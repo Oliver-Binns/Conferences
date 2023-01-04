@@ -21,7 +21,12 @@ struct ContentView: View {
             } else {
                 List {
                     ForEach(items) { idea in
-                        Text(idea.title ?? "Placeholder Title")
+                        NavigationLink {
+                            ideaEditor(ideaID: idea.objectID)
+                        } label: {
+                            Text(idea.title ?? "Placeholder Title")
+                        }
+                            
                     }
                     .onDelete(perform: deleteItems)
                 }
@@ -30,7 +35,9 @@ struct ContentView: View {
         .sheet(isPresented: $editingIdea) {
             try? viewContext.save()
         } content: {
-            ideaEditor()
+            NavigationView {
+                ideaEditor()
+            }
         }
         .toolbar {
             #if os(iOS)
@@ -39,37 +46,29 @@ struct ContentView: View {
             }
             #endif
             ToolbarItem {
-                Button(action: addItem) {
+                Button {
+                    editingIdea = true
+                } label: {
                     Label("Add Item", systemImage: "plus")
                 }
             }
         }
     }
-    
-    private func ideaEditor() -> some View {
-         let childContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-         childContext.parent = viewContext
-         let childItem = Idea(context: childContext)
+
+    private func ideaEditor(ideaID: NSManagedObjectID? = nil) -> some View {
+        let childContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        childContext.parent = viewContext
+        
+        let childItem: Idea
+        if let ideaID,
+           let idea = childContext.object(with: ideaID) as? Idea {
+            childItem = idea
+        } else {
+            childItem = Idea(context: childContext)
+        }
+        
         return EditIdea(idea: childItem)
             .environment(\.managedObjectContext, childContext)
-    }
-
-    private func addItem() {
-        /*withAnimation {
-            /*let newItem = Idea(context: viewContext)
-            newItem.title = "Test"
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }*/
-            isCreating = true
-        }*/
-        editingIdea = true
     }
 
     private func deleteItems(offsets: IndexSet) {
