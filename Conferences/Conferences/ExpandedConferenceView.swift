@@ -48,7 +48,7 @@ struct ExpandedConferenceView: View {
                     }
                     .font(.headline)
                     .buttonStyle(.borderedProminent)
-                }
+                }.padding()
             }
             .navigationTitle(conference.name)
             .frame(maxWidth: .infinity)
