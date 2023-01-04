@@ -35,7 +35,9 @@ struct ContentView: View {
         .sheet(isPresented: $editingIdea) {
             try? viewContext.save()
         } content: {
-            ideaEditor()
+            NavigationView {
+                ideaEditor()
+            }
         }
         .toolbar {
             #if os(iOS)

@@ -37,7 +37,7 @@ struct ConferenceList: View {
                    dates: Date(day: 18, month: 4, year: 2023)...Date(day: 19, month: 4, year: 2023)),
         
         Conference(name: "ServerSide.swift",
-                   venue: .init(name: "Science Museum", location: .init(latitude: 51.4972, longitude: 0.1767)),
+                   venue: .init(name: "Science Museum", location: .init(latitude: 51.4972, longitude: -0.1767)),
                    dates: Date(day: 01, month: 12, year: 2023)...Date(day: 31, month: 12, year: 2023)),
         
         Conference(name: "SwiftHEROES",
