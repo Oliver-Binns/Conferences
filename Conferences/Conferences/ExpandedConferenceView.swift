@@ -19,18 +19,35 @@ struct ExpandedConferenceView: View {
                     
                 }
                 .frame(maxWidth: .infinity, minHeight: 300)
-                .disabled(true)
                 
-                Text(conference.dates.lowerBound, style: .relative)
-                
-                Spacer()
-                
-                Button("Join as speaker") {
+                VStack(alignment: .leading) {
+                    Text(conference.dates.lowerBound, style: .relative)
                     
-                }
-                
-                Button("Join as attendee") {
+                    Button {
+                        
+                    } label: {
+                        HStack {
+                            Image(systemName: "mic.fill")
+                            Text("Join as speaker")
+                        }
+                        .padding(.vertical, 2)
+                        .frame(maxWidth: .infinity)
+                    }
+                    .font(.headline)
+                    .buttonStyle(.borderedProminent)
                     
+                    Button {
+                        
+                    } label: {
+                        HStack {
+                            Image(systemName: "chair.lounge.fill")
+                            Text("Join as attendee")
+                        }
+                        .padding(.vertical, 2)
+                        .frame(maxWidth: .infinity)
+                    }
+                    .font(.headline)
+                    .buttonStyle(.borderedProminent)
                 }
             }
             .navigationTitle(conference.name)
