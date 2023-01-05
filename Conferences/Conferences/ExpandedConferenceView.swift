@@ -132,3 +132,14 @@ struct ExpandedConferenceView: View {
         }
     }
 }
+
+
+#if DEBUG
+struct ExpandedConferenceView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            ExpandedConferenceView(conference: .deepDish)
+        }
+    }
+}
+#endif

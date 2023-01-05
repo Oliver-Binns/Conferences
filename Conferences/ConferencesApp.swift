@@ -23,7 +23,7 @@ struct ConferencesApp: App {
                 }
                 
                 NavigationView {
-                    ContentView()
+                    IdeasList()
                         .environment(\.managedObjectContext, persistenceController.container.viewContext)
                         .navigationTitle("Brainstorm")
                 }

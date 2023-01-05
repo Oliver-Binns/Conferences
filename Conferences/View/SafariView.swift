@@ -10,3 +10,11 @@ struct SafariView: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
 }
+
+#if DEBUG
+struct SafariView_Previews: PreviewProvider {
+    static var previews: some View {
+        SafariView(url: URL(string: "https://www.google.com")!)
+    }
+}
+#endif
