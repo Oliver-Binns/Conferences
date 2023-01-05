@@ -4,6 +4,8 @@
 
 I couldn’t find an app that helped me keep track of the conferences I’ve applied to, and my ideas for talks… so I’ve started making one 😎
 
+![App Screen Recording](./screen-recording.mp4)
+
 ## Contributing
 
 Pull requests and feature requests are welcome.
