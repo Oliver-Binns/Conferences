@@ -4,6 +4,22 @@ import MapKit
 struct ExpandedConferenceView: View {
     let conference: Conference
     
+    enum AttendanceType {
+        case none
+        case attendee
+        case speaker
+    }
+    
+    enum Link: Identifiable {
+        case web
+        case twitter
+        
+        var id: Self { self }
+    }
+    
+    @State private var attendanceType: AttendanceType = .none
+    @State private var displayLink: Link? = .none
+    
     private var region: MKCoordinateRegion {
         .init(center: conference.venue.location,
               latitudinalMeters: 750,
@@ -21,36 +37,97 @@ struct ExpandedConferenceView: View {
                 .frame(maxWidth: .infinity, minHeight: 300)
                 
                 VStack(alignment: .leading) {
-                    Text(conference.dates.lowerBound, style: .relative)
-                    
-                    Button {
-                        
-                    } label: {
+                    VStack(alignment: .leading, spacing: 16) {
                         HStack {
-                            Image(systemName: "mic.fill")
-                            Text("Join as speaker")
+                            if conference.website != nil {
+                                Button {
+                                    displayLink = .web
+                                } label: {
+                                    Label("Website", systemImage: "safari.fill")
+                                }
+                                .font(.headline)
+                                .buttonStyle(.borderedProminent)
+                            }
+                            
+                            if conference.twitter != nil {
+                                Button {
+                                    displayLink = .twitter
+                                } label: {
+                                    Label("Twitter", systemImage: "safari.fill")
+                                }
+                                .font(.headline)
+                                .buttonStyle(.borderedProminent)
+                            }
                         }
-                        .padding(.vertical, 2)
-                        .frame(maxWidth: .infinity)
-                    }
-                    .font(.headline)
-                    .buttonStyle(.borderedProminent)
-                    
-                    Button {
                         
-                    } label: {
-                        HStack {
-                            Image(systemName: "chair.lounge.fill")
-                            Text("Join as attendee")
-                        }
-                        .padding(.vertical, 2)
-                        .frame(maxWidth: .infinity)
+                        CountdownText(label: "Starts", date: conference.dates.lowerBound)
                     }
-                    .font(.headline)
-                    .buttonStyle(.borderedProminent)
-                }.padding()
+                    
+                    Divider()
+                    
+                    Picker("Attendance Type", selection: $attendanceType) {
+                        Text("Not Attending").tag(AttendanceType.none)
+                        Text("Attending").tag(AttendanceType.attendee)
+                        Text("Speaking").tag(AttendanceType.speaker)
+                    }
+                    .pickerStyle(.segmented)
+                    
+                    switch attendanceType {
+                    case .none: EmptyView()
+                    default:
+                        VStack(alignment: .leading) {
+                            Toggle(isOn: .constant(false)) {
+                                Text("Travel Reminders")
+                            }
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(8)
+                    }
+                    
+                    if attendanceType == .speaker {
+                        // CFP opens in...
+                        
+                        // if CFP is open: submitted talks
+                        VStack(alignment: .leading, spacing: 8) {
+                            
+                            Text("Talks Submitted")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            Text("Something Something Some Core Data")
+                            Text("Something Something Some SwiftUI")
+                            Text("Something Something Some WeatherKit")
+                            Text("Something Something Some ARKit")
+                            Text("Something Something Some Accessibility")
+                            // Add Another Talk
+                            // CFP closes in...
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(8)
+                        
+                        // if CFP is closed: select a _single_ talk
+                        
+                        // if talk accepted:
+                        // custom reminders?
+                        // have you completed your talk yet?
+                    }
+                }
+                .sheet(item: $displayLink) { linkType in
+                    switch linkType {
+                    case .twitter:
+                        SafariView(url: conference.twitter!)
+                    case .web:
+                        SafariView(url: conference.website!)
+                    }
+                }
+                .padding()
             }
             .navigationTitle(conference.name)
+            .navigationBarTitleDisplayMode(.inline)
             .frame(maxWidth: .infinity)
         }
     }

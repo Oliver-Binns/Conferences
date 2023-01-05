@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7CB9E38229674D9600753EA3 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9E38129674D9600753EA3 /* SafariView.swift */; };
+		7CB9E384296751D400753EA3 /* CountdownText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9E383296751D400753EA3 /* CountdownText.swift */; };
 		7CD7C80E2965F4B100B56632 /* ConferencesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C80D2965F4B100B56632 /* ConferencesApp.swift */; };
 		7CD7C8102965F4B100B56632 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C80F2965F4B100B56632 /* Persistence.swift */; };
 		7CD7C8132965F4B100B56632 /* Conferences.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C8112965F4B100B56632 /* Conferences.xcdatamodeld */; };
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7CB9E38129674D9600753EA3 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		7CB9E383296751D400753EA3 /* CountdownText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownText.swift; sourceTree = "<group>"; };
 		7CD7C80A2965F4B100B56632 /* Conferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD7C80D2965F4B100B56632 /* ConferencesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferencesApp.swift; sourceTree = "<group>"; };
 		7CD7C80F2965F4B100B56632 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -88,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7CB9E38029674D8900753EA3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7CB9E38129674D9600753EA3 /* SafariView.swift */,
+				7CB9E383296751D400753EA3 /* CountdownText.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		7CD7C8012965F4B100B56632 = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +125,7 @@
 		7CD7C80C2965F4B100B56632 /* Conferences */ = {
 			isa = PBXGroup;
 			children = (
+				7CB9E38029674D8900753EA3 /* View */,
 				7CD7C844296603CD00B56632 /* Brainstorm */,
 				7CD7C8412965FEEE00B56632 /* Conferences */,
 				7CD7C83D2965F5A900B56632 /* Info.plist */,
@@ -308,6 +322,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CD7C80E2965F4B100B56632 /* ConferencesApp.swift in Sources */,
+				7CB9E38229674D9600753EA3 /* SafariView.swift in Sources */,
+				7CB9E384296751D400753EA3 /* CountdownText.swift in Sources */,
 				7CD7C8102965F4B100B56632 /* Persistence.swift in Sources */,
 				7CD7C8152965F4B100B56632 /* IdeasView.swift in Sources */,
 				7CD7C84A29661AAE00B56632 /* ExpandedConferenceView.swift in Sources */,
