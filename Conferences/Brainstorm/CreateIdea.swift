@@ -20,7 +20,6 @@ struct EditIdea: View {
             }, set: {
                 idea.overview = $0
             }), axis: .vertical)
-            .foregroundColor(.secondary)
             
         }
         .navigationTitle("Talk Idea")
@@ -34,3 +33,18 @@ struct EditIdea: View {
         }
     }
 }
+
+#if DEBUG
+struct EditIdea_Previews: PreviewProvider {
+    static var previews: some View {
+        let context = PersistenceController.preview.container.viewContext
+        let idea = Idea(context: context)
+        idea.title = "Something Something Core Data"
+        idea.overview = """
+        For those of you who may not be familiar, core data is a framework that allows for the storage, retrieval, and management of data in iOS, macOS, and watchOS applications. It provides a number of powerful features that make it an essential tool for any developer working with data on Apple platforms. In this talk, I will be providing an overview of core data, discussing its key features and benefits, and demonstrating how to use it effectively in your own projects.
+        """
+        return EditIdea(idea: idea)
+            .environment(\.managedObjectContext, context)
+    }
+}
+#endif

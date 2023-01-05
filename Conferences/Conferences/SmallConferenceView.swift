@@ -18,5 +18,20 @@ struct SmallConferenceView: View {
         .cornerRadius(8)
         .padding(.horizontal)
     }
-
 }
+
+#if DEBUG
+struct SmallConferenceView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            SmallConferenceView(conference: .deepDish)
+                .environment(\.dynamicTypeSize, .xSmall)
+            
+            SmallConferenceView(conference: .deepDish)
+            
+            SmallConferenceView(conference: .deepDish)
+                .environment(\.dynamicTypeSize, .accessibility5)
+        }
+    }
+}
+#endif
