@@ -4,7 +4,7 @@
 
 I couldn’t find an app that helped me keep track of the conferences I’ve applied to, and my ideas for talks… so I’ve started making one 😎
 
-![App Screen Recording](./screen-recording.mp4)
+https://user-images.githubusercontent.com/5354593/210864796-05f0a5b4-efd4-4c2b-80f6-d86b3e3be9d8.mp4
 
 ## Contributing
 
