@@ -10,12 +10,12 @@ struct SmallConferenceView: View {
                 .fontWeight(.semibold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(conference.dates.lowerBound, style: .relative)
+            CountdownText(label: "Starts", date: conference.dates.lowerBound)
         }
         .padding()
         .frame(maxWidth: .infinity)
         .background(Color(.secondarySystemBackground))
-        .cornerRadius(16)
+        .cornerRadius(8)
         .padding(.horizontal)
     }
 

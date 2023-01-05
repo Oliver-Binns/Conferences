@@ -15,14 +15,15 @@ struct EditIdea: View {
                 idea.title = $0
             }))
             
-            TextEditor(text: .init(get: {
+            TextField("Overview", text: .init(get: {
                 idea.overview ?? ""
             }, set: {
                 idea.overview = $0
-            }))
+            }), axis: .vertical)
             .foregroundColor(.secondary)
+            
         }
-        .navigationTitle("New Talk Idea")
+        .navigationTitle("Talk Idea")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Done") {
