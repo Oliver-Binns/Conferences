@@ -9,8 +9,20 @@ struct SmallConferenceView: View {
                 .font(.title)
                 .fontWeight(.semibold)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
-            CountdownText(label: "Starts", date: conference.dates.lowerBound)
+
+            if let cfp = conference.cfpSubmission {
+                if cfp.opens > .now {
+                    CountdownText(label: "CFP opens", date: cfp.opens)
+                        .foregroundColor(.green)
+                } else if let closeDate = cfp.closes,
+                          closeDate > .now {
+                    CountdownText(label: "CFP closes", date: closeDate)
+                        .foregroundColor(closeDate.isSoon ? .red : .green)
+                } else {
+                    Text("CFP closed")
+                }
+            }
+            CountdownText(label: "Conference starts", date: conference.dates.lowerBound)
         }
         .padding()
         .frame(maxWidth: .infinity)

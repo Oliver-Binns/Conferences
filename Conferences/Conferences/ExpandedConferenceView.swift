@@ -87,33 +87,50 @@ struct ExpandedConferenceView: View {
                     }
                     
                     if attendanceType == .speaker {
-                        // CFP opens in...
-                        
-                        // if CFP is open: submitted talks
                         VStack(alignment: .leading, spacing: 8) {
-                            
-                            Text("Talks Submitted")
-                                .font(.headline)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            Text("Something Something Some Core Data")
-                            Text("Something Something Some SwiftUI")
-                            Text("Something Something Some WeatherKit")
-                            Text("Something Something Some ARKit")
-                            Text("Something Something Some Accessibility")
-                            // Add Another Talk
-                            // CFP closes in...
+                            // CFP opens in...
+                            if let cfp = conference.cfpSubmission {
+                                if cfp.opens > .now {
+                                    CountdownText(label: "CFP opens", date: cfp.opens)
+                                        .foregroundColor(.green)
+                                    
+                                    // Add Reminder: when CFP opens...
+                                } else if let closeDate = cfp.closes,
+                                          closeDate > .now {
+                                    // if CFP is open:
+                                    // Select Talks...
+                                    Text("Talks Submitted")
+                                        .font(.headline)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    
+                                    Text("Something Something Some Core Data")
+                                    Text("Something Something Some SwiftUI")
+                                    Text("Something Something Some WeatherKit")
+                                    Text("Something Something Some ARKit")
+                                    Text("Something Something Some Accessibility")
+                                    
+                                    Divider()
+                                    // CFP closes in
+                                    CountdownText(label: "CFP closes", date: closeDate)
+                                        .foregroundColor(closeDate.isSoon ? .red : .green)
+                                    
+                                    // Add Reminder: before CFP closes...
+                                } else {
+                                    // if CFP is closed: select a _single_ talk
+                                    // if talk accepted:
+                                    
+                                    // custom reminders?
+                                    // have you completed your talk yet?
+                                    Text("CFP closed")
+                                }
+                            } else {
+                                Text("We don’t have any information.")
+                            }
                         }
                         .padding()
                         .frame(maxWidth: .infinity)
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(8)
-                        
-                        // if CFP is closed: select a _single_ talk
-                        
-                        // if talk accepted:
-                        // custom reminders?
-                        // have you completed your talk yet?
                     }
                 }
                 .sheet(item: $displayLink) { linkType in
