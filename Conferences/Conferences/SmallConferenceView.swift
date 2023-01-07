@@ -17,9 +17,10 @@ struct SmallConferenceView: View {
                 } else if let closeDate = cfp.closes,
                           closeDate > .now {
                     CountdownText(label: "CFP closes", date: closeDate)
-                        .foregroundColor(closeDate.isSoon ? .red : .green)
+                        .foregroundColor(closeDate.isSoon ? .yellow : .green)
                 } else {
                     Text("CFP closed")
+                        .foregroundColor(.red)
                 }
             }
             CountdownText(label: "Conference starts", date: conference.dates.lowerBound)

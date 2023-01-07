@@ -1,6 +1,9 @@
+import CoreData
 import SwiftUI
 
 struct ConferenceList: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    
     @State
     private var editingSort: Bool = false
     
@@ -9,7 +12,8 @@ struct ConferenceList: View {
             LazyVStack {
                 ForEach(Conference.all) { conference in
                     NavigationLink {
-                        ExpandedConferenceView(conference: conference)
+                        ConferenceDetailView(conference: conference,
+                                             attendance: attendance(at: conference))
                     } label: {
                         SmallConferenceView(conference: conference)
                     }.buttonStyle(.plain)
@@ -32,6 +36,19 @@ struct ConferenceList: View {
             }
         }
        
+    }
+    
+    func attendance(at conference: Conference) -> Attendance {
+        let fetchRequest = Attendance.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "conferenceId = %@",
+                                             conference.id.uuidString)
+        fetchRequest.fetchLimit = 1
+        guard let attendance = try? viewContext.fetch(fetchRequest).first else {
+            let newAttendance = Attendance(context: viewContext)
+            newAttendance.conferenceId = conference.id.uuidString
+            return newAttendance
+        }
+        return attendance
     }
 }
 

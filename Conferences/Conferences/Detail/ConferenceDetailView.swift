@@ -1,24 +1,25 @@
-import SwiftUI
 import MapKit
+import SwiftUI
 
-struct ExpandedConferenceView: View {
-    let conference: Conference
+enum AttendanceType: String {
+    case none
+    case attendee
+    case speaker
+}
+
+enum Link: Identifiable {
+    case web
+    case twitter
     
-    enum AttendanceType {
-        case none
-        case attendee
-        case speaker
-    }
-    
-    enum Link: Identifiable {
-        case web
-        case twitter
-        
-        var id: Self { self }
-    }
-    
-    @State private var attendanceType: AttendanceType = .none
+    var id: Self { self }
+}
+
+struct ConferenceDetailView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @State private var displayLink: Link? = .none
+    
+    let conference: Conference
+    @ObservedObject var attendance: Attendance
     
     private var region: MKCoordinateRegion {
         .init(center: conference.venue.location,
@@ -26,10 +27,18 @@ struct ExpandedConferenceView: View {
               longitudinalMeters: 750)
     }
     
+    private var attendanceType: Binding<AttendanceType> { .init(
+            get: { attendance.type.flatMap(AttendanceType.init) ?? .none },
+            set: {
+                attendance.type = $0.rawValue
+                try? viewContext.save()
+            }
+        )
+    }
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                
                 Map(coordinateRegion: .constant(region), annotationItems: [conference.venue]) {
                     MapMarker(coordinate: $0.location)
                     
@@ -65,14 +74,14 @@ struct ExpandedConferenceView: View {
                     
                     Divider()
                     
-                    Picker("Attendance Type", selection: $attendanceType) {
+                    Picker("Attendance Type", selection: attendanceType) {
                         Text("Not Attending").tag(AttendanceType.none)
                         Text("Attending").tag(AttendanceType.attendee)
                         Text("Speaking").tag(AttendanceType.speaker)
                     }
                     .pickerStyle(.segmented)
                     
-                    switch attendanceType {
+                    switch attendanceType.wrappedValue {
                     case .none: EmptyView()
                     default:
                         VStack(alignment: .leading) {
@@ -86,7 +95,7 @@ struct ExpandedConferenceView: View {
                         .cornerRadius(8)
                     }
                     
-                    if attendanceType == .speaker {
+                    if attendanceType.wrappedValue == .speaker {
                         VStack(alignment: .leading, spacing: 8) {
                             // CFP opens in...
                             if let cfp = conference.cfpSubmission {
@@ -122,6 +131,7 @@ struct ExpandedConferenceView: View {
                                     // custom reminders?
                                     // have you completed your talk yet?
                                     Text("CFP closed")
+                                        .foregroundColor(.red)
                                 }
                             } else {
                                 Text("We don’t have any information.")
@@ -154,8 +164,13 @@ struct ExpandedConferenceView: View {
 #if DEBUG
 struct ExpandedConferenceView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
-            ExpandedConferenceView(conference: .deepDish)
+        let context = PersistenceController.preview.container.viewContext
+        let attendance = Attendance(context: context)
+        
+        return VStack {
+            ConferenceDetailView(conference: .deepDish,
+                                 attendance: attendance)
+                .environment(\.managedObjectContext, context)
         }
     }
 }
