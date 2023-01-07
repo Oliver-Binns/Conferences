@@ -29,7 +29,10 @@ struct ConferenceDetailView: View {
     
     private var attendanceType: Binding<AttendanceType> { .init(
             get: { attendance.type.flatMap(AttendanceType.init) ?? .none },
-            set: { attendance.type = $0.rawValue }
+            set: {
+                attendance.type = $0.rawValue
+                try? viewContext.save()
+            }
         )
     }
     

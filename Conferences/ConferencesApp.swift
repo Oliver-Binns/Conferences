@@ -32,6 +32,12 @@ struct ConferencesApp: App {
             }
             .environment(\.managedObjectContext,
                           persistenceController.container.viewContext)
+            .onAppear {
+                let encoder = JSONEncoder()
+                encoder.dateEncodingStrategy = .iso8601
+                let data = try! encoder.encode(Conference.all)
+                print(String(data: data, encoding: .utf8)!)
+            }
         }
     }
 }
