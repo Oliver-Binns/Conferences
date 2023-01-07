@@ -69,7 +69,8 @@ extension Conference {
                       website: .init(string: "https://iosconf.sg"),
                       twitter: .init(string: "https://twitter.com/iosconfsg"),
                       venue: .init(name: "Shaw Foundation Alumni House", location: .init(latitude: 1.2932204999999999, longitude: 103.77361236255943)),
-                      cfpSubmission: nil,
+                      cfpSubmission: .init(opens: .distantPast,
+                                           closes: .init(day: 15, month: 08, year: 2022)),
                       dates: Date(day: 12, month: 1, year: 2023)...Date(day: 13, month: 1, year: 2023)),
            
            Conference(name: "Swift Island",

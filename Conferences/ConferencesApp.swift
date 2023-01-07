@@ -24,14 +24,14 @@ struct ConferencesApp: App {
                 
                 NavigationView {
                     IdeasList()
-                        .environment(\.managedObjectContext, persistenceController.container.viewContext)
                         .navigationTitle("Brainstorm")
                 }
                 .tabItem {
                     Label("Brainstorm", systemImage: "lightbulb.fill")
                 }
             }
-           
+            .environment(\.managedObjectContext,
+                          persistenceController.container.viewContext)
         }
     }
 }

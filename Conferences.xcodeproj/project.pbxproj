@@ -28,7 +28,7 @@
 		7CD7C8432965FEFC00B56632 /* ConferenceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C8422965FEFC00B56632 /* ConferenceList.swift */; };
 		7CD7C846296603DB00B56632 /* CreateIdea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C845296603DB00B56632 /* CreateIdea.swift */; };
 		7CD7C848296615B400B56632 /* SmallConferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C847296615B400B56632 /* SmallConferenceView.swift */; };
-		7CD7C84A29661AAE00B56632 /* ExpandedConferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C84929661AAE00B56632 /* ExpandedConferenceView.swift */; };
+		7CD7C84A29661AAE00B56632 /* ConferenceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C84929661AAE00B56632 /* ConferenceDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,7 +75,7 @@
 		7CD7C8422965FEFC00B56632 /* ConferenceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceList.swift; sourceTree = "<group>"; };
 		7CD7C845296603DB00B56632 /* CreateIdea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdea.swift; sourceTree = "<group>"; };
 		7CD7C847296615B400B56632 /* SmallConferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallConferenceView.swift; sourceTree = "<group>"; };
-		7CD7C84929661AAE00B56632 /* ExpandedConferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedConferenceView.swift; sourceTree = "<group>"; };
+		7CD7C84929661AAE00B56632 /* ConferenceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +139,14 @@
 				7CB9E393296766B600753EA3 /* OptionalCollection+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7CBAAC702969ABF500096F1E /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				7CD7C84929661AAE00B56632 /* ConferenceDetailView.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		7CD7C8012965F4B100B56632 = {
@@ -217,9 +225,9 @@
 		7CD7C8412965FEEE00B56632 /* Conferences */ = {
 			isa = PBXGroup;
 			children = (
+				7CBAAC702969ABF500096F1E /* Detail */,
 				7CD7C8422965FEFC00B56632 /* ConferenceList.swift */,
 				7CD7C847296615B400B56632 /* SmallConferenceView.swift */,
-				7CD7C84929661AAE00B56632 /* ExpandedConferenceView.swift */,
 			);
 			path = Conferences;
 			sourceTree = "<group>";
@@ -371,7 +379,7 @@
 				7CB9E38F29675F3D00753EA3 /* Persistence+Preview.swift in Sources */,
 				7CD7C8102965F4B100B56632 /* Persistence.swift in Sources */,
 				7CD7C8152965F4B100B56632 /* IdeasList.swift in Sources */,
-				7CD7C84A29661AAE00B56632 /* ExpandedConferenceView.swift in Sources */,
+				7CD7C84A29661AAE00B56632 /* ConferenceDetailView.swift in Sources */,
 				7CB9E392296763D000753EA3 /* Date+Extensions.swift in Sources */,
 				7CB9E38C29675E5700753EA3 /* Conference+Data.swift in Sources */,
 				7CB9E38729675E2000753EA3 /* Conference.swift in Sources */,
