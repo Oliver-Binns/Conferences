@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7CA45EAA296CC3F200A18941 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA45EA9296CC3F200A18941 /* CalendarView.swift */; };
+		7CA45EAC296CC56B00A18941 /* AddToCalendarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA45EAB296CC56B00A18941 /* AddToCalendarButton.swift */; };
 		7CB9E38229674D9600753EA3 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9E38129674D9600753EA3 /* SafariView.swift */; };
 		7CB9E384296751D400753EA3 /* CountdownText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9E383296751D400753EA3 /* CountdownText.swift */; };
 		7CB9E38729675E2000753EA3 /* Conference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9E38629675E2000753EA3 /* Conference.swift */; };
@@ -52,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7CA45EA9296CC3F200A18941 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		7CA45EAB296CC56B00A18941 /* AddToCalendarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCalendarButton.swift; sourceTree = "<group>"; };
 		7CB9E38129674D9600753EA3 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		7CB9E383296751D400753EA3 /* CountdownText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownText.swift; sourceTree = "<group>"; };
 		7CB9E38629675E2000753EA3 /* Conference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conference.swift; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 			children = (
 				7CB9E38129674D9600753EA3 /* SafariView.swift */,
 				7CB9E383296751D400753EA3 /* CountdownText.swift */,
+				7CA45EA9296CC3F200A18941 /* CalendarView.swift */,
+				7CA45EAB296CC56B00A18941 /* AddToCalendarButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -391,8 +397,10 @@
 				7CB9E38F29675F3D00753EA3 /* Persistence+Preview.swift in Sources */,
 				7CD7C8102965F4B100B56632 /* Persistence.swift in Sources */,
 				7CBAAC782969B3AD00096F1E /* Conference+Preview.swift in Sources */,
+				7CA45EAC296CC56B00A18941 /* AddToCalendarButton.swift in Sources */,
 				7CD7C8152965F4B100B56632 /* IdeasList.swift in Sources */,
 				7CD7C84A29661AAE00B56632 /* ConferenceDetailView.swift in Sources */,
+				7CA45EAA296CC3F200A18941 /* CalendarView.swift in Sources */,
 				7CB9E392296763D000753EA3 /* Date+Extensions.swift in Sources */,
 				7CB9E38729675E2000753EA3 /* Conference.swift in Sources */,
 				7CD7C848296615B400B56632 /* SmallConferenceView.swift in Sources */,
@@ -558,6 +566,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Conferences/Info.plist;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Easily add conferences to your calendar.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -597,6 +606,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Conferences/Info.plist;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Easily add conferences to your calendar.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
