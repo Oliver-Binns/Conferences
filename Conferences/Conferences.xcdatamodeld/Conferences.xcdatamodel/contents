@@ -4,9 +4,11 @@
         <attribute name="conferenceId" optional="YES" attributeType="String"/>
         <attribute name="travelReminders" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="talks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Idea" inverseName="submittedTo" inverseEntity="Idea"/>
     </entity>
     <entity name="Idea" representedClassName="Idea" syncable="YES" codeGenerationType="class">
         <attribute name="overview" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="submittedTo" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Attendance" inverseName="talks" inverseEntity="Attendance"/>
     </entity>
 </model>

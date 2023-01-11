@@ -13,12 +13,13 @@ final class AddToCalendarButtonViewModel: NSObject, ObservableObject, EKEventEdi
 
 struct AddToCalendarButton: View {
     let conference: Conference
-    let eventStore = EKEventStore()
+    
+    private let eventStore = EKEventStore()
     
     @ObservedObject
     private var viewModel = AddToCalendarButtonViewModel()
     
-    var event: EKEvent {
+    private var event: EKEvent {
         let e = EKEvent(eventStore: eventStore)
         e.title = conference.name
         e.startDate = conference.dates.lowerBound

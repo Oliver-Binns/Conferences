@@ -121,15 +121,7 @@ struct ConferenceDetailView: View {
                                           closeDate > .now {
                                     // if CFP is open:
                                     // Select Talks...
-                                    Text("Talks Submitted")
-                                        .font(.headline)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    
-                                    Text("Something Something Some Core Data")
-                                    Text("Something Something Some SwiftUI")
-                                    Text("Something Something Some WeatherKit")
-                                    Text("Something Something Some ARKit")
-                                    Text("Something Something Some Accessibility")
+                                    SelectedTalksView(attendance: attendance)
                                     
                                     Divider()
                                     // CFP closes in
