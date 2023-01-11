@@ -10,6 +10,10 @@ struct Conference: Codable, Identifiable {
     let cfpSubmission: CFPSubmission?
     let dates: ClosedRange<Date>
     
+    var location: String {
+        "\(venue.city), \(venue.country)"
+    }
+    
     init(id: UUID = UUID(),
          name: String,
          website: URL?,

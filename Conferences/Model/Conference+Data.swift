@@ -1,6 +1,5 @@
 import Foundation
 
-#if DEBUG
 extension Conference {
     static var all: [Conference] {
         guard
@@ -16,4 +15,3 @@ extension Conference {
     
     static var deepDish = Conference.all[4]
 }
-#endif

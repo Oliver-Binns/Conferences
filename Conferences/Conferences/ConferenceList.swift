@@ -23,17 +23,16 @@ struct ConferenceList: View {
             .toolbar {
                 ToolbarItem {
                     Button {
-                        
+                        editingSort = true
                     } label: {
                         Label("Sort", systemImage: "arrow.up.arrow.down")
-                    }.popover(isPresented: $editingSort) {
-                        Text("Test")
-                            .font(.headline)
-                            .padding()
-                            .frame(minWidth: 300, minHeight: 300)
+                    }
+                    .popover(isPresented: $editingSort) {
+                        SortView()
                     }
                 }
             }
+           
         }
        
     }
