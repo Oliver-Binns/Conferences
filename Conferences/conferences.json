@@ -1,1 +1,245 @@
-[{"website":"https:\/\/iosconf.sg","venue":{"id":"E237FAE2-B054-445D-B746-095AC371B7EE","name":"Shaw Foundation Alumni House","location":[103.77361236255943,1.2932204999999999]},"id":"5A9A671C-141D-432B-BD28-AB018CB6CAD7","twitter":"https:\/\/twitter.com\/iosconfsg","cfpSubmission":{"opens":"0001-01-01T00:00:00Z","closes":"2022-08-15T00:00:00Z"},"dates":["2023-01-12T00:00:00Z","2023-01-13T00:00:00Z"],"name":"iOS Conf SG"},{"website":"https:\/\/nyswifty.com","venue":{"id":"60C97D23-E0F9-4461-9123-3D858B92C49A","name":"Roulette","location":[-73.980716599999994,40.685557600000003]},"id":"18A52B4E-2338-4235-8CC9-7FC4C2A2C56F","twitter":"https:\/\/twitter.com\/nyswifty","cfpSubmission":{"opens":"2023-01-07T14:02:54Z","closes":"2023-01-31T00:00:00Z"},"dates":["2023-04-18T00:00:00Z","2023-04-19T00:00:00Z"],"name":"NYSwifty"},{"website":"https:\/\/deepdishswift.com","venue":{"id":"3FE61F66-7452-4841-A6CC-43E224C06775","name":"Loews Chicago O'Hare Hotel","location":[-87.863654297103665,41.97439645]},"id":"F309F47F-72B0-4921-984B-FE12FA921007","twitter":"https:\/\/twitter.com\/DeepDishSwift","cfpSubmission":{"opens":"2023-01-07T14:02:54Z","closes":"2023-01-28T00:00:00Z"},"dates":["2023-04-30T00:00:00Z","2023-05-02T00:00:00Z"],"name":"Deep Dish Swift"},{"website":"https:\/\/swiftheroes.com\/2023\/","venue":{"id":"9FFD949A-AD32-45F3-9776-037E368A829C","name":"Museo dell’Automobile","location":[7.6734547423676362,45.0318489]},"id":"E18A5E3A-30EF-4C57-A5DF-19B30176EF13","twitter":"https:\/\/twitter.com\/swiftheroes_it","cfpSubmission":{"opens":"2022-12-13T00:00:00Z","closes":"2023-02-27T00:00:00Z"},"dates":["2023-05-04T00:00:00Z","2023-05-05T00:00:00Z"],"name":"SwiftHEROES"},{"website":"https:\/\/plswift.com","venue":{"id":"287C3987-8253-4B0E-BF9D-C392C9522E70","name":"Copernicus Science Centre","location":[21.028600190793306,52.241776000000002]},"id":"73453A83-F8BE-4525-BE8A-972F19625289","twitter":"https:\/\/twitter.com\/swift_pl","cfpSubmission":{"opens":"2023-01-07T14:02:54Z","closes":"2023-01-31T00:00:00Z"},"dates":["2023-05-30T00:00:00Z","2023-05-31T00:00:00Z"],"name":"plSwift"},{"venue":{"id":"BD69AAE1-180C-4C4D-93E3-F5E07B2FDA24","name":"TIFF Bell Lightbox","location":[-79.390533399999995,43.6467198]},"id":"C600A851-C5E8-4BC4-B219-3E9B69B04673","twitter":"https:\/\/twitter.com\/swiftconfto","website":"https:\/\/www.swiftconf.to","name":"Swift TO","dates":["2023-08-10T00:00:00Z","2023-08-11T00:00:00Z"]},{"venue":{"id":"2762A5A9-3E6C-45BB-BA84-42F02BF2ACBB","name":"Texel","location":[4.8211125432901358,53.08870495]},"id":"D21A97E3-A71D-4393-9362-215640874EBF","twitter":"https:\/\/twitter.com\/SwiftIslandNL","website":"https:\/\/swiftisland.nl","name":"Swift Island","dates":["2023-08-25T00:00:00Z","2023-08-27T00:00:00Z"]},{"venue":{"id":"9ACE6ACC-4425-4C63-92DC-7594C1F520F6","name":"Aberystwyth University","location":[-4.0650541796713808,52.415549550000001]},"id":"C03A257D-A756-482B-86FD-FF5937C34FC6","twitter":"https:\/\/twitter.com\/IOSDEVUK","website":"https:\/\/www.iosdevuk.com","name":"iOSDevUK","dates":["2023-09-04T00:00:00Z","2023-09-07T00:00:00Z"]},{"website":"https:\/\/swiftleeds.co.uk","venue":{"id":"C05D6894-26AD-41FF-88A5-0DD32F0F05B6","name":"Leeds Playhouse","location":[-1.5343041059594758,53.7980041]},"id":"D14FB533-1885-440F-87F4-36762FBC3BCE","twitter":"https:\/\/twitter.com\/swift_leeds","cfpSubmission":{"opens":"2023-03-01T00:00:00Z"},"dates":["2023-10-22T00:00:00Z","2023-10-22T00:00:00Z"],"name":"SwiftLeeds"},{"venue":{"id":"C5AFEAED-8188-4B0F-9D53-8487BB795404","name":"Science Museum","location":[-0.1767,51.497199999999999]},"id":"AAAD6B1B-4286-43BD-858F-279A2F2B66C5","twitter":"https:\/\/twitter.com\/SwiftServerConf","website":"https:\/\/www.serversideswift.info","name":"ServerSide.swift","dates":["2023-12-01T00:00:00Z","2023-12-31T00:00:00Z"]},{"venue":{"id":"89AE04D8-8566-49DB-9837-6BD71DFBDC96","name":"La Usina del Arte","location":[-58.357099695529314,-34.628776099999996]},"id":"EC1CB1A1-D00D-4131-B67F-8ABF3D940B75","twitter":"https:\/\/twitter.com\/baswiftable","website":"https:\/\/www.swiftable.co","name":"Swiftable","dates":["2023-12-01T00:00:00Z","2023-12-31T00:00:00Z"]}]
+[
+  {
+    "website":"https:\/\/iosconf.sg",
+    "venue":{
+      "id":"E237FAE2-B054-445D-B746-095AC371B7EE",
+      "name":"Shaw Foundation Alumni House",
+      "city": "Singapore",
+      "country": "Singapore",
+      "location":[
+        103.77361236255943,
+        1.2932204999999999
+      ]
+    },
+    "id":"5A9A671C-141D-432B-BD28-AB018CB6CAD7",
+    "twitter":"https:\/\/twitter.com\/iosconfsg",
+    "cfpSubmission":{
+      "opens":"0001-01-01T00:00:00Z",
+      "closes":"2022-08-15T00:00:00Z"
+    },
+    "dates":[
+      "2023-01-12T00:00:00Z",
+      "2023-01-13T00:00:00Z"
+    ],
+    "name":"iOS Conf SG"
+  },
+  {
+    "website":"https:\/\/nyswifty.com",
+    "venue":{
+      "id":"60C97D23-E0F9-4461-9123-3D858B92C49A",
+      "name":"Roulette",
+      "city": "New York",
+      "country": "USA",
+      "location":[
+        -73.980716599999994,
+        40.685557600000003
+      ]
+    },
+    "id":"18A52B4E-2338-4235-8CC9-7FC4C2A2C56F",
+    "twitter":"https:\/\/twitter.com\/nyswifty",
+    "cfpSubmission":{
+      "opens":"2023-01-07T14:02:54Z",
+      "closes":"2023-01-31T00:00:00Z"
+    },
+    "dates":[
+      "2023-04-18T00:00:00Z",
+      "2023-04-19T00:00:00Z"
+    ],
+    "name":"NYSwifty"
+  },
+  {
+    "website":"https:\/\/deepdishswift.com",
+    "venue":{
+      "id":"3FE61F66-7452-4841-A6CC-43E224C06775",
+      "name":"Loews Chicago O'Hare Hotel",
+      "city": "Chicago",
+      "country": "USA",
+      "location":[
+        -87.863654297103665,
+        41.97439645
+      ]
+    },
+    "id":"F309F47F-72B0-4921-984B-FE12FA921007",
+    "twitter":"https:\/\/twitter.com\/DeepDishSwift",
+    "cfpSubmission":{
+      "opens":"2023-01-07T14:02:54Z",
+      "closes":"2023-01-28T00:00:00Z"
+    },
+    "dates":[
+      "2023-04-30T00:00:00Z",
+      "2023-05-02T00:00:00Z"
+    ],
+    "name":"Deep Dish Swift"
+  },
+  {
+    "website":"https:\/\/swiftheroes.com\/2023\/",
+    "venue":{
+      "id":"9FFD949A-AD32-45F3-9776-037E368A829C",
+      "name":"Museo dell’Automobile",
+      "city": "Turin",
+      "country": "Italy",
+      "location":[
+        7.6734547423676362,
+        45.0318489
+      ]
+    },
+    "id":"E18A5E3A-30EF-4C57-A5DF-19B30176EF13",
+    "twitter":"https:\/\/twitter.com\/swiftheroes_it",
+    "cfpSubmission":{
+      "opens":"2022-12-13T00:00:00Z",
+      "closes":"2023-02-27T00:00:00Z"
+    },
+    "dates":[
+      "2023-05-04T00:00:00Z",
+      "2023-05-05T00:00:00Z"
+    ],
+    "name":"SwiftHEROES"
+  },
+  {
+    "website":"https:\/\/plswift.com",
+    "venue":{
+      "id":"287C3987-8253-4B0E-BF9D-C392C9522E70",
+      "name":"Copernicus Science Centre",
+      "city": "Warsaw",
+      "country": "Poland",
+      "location":[
+        21.028600190793306,
+        52.241776000000002
+      ]
+    },
+    "id":"73453A83-F8BE-4525-BE8A-972F19625289",
+    "twitter":"https:\/\/twitter.com\/swift_pl",
+    "cfpSubmission":{
+      "opens":"2023-01-07T14:02:54Z",
+      "closes":"2023-01-31T00:00:00Z"
+    },
+    "dates":[
+      "2023-05-30T00:00:00Z",
+      "2023-05-31T00:00:00Z"
+    ],
+    "name":"plSwift"
+  },
+  {
+    "venue":{
+      "id":"BD69AAE1-180C-4C4D-93E3-F5E07B2FDA24",
+      "name":"TIFF Bell Lightbox",
+      "city": "Toronto",
+      "country": "Canada",
+      "location":[
+        -79.390533399999995,
+        43.6467198
+      ]
+    },
+    "id":"C600A851-C5E8-4BC4-B219-3E9B69B04673",
+    "twitter":"https:\/\/twitter.com\/swiftconfto",
+    "website":"https:\/\/www.swiftconf.to",
+    "name":"Swift TO",
+    "dates":[
+      "2023-08-10T00:00:00Z",
+      "2023-08-11T00:00:00Z"
+    ]
+  },
+  {
+    "venue":{
+      "id":"2762A5A9-3E6C-45BB-BA84-42F02BF2ACBB",
+      "name":"Texel",
+      "city": "Texel",
+      "country": "Netherlands",
+      "location":[
+        4.8211125432901358,
+        53.08870495
+      ]
+    },
+    "id":"D21A97E3-A71D-4393-9362-215640874EBF",
+    "twitter":"https:\/\/twitter.com\/SwiftIslandNL",
+    "website":"https:\/\/swiftisland.nl",
+    "name":"Swift Island",
+    "dates":[
+      "2023-08-25T00:00:00Z",
+      "2023-08-27T00:00:00Z"
+    ]
+  },
+  {
+    "venue":{
+      "id":"9ACE6ACC-4425-4C63-92DC-7594C1F520F6",
+      "name":"Aberystwyth University",
+      "city": "Aberystwyth",
+      "country": "United Kingdom",
+      "location":[
+        -4.0650541796713808,
+        52.415549550000001
+      ]
+    },
+    "id":"C03A257D-A756-482B-86FD-FF5937C34FC6",
+    "twitter":"https:\/\/twitter.com\/IOSDEVUK",
+    "website":"https:\/\/www.iosdevuk.com",
+    "name":"iOSDevUK",
+    "dates":[
+      "2023-09-04T00:00:00Z",
+      "2023-09-07T00:00:00Z"
+    ]
+  },
+  {
+    "website":"https:\/\/swiftleeds.co.uk",
+    "venue":{
+      "id":"C05D6894-26AD-41FF-88A5-0DD32F0F05B6",
+      "name":"Leeds Playhouse",
+      "city": "Leeds",
+      "country": "United Kingdom",
+      "location":[
+        -1.5343041059594758,
+        53.7980041
+      ]
+    },
+    "id":"D14FB533-1885-440F-87F4-36762FBC3BCE",
+    "twitter":"https:\/\/twitter.com\/swift_leeds",
+    "cfpSubmission":{
+      "opens":"2023-03-01T00:00:00Z"
+    },
+    "dates":[
+      "2023-10-22T00:00:00Z",
+      "2023-10-22T00:00:00Z"
+    ],
+    "name":"SwiftLeeds"
+  },
+  {
+    "venue":{
+      "id":"C5AFEAED-8188-4B0F-9D53-8487BB795404",
+      "name":"Science Museum",
+      "city": "London",
+      "country": "United Kingdom",
+      "location":[
+        -0.1767,
+        51.497199999999999
+      ]
+    },
+    "id":"AAAD6B1B-4286-43BD-858F-279A2F2B66C5",
+    "twitter":"https:\/\/twitter.com\/SwiftServerConf",
+    "website":"https:\/\/www.serversideswift.info",
+    "name":"ServerSide.swift",
+    "dates":[
+      "2023-12-01T00:00:00Z",
+      "2023-12-31T00:00:00Z"
+    ]
+  },
+  {
+    "venue":{
+      "id":"89AE04D8-8566-49DB-9837-6BD71DFBDC96",
+      "name":"La Usina del Arte",
+      "city": "Buenos Aires",
+      "country": "Argentina",
+      "location":[
+        -58.357099695529314,
+        -34.628776099999996
+      ]
+    },
+    "id":"EC1CB1A1-D00D-4131-B67F-8ABF3D940B75",
+    "twitter":"https:\/\/twitter.com\/baswiftable",
+    "website":"https:\/\/www.swiftable.co",
+    "name":"Swiftable",
+    "dates":[
+      "2023-12-01T00:00:00Z",
+      "2023-12-31T00:00:00Z"
+    ]
+  }
+]
