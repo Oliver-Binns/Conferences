@@ -5,7 +5,7 @@ struct EditIdea: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) var dismiss
     
-    let idea: Idea
+    @ObservedObject var idea: Idea
     
     var body: some View {
         Form {

@@ -24,7 +24,7 @@ struct IdeasList: View {
                         NavigationLink {
                             ideaEditor(ideaID: idea.objectID)
                         } label: {
-                            Text(idea.title ?? "Placeholder Title")
+                            Text(idea.unwrappedTitle)
                         }
                             
                     }
@@ -56,19 +56,18 @@ struct IdeasList: View {
     }
 
     private func ideaEditor(ideaID: NSManagedObjectID? = nil) -> some View {
-        let childContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        childContext.parent = viewContext
+        let editingContext = viewContext.editingContext
         
         let childItem: Idea
         if let ideaID,
-           let idea = childContext.object(with: ideaID) as? Idea {
+           let idea = editingContext.object(with: ideaID) as? Idea {
             childItem = idea
         } else {
-            childItem = Idea(context: childContext)
+            childItem = Idea(context: editingContext)
         }
         
         return EditIdea(idea: childItem)
-            .environment(\.managedObjectContext, childContext)
+            .environment(\.managedObjectContext, editingContext)
     }
 
     private func deleteItems(offsets: IndexSet) {

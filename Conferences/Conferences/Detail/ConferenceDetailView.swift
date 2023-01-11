@@ -31,9 +31,20 @@ struct ConferenceDetailView: View {
             get: { attendance.type.flatMap(AttendanceType.init) ?? .none },
             set: {
                 attendance.type = $0.rawValue
+                if $0 == .none {
+                    attendance.travelReminders = false
+                }
                 try? viewContext.save()
             }
         )
+    }
+    
+    private var travelReminders: Binding<Bool> {
+        .init { attendance.travelReminders }
+        set: {
+            attendance.travelReminders = $0
+            try? viewContext.save()
+        }
     }
     
     var body: some View {
@@ -85,8 +96,10 @@ struct ConferenceDetailView: View {
                     case .none: EmptyView()
                     default:
                         VStack(alignment: .leading) {
-                            Toggle(isOn: .constant(false)) {
-                                Text("Travel Reminders")
+                            AddToCalendarButton(conference: conference)
+                            Divider()
+                            Toggle(isOn: travelReminders) {
+                                Text("Travel Booked")
                             }
                         }
                         .padding()
@@ -108,15 +121,7 @@ struct ConferenceDetailView: View {
                                           closeDate > .now {
                                     // if CFP is open:
                                     // Select Talks...
-                                    Text("Talks Submitted")
-                                        .font(.headline)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    
-                                    Text("Something Something Some Core Data")
-                                    Text("Something Something Some SwiftUI")
-                                    Text("Something Something Some WeatherKit")
-                                    Text("Something Something Some ARKit")
-                                    Text("Something Something Some Accessibility")
+                                    SelectedTalksView(attendance: attendance)
                                     
                                     Divider()
                                     // CFP closes in
