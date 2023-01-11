@@ -7,10 +7,19 @@ struct ConferenceList: View {
     @State
     private var editingSort: Bool = false
     
+    @State
+    private var sort: ConferenceSort = .date
+    
+    var conferences: [Conference] {
+        sort == .name ?
+            Conference.all.sorted(by: \.name) :
+            Conference.all.sorted(by: \.dates.lowerBound)
+    }
+    
     var body: some View {
         ScrollView {
             LazyVStack {
-                ForEach(Conference.all) { conference in
+                ForEach(conferences) { conference in
                     NavigationLink {
                         ConferenceDetailView(conference: conference,
                                              attendance: attendance(at: conference))
@@ -28,7 +37,7 @@ struct ConferenceList: View {
                         Label("Sort", systemImage: "arrow.up.arrow.down")
                     }
                     .popover(isPresented: $editingSort) {
-                        SortView()
+                        SortView(sort: $sort)
                     }
                 }
             }
