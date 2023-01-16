@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7C74914D2975CDC800AC7B82 /* ConferenceSubmissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74914C2975CDC800AC7B82 /* ConferenceSubmissionsView.swift */; };
+		7C7491502975D26300AC7B82 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74914F2975D26300AC7B82 /* InfoView.swift */; };
+		7C7491522975D40700AC7B82 /* URL+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7491512975D40700AC7B82 /* URL+Identifiable.swift */; };
+		7C7491542975D42A00AC7B82 /* URL+Conferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7491532975D42A00AC7B82 /* URL+Conferences.swift */; };
+		7C7491562975D73400AC7B82 /* View+Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7491552975D73400AC7B82 /* View+Section.swift */; };
 		7C85C1CA296D9C6D00A98BC5 /* SelectedTalksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C85C1C9296D9C6D00A98BC5 /* SelectedTalksView.swift */; };
 		7C85C1CC296D9D4500A98BC5 /* SelectTalksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C85C1CB296D9D4500A98BC5 /* SelectTalksView.swift */; };
 		7C85C1CE296DAEE500A98BC5 /* ManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C85C1CD296DAEE500A98BC5 /* ManagedObjectContext.swift */; };
@@ -60,7 +63,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7C74914C2975CDC800AC7B82 /* ConferenceSubmissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceSubmissionsView.swift; sourceTree = "<group>"; };
+		7C74914F2975D26300AC7B82 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		7C7491512975D40700AC7B82 /* URL+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Identifiable.swift"; sourceTree = "<group>"; };
+		7C7491532975D42A00AC7B82 /* URL+Conferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Conferences.swift"; sourceTree = "<group>"; };
+		7C7491552975D73400AC7B82 /* View+Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Section.swift"; sourceTree = "<group>"; };
 		7C85C1C9296D9C6D00A98BC5 /* SelectedTalksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedTalksView.swift; sourceTree = "<group>"; };
 		7C85C1CB296D9D4500A98BC5 /* SelectTalksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTalksView.swift; sourceTree = "<group>"; };
 		7C85C1CD296DAEE500A98BC5 /* ManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectContext.swift; sourceTree = "<group>"; };
@@ -126,6 +132,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C74914E2975D25900AC7B82 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				7C74914F2975D26300AC7B82 /* InfoView.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
 		7CB9E38029674D8900753EA3 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +179,9 @@
 				7CB9E393296766B600753EA3 /* OptionalCollection+Extensions.swift */,
 				7CBAAC732969B2EF00096F1E /* CLLocationCoordinate2D+Codable.swift */,
 				7CCA101D296F611100E1833D /* Collection+Sorting.swift */,
+				7C7491512975D40700AC7B82 /* URL+Identifiable.swift */,
+				7C7491532975D42A00AC7B82 /* URL+Conferences.swift */,
+				7C7491552975D73400AC7B82 /* View+Section.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -211,6 +228,7 @@
 		7CD7C80C2965F4B100B56632 /* Conferences */ = {
 			isa = PBXGroup;
 			children = (
+				7C74914E2975D25900AC7B82 /* Info */,
 				7CB9E390296763BA00753EA3 /* Extensions */,
 				7CB9E38D29675F3000753EA3 /* Persistence */,
 				7CB9E38529675E1600753EA3 /* Model */,
@@ -277,7 +295,6 @@
 			children = (
 				7CD7C8142965F4B100B56632 /* IdeasList.swift */,
 				7CD7C845296603DB00B56632 /* CreateIdea.swift */,
-				7C74914C2975CDC800AC7B82 /* ConferenceSubmissionsView.swift */,
 			);
 			path = Brainstorm;
 			sourceTree = "<group>";
@@ -413,11 +430,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C7491562975D73400AC7B82 /* View+Section.swift in Sources */,
 				7CD7C80E2965F4B100B56632 /* ConferencesApp.swift in Sources */,
 				7CBAAC7A2969B3E900096F1E /* Conference+Data.swift in Sources */,
 				7CB9E38A29675E3D00753EA3 /* Venue.swift in Sources */,
 				7CB9E38229674D9600753EA3 /* SafariView.swift in Sources */,
 				7CCA101C296F542200E1833D /* SortView.swift in Sources */,
+				7C7491542975D42A00AC7B82 /* URL+Conferences.swift in Sources */,
 				7CCA101E296F611100E1833D /* Collection+Sorting.swift in Sources */,
 				7C85C1D0296DC47200A98BC5 /* Idea+Comparable.swift in Sources */,
 				7CB9E394296766B600753EA3 /* OptionalCollection+Extensions.swift in Sources */,
@@ -427,14 +446,15 @@
 				7CD7C8102965F4B100B56632 /* Persistence.swift in Sources */,
 				7C85C1CA296D9C6D00A98BC5 /* SelectedTalksView.swift in Sources */,
 				7CA45EAC296CC56B00A18941 /* AddToCalendarButton.swift in Sources */,
-				7C74914D2975CDC800AC7B82 /* ConferenceSubmissionsView.swift in Sources */,
 				7CD7C8152965F4B100B56632 /* IdeasList.swift in Sources */,
 				7CD7C84A29661AAE00B56632 /* ConferenceDetailView.swift in Sources */,
 				7C85C1CC296D9D4500A98BC5 /* SelectTalksView.swift in Sources */,
 				7CA45EAA296CC3F200A18941 /* CalendarView.swift in Sources */,
+				7C7491502975D26300AC7B82 /* InfoView.swift in Sources */,
 				7CB9E392296763D000753EA3 /* Date+Extensions.swift in Sources */,
 				7CB9E38729675E2000753EA3 /* Conference.swift in Sources */,
 				7CD7C848296615B400B56632 /* SmallConferenceView.swift in Sources */,
+				7C7491522975D40700AC7B82 /* URL+Identifiable.swift in Sources */,
 				7C85C1CE296DAEE500A98BC5 /* ManagedObjectContext.swift in Sources */,
 				7CD7C8132965F4B100B56632 /* Conferences.xcdatamodeld in Sources */,
 				7CD7C846296603DB00B56632 /* CreateIdea.swift in Sources */,
