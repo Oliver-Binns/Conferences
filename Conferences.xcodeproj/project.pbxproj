@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C74914D2975CDC800AC7B82 /* ConferenceSubmissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74914C2975CDC800AC7B82 /* ConferenceSubmissionsView.swift */; };
 		7C85C1CA296D9C6D00A98BC5 /* SelectedTalksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C85C1C9296D9C6D00A98BC5 /* SelectedTalksView.swift */; };
 		7C85C1CC296D9D4500A98BC5 /* SelectTalksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C85C1CB296D9D4500A98BC5 /* SelectTalksView.swift */; };
 		7C85C1CE296DAEE500A98BC5 /* ManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C85C1CD296DAEE500A98BC5 /* ManagedObjectContext.swift */; };
@@ -59,6 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7C74914C2975CDC800AC7B82 /* ConferenceSubmissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceSubmissionsView.swift; sourceTree = "<group>"; };
 		7C85C1C9296D9C6D00A98BC5 /* SelectedTalksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedTalksView.swift; sourceTree = "<group>"; };
 		7C85C1CB296D9D4500A98BC5 /* SelectTalksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTalksView.swift; sourceTree = "<group>"; };
 		7C85C1CD296DAEE500A98BC5 /* ManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectContext.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			children = (
 				7CD7C8142965F4B100B56632 /* IdeasList.swift */,
 				7CD7C845296603DB00B56632 /* CreateIdea.swift */,
+				7C74914C2975CDC800AC7B82 /* ConferenceSubmissionsView.swift */,
 			);
 			path = Brainstorm;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				7CD7C8102965F4B100B56632 /* Persistence.swift in Sources */,
 				7C85C1CA296D9C6D00A98BC5 /* SelectedTalksView.swift in Sources */,
 				7CA45EAC296CC56B00A18941 /* AddToCalendarButton.swift in Sources */,
+				7C74914D2975CDC800AC7B82 /* ConferenceSubmissionsView.swift in Sources */,
 				7CD7C8152965F4B100B56632 /* IdeasList.swift in Sources */,
 				7CD7C84A29661AAE00B56632 /* ConferenceDetailView.swift in Sources */,
 				7C85C1CC296D9D4500A98BC5 /* SelectTalksView.swift in Sources */,

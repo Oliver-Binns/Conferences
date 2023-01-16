@@ -21,6 +21,20 @@ struct EditIdea: View {
                 idea.overview = $0
             }), axis: .vertical)
             
+            if let conferences = idea.submittedTo?
+                .compactMap({ $0 as? Attendance })
+                .compactMap({ $0.conferenceId })
+                .compactMap(UUID.init)
+                .compactMap { conferenceId in
+                    return Conference.all.first(where: { $0.id == conferenceId })
+                },
+                conferences.count > 0 {
+                Section("Submitted to") {
+                    ForEach(conferences) { conference in
+                        Text(conference.name)
+                    }
+                }
+            }
         }
         .navigationTitle("Talk Idea")
         .toolbar {
