@@ -1,6 +1,4 @@
-import CoreLocation
 import CloudKit
-import Foundation
 
 protocol Queryable {
     init?(record: CKRecord, database: PublicDatabase) async throws
@@ -36,14 +34,11 @@ struct PublicDatabase {
             
             container.publicCloudDatabase.add(operation)
             
-            
-            var confs: [T] = []
-            for try await item in group {
-                if let item {
-                    confs.append(item)
-                }
-            }
-            return confs
+            return try await group
+                .compactMap { $0 }
+                .reduce(into: [T](), {
+                    $0.append($1)
+                })
         }
     }
     
@@ -65,56 +60,5 @@ struct PublicDatabase {
     enum RecordType: String {
         case conference = "Conference"
         case venue = "Venue"
-    }
-}
-
-extension Venue: Queryable {
-    init?(record: CKRecord, database: PublicDatabase) async {
-        guard
-            let id = UUID(uuidString: record.recordID.recordName),
-            let name = record["name"] as? String,
-            let city = record["city"] as? String,
-            let country = record["country"] as? String,
-            let location = record["location"] as? CLLocation else {
-            return nil
-        }
-        self.id = id
-        self.name = name
-        self.city = city
-        self.country = country
-        self.location = location.coordinate
-    }
-}
-
-extension Conference: Queryable {
-    init?(record: CKRecord, database: PublicDatabase) async throws {
-        guard
-            let id = UUID(uuidString: record.recordID.recordName),
-            let name = record["name"] as? String,
-            
-            let venueRef = record["venue"] as? CKRecord.Reference,
-            let venue: Venue = try await database.retrieve(id: venueRef.recordID, ofType: .venue),
-                
-            let dates = record["dates"] as? [Date],
-            let startDate = dates.first,
-            let endDate = dates.last else {
-            return nil
-        }
-        self.id = id
-        self.name = name
-        self.website = record["website"].flatMap(URL.init)
-        self.twitter = record["twitter"].flatMap(URL.init)
-        self.venue = venue
-        self.cfpSubmission = .init(dates: record["cfpSubmission"] as? [Date])
-        self.dates = startDate...endDate
-    }
-}
-
-extension CFPSubmission {
-    init?(dates: [Date]?) {
-        guard let dates,
-              let opens = dates.first else { return nil }
-        self.opens = opens
-        self.closes = dates.count > 1 ? dates[1] : nil
     }
 }

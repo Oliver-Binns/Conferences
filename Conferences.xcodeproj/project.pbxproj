@@ -29,6 +29,8 @@
 		7CBAAC7A2969B3E900096F1E /* Conference+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAAC792969B3E900096F1E /* Conference+Data.swift */; };
 		7CC336FE297B0F9B007C0364 /* SortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC336FD297B0F9B007C0364 /* SortModel.swift */; };
 		7CC33702297B1D6A007C0364 /* PublicDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33701297B1D6A007C0364 /* PublicDatabase.swift */; };
+		7CC33704297B5180007C0364 /* Venue+Queryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33703297B5180007C0364 /* Venue+Queryable.swift */; };
+		7CC33706297B51A1007C0364 /* Conference+Queryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33705297B51A1007C0364 /* Conference+Queryable.swift */; };
 		7CCA101C296F542200E1833D /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCA101B296F542200E1833D /* SortView.swift */; };
 		7CCA101E296F611100E1833D /* Collection+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCA101D296F611100E1833D /* Collection+Sorting.swift */; };
 		7CD7C80E2965F4B100B56632 /* ConferencesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C80D2965F4B100B56632 /* ConferencesApp.swift */; };
@@ -87,6 +89,8 @@
 		7CBAAC792969B3E900096F1E /* Conference+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conference+Data.swift"; sourceTree = "<group>"; };
 		7CC336FD297B0F9B007C0364 /* SortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModel.swift; sourceTree = "<group>"; };
 		7CC33701297B1D6A007C0364 /* PublicDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicDatabase.swift; sourceTree = "<group>"; };
+		7CC33703297B5180007C0364 /* Venue+Queryable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Venue+Queryable.swift"; sourceTree = "<group>"; };
+		7CC33705297B51A1007C0364 /* Conference+Queryable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conference+Queryable.swift"; sourceTree = "<group>"; };
 		7CCA101B296F542200E1833D /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
 		7CCA101D296F611100E1833D /* Collection+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Sorting.swift"; sourceTree = "<group>"; };
 		7CD7C80A2965F4B100B56632 /* Conferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,6 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				7CC33701297B1D6A007C0364 /* PublicDatabase.swift */,
+				7CC33703297B5180007C0364 /* Venue+Queryable.swift */,
+				7CC33705297B51A1007C0364 /* Conference+Queryable.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -471,7 +477,9 @@
 				7CA45EAC296CC56B00A18941 /* AddToCalendarButton.swift in Sources */,
 				7CD7C8152965F4B100B56632 /* IdeasList.swift in Sources */,
 				7CD7C84A29661AAE00B56632 /* ConferenceDetailView.swift in Sources */,
+				7CC33706297B51A1007C0364 /* Conference+Queryable.swift in Sources */,
 				7C85C1CC296D9D4500A98BC5 /* SelectTalksView.swift in Sources */,
+				7CC33704297B5180007C0364 /* Venue+Queryable.swift in Sources */,
 				7CA45EAA296CC3F200A18941 /* CalendarView.swift in Sources */,
 				7C7491502975D26300AC7B82 /* InfoView.swift in Sources */,
 				7CB9E392296763D000753EA3 /* Date+Extensions.swift in Sources */,
