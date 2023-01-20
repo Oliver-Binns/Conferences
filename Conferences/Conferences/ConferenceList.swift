@@ -10,14 +10,17 @@ struct ConferenceList: View {
     @State
     private var editingSort: Bool = false
     
+<<<<<<< Updated upstream
     @State
     private var sort: ConferenceSort = .date
 
+=======
+    @StateObject
+    private var sort = SortModel()
+>>>>>>> Stashed changes
     
     var conferences: [Conference] {
-        sort == .name ?
-            Conference.all.sorted(by: \.name) :
-            Conference.all.sorted(by: \.dates.lowerBound)
+        sort.process(conferences: Conference.all)
     }
     
     var body: some View {
@@ -50,7 +53,7 @@ struct ConferenceList: View {
                         Label("Sort", systemImage: "arrow.up.arrow.down")
                     }
                     .popover(isPresented: $editingSort) {
-                        SortView(sort: $sort)
+                        SortView(viewModel: sort)
                     }
                 }
             }
