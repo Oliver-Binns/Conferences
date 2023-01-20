@@ -1,16 +1,19 @@
 import SwiftUI
 
 struct SortView: View {
-    @Binding var sort: ConferenceSort
+    @ObservedObject
+    var viewModel: SortModel
     
     var body: some View {
         List {
-            Picker("Sort by", selection: $sort) {
+            Picker("Sort by", selection: $viewModel.sort) {
                 ForEach(ConferenceSort.allCases) { sort in
                     Text(sort.rawValue.capitalized)
                         .tag(sort)
                 }
             }
+            
+            Toggle("Hide Past Events", isOn: $viewModel.hidePastEvents)
         }.environment(\.editMode, .constant(.active))
     }
 }
