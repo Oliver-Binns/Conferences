@@ -10,14 +10,8 @@ struct ConferenceList: View {
     @State
     private var editingSort: Bool = false
     
-<<<<<<< Updated upstream
-    @State
-    private var sort: ConferenceSort = .date
-
-=======
     @StateObject
     private var sort = SortModel()
->>>>>>> Stashed changes
     
     var conferences: [Conference] {
         sort.process(conferences: Conference.all)
