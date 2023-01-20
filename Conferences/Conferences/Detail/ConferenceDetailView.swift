@@ -16,7 +16,7 @@ enum Link: Identifiable {
 
 struct ConferenceDetailView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @State private var displayLink: Link? = .none
+    @State private var displayLink: URL?
     
     let conference: Conference
     @ObservedObject var attendance: Attendance
@@ -59,9 +59,9 @@ struct ConferenceDetailView: View {
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading, spacing: 16) {
                         HStack {
-                            if conference.website != nil {
+                            if let website = conference.website {
                                 Button {
-                                    displayLink = .web
+                                    displayLink = website
                                 } label: {
                                     Label("Website", systemImage: "safari.fill")
                                 }
@@ -69,9 +69,9 @@ struct ConferenceDetailView: View {
                                 .buttonStyle(.borderedProminent)
                             }
                             
-                            if conference.twitter != nil {
+                            if let twitter = conference.twitter {
                                 Button {
-                                    displayLink = .twitter
+                                    displayLink = twitter
                                 } label: {
                                     Label("Twitter", systemImage: "safari.fill")
                                 }
@@ -102,10 +102,7 @@ struct ConferenceDetailView: View {
                                 Text("Travel Booked")
                             }
                         }
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color(.secondarySystemBackground))
-                        .cornerRadius(8)
+                        .sectionStyle()
                     }
                     
                     if attendanceType.wrappedValue == .speaker {
@@ -142,19 +139,11 @@ struct ConferenceDetailView: View {
                                 Text("We don’t have any information.")
                             }
                         }
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color(.secondarySystemBackground))
-                        .cornerRadius(8)
+                        .sectionStyle()
                     }
                 }
-                .sheet(item: $displayLink) { linkType in
-                    switch linkType {
-                    case .twitter:
-                        SafariView(url: conference.twitter!)
-                    case .web:
-                        SafariView(url: conference.website!)
-                    }
+                .sheet(item: $displayLink) { link in
+                    SafariView(url: link)
                 }
                 .padding()
             }

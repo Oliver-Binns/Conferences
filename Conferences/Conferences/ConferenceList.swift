@@ -5,10 +5,14 @@ struct ConferenceList: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @State
+    private var displayingInfo: Bool = false
+    
+    @State
     private var editingSort: Bool = false
     
     @State
     private var sort: ConferenceSort = .date
+
     
     var conferences: [Conference] {
         sort == .name ?
@@ -30,6 +34,15 @@ struct ConferenceList: View {
             }
             .padding(.vertical)
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        displayingInfo = true
+                    } label: {
+                        Label("Info", systemImage: "info.circle")
+                    }.sheet(isPresented: $displayingInfo) {
+                        InfoView()
+                    }
+                }
                 ToolbarItem {
                     Button {
                         editingSort = true

@@ -31,10 +31,7 @@ struct SmallConferenceView: View {
                 CountdownText(label: "Conference starts", date: conference.dates.lowerBound)
             }
         }
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(8)
+        .sectionStyle()
         .padding(.horizontal)
     }
 }
