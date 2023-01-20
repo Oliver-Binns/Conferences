@@ -35,3 +35,4 @@ struct CFPSubmission: Codable {
     let opens: Date
     let closes: Date?
 }
+

@@ -1,4 +1,5 @@
 import CoreData
+import CloudKit
 import SwiftUI
 
 struct ConferenceList: View {
@@ -13,9 +14,10 @@ struct ConferenceList: View {
     @StateObject
     private var sort = SortModel()
     
-    var conferences: [Conference] {
-        sort.process(conferences: Conference.all)
-    }
+    @State
+    var conferences: [Conference] = []
+    
+    private let database = PublicDatabase()
     
     var body: some View {
         ScrollView {
@@ -51,9 +53,17 @@ struct ConferenceList: View {
                     }
                 }
             }
-           
+        }.task {
+            do {
+
+                let confs: [Conference] = try await database.retrieve(type: .conference)
+                DispatchQueue.main.async {
+                    conferences = confs
+                }
+            } catch {
+                print("error happened", error)
+            }
         }
-       
     }
     
     func attendance(at conference: Conference) -> Attendance {

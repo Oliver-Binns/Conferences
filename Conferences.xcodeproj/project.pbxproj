@@ -28,6 +28,7 @@
 		7CBAAC762969B39400096F1E /* conferences.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAAC752969B39400096F1E /* conferences.json */; };
 		7CBAAC7A2969B3E900096F1E /* Conference+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAAC792969B3E900096F1E /* Conference+Data.swift */; };
 		7CC336FE297B0F9B007C0364 /* SortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC336FD297B0F9B007C0364 /* SortModel.swift */; };
+		7CC33702297B1D6A007C0364 /* PublicDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33701297B1D6A007C0364 /* PublicDatabase.swift */; };
 		7CCA101C296F542200E1833D /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCA101B296F542200E1833D /* SortView.swift */; };
 		7CCA101E296F611100E1833D /* Collection+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCA101D296F611100E1833D /* Collection+Sorting.swift */; };
 		7CD7C80E2965F4B100B56632 /* ConferencesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C80D2965F4B100B56632 /* ConferencesApp.swift */; };
@@ -85,6 +86,7 @@
 		7CBAAC752969B39400096F1E /* conferences.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = conferences.json; sourceTree = "<group>"; };
 		7CBAAC792969B3E900096F1E /* Conference+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conference+Data.swift"; sourceTree = "<group>"; };
 		7CC336FD297B0F9B007C0364 /* SortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModel.swift; sourceTree = "<group>"; };
+		7CC33701297B1D6A007C0364 /* PublicDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicDatabase.swift; sourceTree = "<group>"; };
 		7CCA101B296F542200E1833D /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
 		7CCA101D296F611100E1833D /* Collection+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Sorting.swift"; sourceTree = "<group>"; };
 		7CD7C80A2965F4B100B56632 /* Conferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,9 +169,8 @@
 		7CB9E38D29675F3000753EA3 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				7CD7C80F2965F4B100B56632 /* Persistence.swift */,
-				7CB9E38E29675F3D00753EA3 /* Persistence+Preview.swift */,
-				7C85C1CD296DAEE500A98BC5 /* ManagedObjectContext.swift */,
+				7CC33700297B1D5F007C0364 /* CloudKit */,
+				7CC336FF297B1D51007C0364 /* CoreData */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -196,6 +197,24 @@
 				7C85C1CB296D9D4500A98BC5 /* SelectTalksView.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		7CC336FF297B1D51007C0364 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7CD7C80F2965F4B100B56632 /* Persistence.swift */,
+				7CB9E38E29675F3D00753EA3 /* Persistence+Preview.swift */,
+				7C85C1CD296DAEE500A98BC5 /* ManagedObjectContext.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		7CC33700297B1D5F007C0364 /* CloudKit */ = {
+			isa = PBXGroup;
+			children = (
+				7CC33701297B1D6A007C0364 /* PublicDatabase.swift */,
+			);
+			path = CloudKit;
 			sourceTree = "<group>";
 		};
 		7CCA101A296F541800E1833D /* Sorting */ = {
@@ -458,6 +477,7 @@
 				7CB9E392296763D000753EA3 /* Date+Extensions.swift in Sources */,
 				7CB9E38729675E2000753EA3 /* Conference.swift in Sources */,
 				7CD7C848296615B400B56632 /* SmallConferenceView.swift in Sources */,
+				7CC33702297B1D6A007C0364 /* PublicDatabase.swift in Sources */,
 				7C7491522975D40700AC7B82 /* URL+Identifiable.swift in Sources */,
 				7C85C1CE296DAEE500A98BC5 /* ManagedObjectContext.swift in Sources */,
 				7CD7C8132965F4B100B56632 /* Conferences.xcdatamodeld in Sources */,
