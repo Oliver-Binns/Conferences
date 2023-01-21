@@ -11,6 +11,9 @@ struct ConferenceList: View {
     @State
     private var editingSort: Bool = false
     
+    @State
+    private var errorOccurred: Bool = false
+    
     @StateObject
     private var sort = SortModel()
     
@@ -20,49 +23,78 @@ struct ConferenceList: View {
     private let database = PublicDatabase()
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                ForEach(conferences) { conference in
-                    NavigationLink {
-                        ConferenceDetailView(conference: conference,
-                                             attendance: attendance(at: conference))
-                    } label: {
-                        SmallConferenceView(conference: conference)
-                    }.buttonStyle(.plain)
+        VStack(spacing: 16) {
+            if errorOccurred {
+                Spacer()
+                
+                VStack {
+                    Image(systemName: "wifi.exclamationmark")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 150, maxHeight: 150)
+                    Text("An error occured while fetching information.")
                 }
-            }
-            .padding(.vertical)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        displayingInfo = true
-                    } label: {
-                        Label("Info", systemImage: "info.circle")
-                    }.sheet(isPresented: $displayingInfo) {
-                        InfoView()
+                
+                Spacer()
+                
+                Button("Try Again") {
+                    Task { await fetchConferences() }
+                }
+                .buttonStyle(.borderedProminent)
+                .padding(.bottom)
+            } else if conferences.isEmpty {
+                ProgressView().progressViewStyle(.circular)
+                Text("Loading...")
+                    .task {
+                        await fetchConferences()
+                    }
+            } else {
+                ScrollView {
+                    LazyVStack {
+                        ForEach(sort.process(conferences: conferences)) { conference in
+                            NavigationLink {
+                                ConferenceDetailView(conference: conference,
+                                                     attendance: attendance(at: conference))
+                            } label: {
+                                SmallConferenceView(conference: conference)
+                            }.buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.vertical)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button {
+                                displayingInfo = true
+                            } label: {
+                                Label("Info", systemImage: "info.circle")
+                            }.sheet(isPresented: $displayingInfo) {
+                                InfoView()
+                            }
+                        }
+                        ToolbarItem {
+                            Button {
+                                editingSort = true
+                            } label: {
+                                Label("Sort", systemImage: "arrow.up.arrow.down")
+                            }
+                            .popover(isPresented: $editingSort) {
+                                SortView(viewModel: sort)
+                            }
+                        }
                     }
                 }
-                ToolbarItem {
-                    Button {
-                        editingSort = true
-                    } label: {
-                        Label("Sort", systemImage: "arrow.up.arrow.down")
-                    }
-                    .popover(isPresented: $editingSort) {
-                        SortView(viewModel: sort)
-                    }
-                }
             }
-        }.task {
-            do {
-
-                let confs: [Conference] = try await database.retrieve(type: .conference)
-                DispatchQueue.main.async {
-                    conferences = confs
-                }
-            } catch {
-                print("error happened", error)
-            }
+            
+        }
+    }
+    
+    func fetchConferences() async {
+        do {
+            errorOccurred = false
+            guard conferences.isEmpty else { return }
+            conferences = try await database.retrieve(type: .conference)
+        } catch {
+            errorOccurred = true
         }
     }
     

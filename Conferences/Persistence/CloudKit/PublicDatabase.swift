@@ -14,7 +14,7 @@ struct PublicDatabase {
         
         return try await container.publicCloudDatabase
             .run(query: query)
-            .compactMap { try await T(record: $0, database: self) }
+            .compactMap { try? await T(record: $0, database: self) }
             .reduce(into: [T](), {
                 $0.append($1)
             })
