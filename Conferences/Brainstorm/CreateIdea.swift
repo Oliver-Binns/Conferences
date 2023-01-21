@@ -3,9 +3,17 @@ import SwiftUI
 
 struct EditIdea: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject private var database: ConferenceDataStore
     @Environment(\.dismiss) var dismiss
     
     @ObservedObject var idea: Idea
+    
+    private var allConferences: [Conference] {
+        guard case .loaded(let allConferences) = database.state else {
+            return []
+        }
+        return allConferences
+    }
     
     var body: some View {
         Form {
@@ -26,7 +34,8 @@ struct EditIdea: View {
                 .compactMap({ $0.conferenceId })
                 .compactMap(UUID.init)
                 .compactMap { conferenceId in
-                    return Conference.all.first(where: { $0.id == conferenceId })
+                    allConferences
+                        .first(where: { $0.id == conferenceId })
                 },
                 conferences.count > 0 {
                 Section("Submitted to") {
@@ -59,6 +68,7 @@ struct EditIdea_Previews: PreviewProvider {
         """
         return EditIdea(idea: idea)
             .environment(\.managedObjectContext, context)
+            .environmentObject(ConferenceDataStore(service: PreviewDataService()))
     }
 }
 #endif

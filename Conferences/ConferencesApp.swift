@@ -25,6 +25,7 @@ struct ConferencesApp: App {
             }
             .environment(\.managedObjectContext,
                           persistenceController.container.viewContext)
+            .environmentObject(ConferenceDataStore())
         }
     }
 }

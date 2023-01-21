@@ -1,7 +1,7 @@
 import CloudKit
 
 extension Conference: Queryable {
-    init?(record: CKRecord, database: PublicDatabase) async throws {
+    init?(record: CKRecord, database: CloudKitService) async throws {
         guard
             let id = UUID(uuidString: record.recordID.recordName),
             let name = record["name"] as? String,

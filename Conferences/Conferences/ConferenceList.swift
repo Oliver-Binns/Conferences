@@ -4,6 +4,7 @@ import SwiftUI
 
 struct ConferenceList: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject private var database: ConferenceDataStore
     
     @State
     private var displayingInfo: Bool = false
@@ -20,11 +21,10 @@ struct ConferenceList: View {
     @State
     var conferences: [Conference] = []
     
-    private let database = PublicDatabase()
-    
     var body: some View {
         VStack(spacing: 16) {
-            if errorOccurred {
+            switch database.state {
+            case .error:
                 Spacer()
                 
                 VStack {
@@ -42,13 +42,13 @@ struct ConferenceList: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .padding(.bottom)
-            } else if conferences.isEmpty {
+            case .loading:
                 ProgressView().progressViewStyle(.circular)
                 Text("Loading...")
                     .task {
                         await fetchConferences()
                     }
-            } else {
+            case .loaded(let conferences):
                 ScrollView {
                     LazyVStack {
                         ForEach(sort.process(conferences: conferences)) { conference in
@@ -84,18 +84,11 @@ struct ConferenceList: View {
                     }
                 }
             }
-            
         }
     }
     
     func fetchConferences() async {
-        do {
-            errorOccurred = false
-            guard conferences.isEmpty else { return }
-            conferences = try await database.retrieve(type: .conference)
-        } catch {
-            errorOccurred = true
-        }
+        await database.fetch()
     }
     
     func attendance(at conference: Conference) -> Attendance {
@@ -116,6 +109,7 @@ struct ConferenceList: View {
 struct ConferenceList_Previews: PreviewProvider {
     static var previews: some View {
         ConferenceList()
+            .environmentObject(ConferenceDataStore(service: PreviewDataService()))
     }
 }
 #endif

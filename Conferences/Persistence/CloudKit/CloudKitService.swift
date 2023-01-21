@@ -1,11 +1,21 @@
 import CloudKit
 
 protocol Queryable {
-    init?(record: CKRecord, database: PublicDatabase) async throws
+    init?(record: CKRecord, database: CloudKitService) async throws
 }
 
+enum RecordType: String {
+    case conference = "Conference"
+    case venue = "Venue"
+}
 
-struct PublicDatabase {
+protocol DataService {
+    func retrieve<T: Queryable>(type: RecordType) async throws -> [T]
+    func retrieve<T: Queryable>(id: CKRecord.ID,
+                                ofType type: RecordType) async throws -> T?
+}
+
+struct CloudKitService: DataService {
     private let container = CKContainer.default()
     
     func retrieve<T: Queryable>(type: RecordType) async throws -> [T] {
@@ -25,10 +35,4 @@ struct PublicDatabase {
             .fetch(withRecordID: id) else { return nil }
         return try await T(record: record, database: self)
     }
-    
-    enum RecordType: String {
-        case conference = "Conference"
-        case venue = "Venue"
-    }
 }
-

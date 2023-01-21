@@ -1,7 +1,8 @@
-import Foundation
+#if DEBUG
+import CloudKit
 
 extension Conference {
-    static var all: [Conference] {
+    fileprivate static var all: [Conference] {
         guard
             let fileURL = Bundle.main.url(forResource: "conferences", withExtension: "json"),
             let data = try? String(contentsOf: fileURL).data(using: .utf8) else {
@@ -15,3 +16,15 @@ extension Conference {
     
     static var deepDish = Conference.all[4]
 }
+
+struct PreviewDataService: DataService {
+    func retrieve<T: Queryable>(type: RecordType) async throws -> [T] {
+        Conference.all.compactMap { $0 as? T }
+    }
+    
+    func retrieve<T: Queryable>(id: CKRecord.ID,
+                                ofType type: RecordType) async throws -> T? {
+        nil
+    }
+}
+#endif
