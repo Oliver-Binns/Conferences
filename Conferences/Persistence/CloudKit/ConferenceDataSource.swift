@@ -27,7 +27,6 @@ final class ConferenceDataStore: ObservableObject {
             if let cachedConferences: [Conference] = try? cache
                 .retrieve(type: .conference),
                !cachedConferences.isEmpty {
-                print("cache hit", cachedConferences)
                 state = .cached(cachedConferences)
             }
             // Fetch from CloudKit for latest data

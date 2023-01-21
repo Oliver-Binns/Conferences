@@ -28,7 +28,12 @@ extension CKDatabase {
             }
             
             operation.queryResultBlock = { result in
-                continuation.finish()
+                switch result {
+                case .success:
+                    continuation.finish()
+                case .failure(let error):
+                    continuation.finish(throwing: error)
+                }
             }
             
             add(operation)
