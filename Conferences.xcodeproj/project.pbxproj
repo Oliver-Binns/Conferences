@@ -33,6 +33,7 @@
 		7CC33706297B51A1007C0364 /* Conference+Queryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33705297B51A1007C0364 /* Conference+Queryable.swift */; };
 		7CC33709297B594F007C0364 /* CloudKit+Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33708297B594F007C0364 /* CloudKit+Concurrency.swift */; };
 		7CC3370D297B6CD2007C0364 /* ConferenceDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC3370C297B6CD2007C0364 /* ConferenceDataSource.swift */; };
+		7CC33711297C21FC007C0364 /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33710297C21FC007C0364 /* FileCache.swift */; };
 		7CCA101C296F542200E1833D /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCA101B296F542200E1833D /* SortView.swift */; };
 		7CCA101E296F611100E1833D /* Collection+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCA101D296F611100E1833D /* Collection+Sorting.swift */; };
 		7CD7C80E2965F4B100B56632 /* ConferencesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C80D2965F4B100B56632 /* ConferencesApp.swift */; };
@@ -95,6 +96,7 @@
 		7CC33705297B51A1007C0364 /* Conference+Queryable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conference+Queryable.swift"; sourceTree = "<group>"; };
 		7CC33708297B594F007C0364 /* CloudKit+Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit+Concurrency.swift"; sourceTree = "<group>"; };
 		7CC3370C297B6CD2007C0364 /* ConferenceDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceDataSource.swift; sourceTree = "<group>"; };
+		7CC33710297C21FC007C0364 /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
 		7CCA101B296F542200E1833D /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
 		7CCA101D296F611100E1833D /* Collection+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Sorting.swift"; sourceTree = "<group>"; };
 		7CD7C80A2965F4B100B56632 /* Conferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +178,7 @@
 		7CB9E38D29675F3000753EA3 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				7CC3370F297C21E0007C0364 /* Cache */,
 				7CC33700297B1D5F007C0364 /* CloudKit */,
 				7CC336FF297B1D51007C0364 /* CoreData */,
 			);
@@ -234,6 +237,14 @@
 				7CC33708297B594F007C0364 /* CloudKit+Concurrency.swift */,
 			);
 			path = CloudKit;
+			sourceTree = "<group>";
+		};
+		7CC3370F297C21E0007C0364 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				7CC33710297C21FC007C0364 /* FileCache.swift */,
+			);
+			path = Cache;
 			sourceTree = "<group>";
 		};
 		7CCA101A296F541800E1833D /* Sorting */ = {
@@ -482,6 +493,7 @@
 				7C7491542975D42A00AC7B82 /* URL+Conferences.swift in Sources */,
 				7CCA101E296F611100E1833D /* Collection+Sorting.swift in Sources */,
 				7C85C1D0296DC47200A98BC5 /* Idea+Comparable.swift in Sources */,
+				7CC33711297C21FC007C0364 /* FileCache.swift in Sources */,
 				7CB9E394296766B600753EA3 /* OptionalCollection+Extensions.swift in Sources */,
 				7CB9E384296751D400753EA3 /* CountdownText.swift in Sources */,
 				7CBAAC742969B2EF00096F1E /* CLLocationCoordinate2D+Codable.swift in Sources */,

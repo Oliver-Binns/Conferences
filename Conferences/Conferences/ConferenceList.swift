@@ -37,18 +37,15 @@ struct ConferenceList: View {
                 
                 Spacer()
                 
-                Button("Try Again") {
-                    Task { await fetchConferences() }
-                }
+                Button("Try Again", action: fetchConferences)
                 .buttonStyle(.borderedProminent)
                 .padding(.bottom)
             case .loading:
                 ProgressView().progressViewStyle(.circular)
                 Text("Loading...")
-                    .task {
-                        await fetchConferences()
-                    }
-            case .loaded(let conferences):
+                    .onAppear(perform: fetchConferences)
+            case .loaded(let conferences),
+                 .cached(let conferences):
                 ScrollView {
                     LazyVStack {
                         ForEach(sort.process(conferences: conferences)) { conference in
@@ -87,8 +84,8 @@ struct ConferenceList: View {
         }
     }
     
-    func fetchConferences() async {
-        await database.fetch()
+    func fetchConferences() {
+        database.fetch()
     }
     
     func attendance(at conference: Conference) -> Attendance {
