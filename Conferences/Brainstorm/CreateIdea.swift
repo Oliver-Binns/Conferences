@@ -9,10 +9,12 @@ struct EditIdea: View {
     @ObservedObject var idea: Idea
     
     private var allConferences: [Conference] {
-        guard case .loaded(let allConferences) = database.state else {
-            return []
+        switch database.state {
+        case .loaded(let conferences),
+             .cached(let conferences):
+            return conferences
+        default: return []
         }
-        return allConferences
     }
     
     var body: some View {
