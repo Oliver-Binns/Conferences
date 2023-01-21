@@ -35,3 +35,12 @@ struct CFPSubmission: Codable {
     let opens: Date
     let closes: Date?
 }
+
+extension CFPSubmission {
+    init?(dates: [Date]?) {
+        guard let dates,
+              let opens = dates.first else { return nil }
+        self.opens = opens
+        self.closes = dates.count > 1 ? dates[1] : nil
+    }
+}

@@ -136,7 +136,7 @@ struct ConferenceDetailView: View {
                                         .foregroundColor(.red)
                                 }
                             } else {
-                                Text("We don’t have any information.")
+                                Text("We don’t have any information to help you speak at this conference.")
                             }
                         }
                         .sectionStyle()

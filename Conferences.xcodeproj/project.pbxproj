@@ -28,6 +28,10 @@
 		7CBAAC762969B39400096F1E /* conferences.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAAC752969B39400096F1E /* conferences.json */; };
 		7CBAAC7A2969B3E900096F1E /* Conference+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAAC792969B3E900096F1E /* Conference+Data.swift */; };
 		7CC336FE297B0F9B007C0364 /* SortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC336FD297B0F9B007C0364 /* SortModel.swift */; };
+		7CC33702297B1D6A007C0364 /* PublicDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33701297B1D6A007C0364 /* PublicDatabase.swift */; };
+		7CC33704297B5180007C0364 /* Venue+Queryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33703297B5180007C0364 /* Venue+Queryable.swift */; };
+		7CC33706297B51A1007C0364 /* Conference+Queryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33705297B51A1007C0364 /* Conference+Queryable.swift */; };
+		7CC33709297B594F007C0364 /* CloudKit+Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33708297B594F007C0364 /* CloudKit+Concurrency.swift */; };
 		7CCA101C296F542200E1833D /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCA101B296F542200E1833D /* SortView.swift */; };
 		7CCA101E296F611100E1833D /* Collection+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCA101D296F611100E1833D /* Collection+Sorting.swift */; };
 		7CD7C80E2965F4B100B56632 /* ConferencesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C80D2965F4B100B56632 /* ConferencesApp.swift */; };
@@ -85,6 +89,10 @@
 		7CBAAC752969B39400096F1E /* conferences.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = conferences.json; sourceTree = "<group>"; };
 		7CBAAC792969B3E900096F1E /* Conference+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conference+Data.swift"; sourceTree = "<group>"; };
 		7CC336FD297B0F9B007C0364 /* SortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModel.swift; sourceTree = "<group>"; };
+		7CC33701297B1D6A007C0364 /* PublicDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicDatabase.swift; sourceTree = "<group>"; };
+		7CC33703297B5180007C0364 /* Venue+Queryable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Venue+Queryable.swift"; sourceTree = "<group>"; };
+		7CC33705297B51A1007C0364 /* Conference+Queryable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conference+Queryable.swift"; sourceTree = "<group>"; };
+		7CC33708297B594F007C0364 /* CloudKit+Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit+Concurrency.swift"; sourceTree = "<group>"; };
 		7CCA101B296F542200E1833D /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
 		7CCA101D296F611100E1833D /* Collection+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Sorting.swift"; sourceTree = "<group>"; };
 		7CD7C80A2965F4B100B56632 /* Conferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,9 +175,8 @@
 		7CB9E38D29675F3000753EA3 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				7CD7C80F2965F4B100B56632 /* Persistence.swift */,
-				7CB9E38E29675F3D00753EA3 /* Persistence+Preview.swift */,
-				7C85C1CD296DAEE500A98BC5 /* ManagedObjectContext.swift */,
+				7CC33700297B1D5F007C0364 /* CloudKit */,
+				7CC336FF297B1D51007C0364 /* CoreData */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -177,6 +184,7 @@
 		7CB9E390296763BA00753EA3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7CC33707297B5943007C0364 /* CloudKit */,
 				7CB9E391296763D000753EA3 /* Date+Extensions.swift */,
 				7CB9E393296766B600753EA3 /* OptionalCollection+Extensions.swift */,
 				7CBAAC732969B2EF00096F1E /* CLLocationCoordinate2D+Codable.swift */,
@@ -196,6 +204,34 @@
 				7C85C1CB296D9D4500A98BC5 /* SelectTalksView.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		7CC336FF297B1D51007C0364 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7CD7C80F2965F4B100B56632 /* Persistence.swift */,
+				7CB9E38E29675F3D00753EA3 /* Persistence+Preview.swift */,
+				7C85C1CD296DAEE500A98BC5 /* ManagedObjectContext.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		7CC33700297B1D5F007C0364 /* CloudKit */ = {
+			isa = PBXGroup;
+			children = (
+				7CC33701297B1D6A007C0364 /* PublicDatabase.swift */,
+				7CC33703297B5180007C0364 /* Venue+Queryable.swift */,
+				7CC33705297B51A1007C0364 /* Conference+Queryable.swift */,
+			);
+			path = CloudKit;
+			sourceTree = "<group>";
+		};
+		7CC33707297B5943007C0364 /* CloudKit */ = {
+			isa = PBXGroup;
+			children = (
+				7CC33708297B594F007C0364 /* CloudKit+Concurrency.swift */,
+			);
+			path = CloudKit;
 			sourceTree = "<group>";
 		};
 		7CCA101A296F541800E1833D /* Sorting */ = {
@@ -452,14 +488,18 @@
 				7CA45EAC296CC56B00A18941 /* AddToCalendarButton.swift in Sources */,
 				7CD7C8152965F4B100B56632 /* IdeasList.swift in Sources */,
 				7CD7C84A29661AAE00B56632 /* ConferenceDetailView.swift in Sources */,
+				7CC33706297B51A1007C0364 /* Conference+Queryable.swift in Sources */,
 				7C85C1CC296D9D4500A98BC5 /* SelectTalksView.swift in Sources */,
+				7CC33704297B5180007C0364 /* Venue+Queryable.swift in Sources */,
 				7CA45EAA296CC3F200A18941 /* CalendarView.swift in Sources */,
 				7C7491502975D26300AC7B82 /* InfoView.swift in Sources */,
 				7CB9E392296763D000753EA3 /* Date+Extensions.swift in Sources */,
 				7CB9E38729675E2000753EA3 /* Conference.swift in Sources */,
 				7CD7C848296615B400B56632 /* SmallConferenceView.swift in Sources */,
+				7CC33702297B1D6A007C0364 /* PublicDatabase.swift in Sources */,
 				7C7491522975D40700AC7B82 /* URL+Identifiable.swift in Sources */,
 				7C85C1CE296DAEE500A98BC5 /* ManagedObjectContext.swift in Sources */,
+				7CC33709297B594F007C0364 /* CloudKit+Concurrency.swift in Sources */,
 				7CD7C8132965F4B100B56632 /* Conferences.xcdatamodeld in Sources */,
 				7CD7C846296603DB00B56632 /* CreateIdea.swift in Sources */,
 				7CD7C8432965FEFC00B56632 /* ConferenceList.swift in Sources */,
