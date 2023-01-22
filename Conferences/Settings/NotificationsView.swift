@@ -10,7 +10,7 @@ struct NotificationsView: View {
                    isOn: $notificationSubscriber.newConferences)
             .disabled(notificationSubscriber.isRejected)
             
-            Toggle("Travel Reminders",
+            /*Toggle("Travel Reminders",
                    isOn: $notificationSubscriber.travelReminders)
             .disabled(notificationSubscriber.isRejected)
             
@@ -19,7 +19,7 @@ struct NotificationsView: View {
             .disabled(notificationSubscriber.isRejected)
             Toggle("CFP Closing",
                    isOn: $notificationSubscriber.cfpClosing)
-            .disabled(notificationSubscriber.isRejected)
+            .disabled(notificationSubscriber.isRejected)*/
             
             if notificationSubscriber.isRejected {
                 VStack(alignment: .leading, spacing: 16) {

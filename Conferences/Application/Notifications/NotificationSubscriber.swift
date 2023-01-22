@@ -2,17 +2,17 @@ import CloudKit
 import UIKit
 import UserNotifications
 
-@MainActor
 final class NotificationSubscriber: ObservableObject {
-    @Published
+    @MainActor @Published
     private var authorizationStatus: UNAuthorizationStatus = .notDetermined
     
+    @MainActor
     var isRejected: Bool {
         authorizationStatus == .denied
     }
     
-    @Published
-    var newConferences: Bool {
+    @MainActor @Published
+    var newConferences: Bool = false {
         didSet {
             Task {
                 try await requestAuthorizationIfNeeded()
@@ -26,7 +26,7 @@ final class NotificationSubscriber: ObservableObject {
         }
     }
     
-    @Published
+    @MainActor @Published
     var cfpOpening: Bool = false {
         didSet {
             Task {
@@ -35,7 +35,7 @@ final class NotificationSubscriber: ObservableObject {
         }
     }
     
-    @Published
+    @MainActor @Published
     var cfpClosing: Bool = false {
         didSet {
             Task {
@@ -44,7 +44,7 @@ final class NotificationSubscriber: ObservableObject {
         }
     }
     
-    @Published
+    @MainActor @Published
     var travelReminders: Bool = false {
         didSet {
             Task {
@@ -57,14 +57,16 @@ final class NotificationSubscriber: ObservableObject {
     
     init(centre: UNUserNotificationCenter = .current()) async throws {
         self.centre = centre
-        self.newConferences = try await Self.isConferenceSubscriptionEnabled()
+        
+        let newConferences = try await isConferenceSubscriptionEnabled()
+        await MainActor.run { self.newConferences = newConferences }
     }
     
     private func requestAuthorizationIfNeeded() async throws {
-        guard authorizationStatus == .notDetermined else { return }
+        guard await authorizationStatus == .notDetermined else { return }
         try await centre
             .requestAuthorization(options: [.alert, .badge, .sound])
-        authorizationStatus = await centre.getNotificationSettings().authorizationStatus
+        await checkNotificationSettings()
     }
     
     private func subscribeToNewConferences() async throws {
@@ -91,7 +93,7 @@ final class NotificationSubscriber: ObservableObject {
             .deleteSubscription(withID: SubscriptionType.newConferences.rawValue)
     }
     
-    private static func isConferenceSubscriptionEnabled() async throws -> Bool {
+    private func isConferenceSubscriptionEnabled() async throws -> Bool {
         do {
             _ = try await CKContainer.default()
                 .publicCloudDatabase
@@ -103,8 +105,11 @@ final class NotificationSubscriber: ObservableObject {
     }
     
     func checkNotificationSettings() async {
-        authorizationStatus = await centre.getNotificationSettings()
+        let status = await centre.getNotificationSettings()
             .authorizationStatus
+        await MainActor.run {
+            authorizationStatus = status
+        }
     }
 }
 
