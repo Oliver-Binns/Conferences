@@ -41,6 +41,10 @@
 		7CC3371E297D7068007C0364 /* URLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC3371D297D7068007C0364 /* URLOpener.swift */; };
 		7CC33724297D7300007C0364 /* View+AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33723297D7300007C0364 /* View+AppState.swift */; };
 		7CC33727297D73A5007C0364 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33726297D73A5007C0364 /* NotificationsView.swift */; };
+		7CC3372A297DA131007C0364 /* NewConferenceSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33729297DA131007C0364 /* NewConferenceSubscriber.swift */; };
+		7CC3372D297DA19D007C0364 /* ObjectSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC3372C297DA19D007C0364 /* ObjectSubscriber.swift */; };
+		7CC3372F297DA2C9007C0364 /* EditConferenceSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC3372E297DA2C9007C0364 /* EditConferenceSubscriber.swift */; };
+		7CC33731297DA31D007C0364 /* EditAttendanceSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33730297DA31D007C0364 /* EditAttendanceSubscriber.swift */; };
 		7CCA101C296F542200E1833D /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCA101B296F542200E1833D /* SortView.swift */; };
 		7CCA101E296F611100E1833D /* Collection+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCA101D296F611100E1833D /* Collection+Sorting.swift */; };
 		7CD7C80E2965F4B100B56632 /* ConferencesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C80D2965F4B100B56632 /* ConferencesApp.swift */; };
@@ -111,6 +115,10 @@
 		7CC3371D297D7068007C0364 /* URLOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLOpener.swift; sourceTree = "<group>"; };
 		7CC33723297D7300007C0364 /* View+AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+AppState.swift"; sourceTree = "<group>"; };
 		7CC33726297D73A5007C0364 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		7CC33729297DA131007C0364 /* NewConferenceSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConferenceSubscriber.swift; sourceTree = "<group>"; };
+		7CC3372C297DA19D007C0364 /* ObjectSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSubscriber.swift; sourceTree = "<group>"; };
+		7CC3372E297DA2C9007C0364 /* EditConferenceSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditConferenceSubscriber.swift; sourceTree = "<group>"; };
+		7CC33730297DA31D007C0364 /* EditAttendanceSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAttendanceSubscriber.swift; sourceTree = "<group>"; };
 		7CCA101B296F542200E1833D /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
 		7CCA101D296F611100E1833D /* Collection+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Sorting.swift"; sourceTree = "<group>"; };
 		7CD7C80A2965F4B100B56632 /* Conferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,10 +171,10 @@
 		7C74914E2975D25900AC7B82 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				7CC33728297DA114007C0364 /* Notifications */,
 				7C74914F2975D26300AC7B82 /* InfoView.swift */,
 				7CC33718297D67D1007C0364 /* SettingsView.swift */,
 				7CC3371D297D7068007C0364 /* URLOpener.swift */,
-				7CC33726297D73A5007C0364 /* NotificationsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -265,19 +273,10 @@
 		7CC33712297D5DAB007C0364 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				7CC33715297D65A7007C0364 /* Notifications */,
 				7CD7C80D2965F4B100B56632 /* ConferencesApp.swift */,
 				7CC33713297D5DB6007C0364 /* AppDelegate.swift */,
 			);
 			path = Application;
-			sourceTree = "<group>";
-		};
-		7CC33715297D65A7007C0364 /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				7CC33716297D65B2007C0364 /* NotificationSubscriber.swift */,
-			);
-			path = Notifications;
 			sourceTree = "<group>";
 		};
 		7CC3371A297D6C75007C0364 /* UserNotifications */ = {
@@ -322,6 +321,27 @@
 				7CBAAC732969B2EF00096F1E /* CLLocationCoordinate2D+Codable.swift */,
 			);
 			path = CoreLocation;
+			sourceTree = "<group>";
+		};
+		7CC33728297DA114007C0364 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				7CC3372B297DA192007C0364 /* Subscribers */,
+				7CC33716297D65B2007C0364 /* NotificationSubscriber.swift */,
+				7CC33726297D73A5007C0364 /* NotificationsView.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		7CC3372B297DA192007C0364 /* Subscribers */ = {
+			isa = PBXGroup;
+			children = (
+				7CC33729297DA131007C0364 /* NewConferenceSubscriber.swift */,
+				7CC3372C297DA19D007C0364 /* ObjectSubscriber.swift */,
+				7CC3372E297DA2C9007C0364 /* EditConferenceSubscriber.swift */,
+				7CC33730297DA31D007C0364 /* EditAttendanceSubscriber.swift */,
+			);
+			path = Subscribers;
 			sourceTree = "<group>";
 		};
 		7CCA101A296F541800E1833D /* Sorting */ = {
@@ -588,6 +608,8 @@
 				7CC33706297B51A1007C0364 /* Conference+Queryable.swift in Sources */,
 				7C85C1CC296D9D4500A98BC5 /* SelectTalksView.swift in Sources */,
 				7CC33704297B5180007C0364 /* Venue+Queryable.swift in Sources */,
+				7CC3372D297DA19D007C0364 /* ObjectSubscriber.swift in Sources */,
+				7CC3372F297DA2C9007C0364 /* EditConferenceSubscriber.swift in Sources */,
 				7CC3371C297D6C85007C0364 /* UNUserNotificationCenter+Concurrency.swift in Sources */,
 				7CC33727297D73A5007C0364 /* NotificationsView.swift in Sources */,
 				7CA45EAA296CC3F200A18941 /* CalendarView.swift in Sources */,
@@ -595,12 +617,14 @@
 				7CC3370D297B6CD2007C0364 /* ConferenceDataSource.swift in Sources */,
 				7CB9E392296763D000753EA3 /* Date+Extensions.swift in Sources */,
 				7CB9E38729675E2000753EA3 /* Conference.swift in Sources */,
+				7CC33731297DA31D007C0364 /* EditAttendanceSubscriber.swift in Sources */,
 				7CD7C848296615B400B56632 /* SmallConferenceView.swift in Sources */,
 				7CC33702297B1D6A007C0364 /* CloudKitService.swift in Sources */,
 				7C7491522975D40700AC7B82 /* URL+Identifiable.swift in Sources */,
 				7C85C1CE296DAEE500A98BC5 /* ManagedObjectContext.swift in Sources */,
 				7CC33709297B594F007C0364 /* CloudKit+Concurrency.swift in Sources */,
 				7CD7C8132965F4B100B56632 /* Conferences.xcdatamodeld in Sources */,
+				7CC3372A297DA131007C0364 /* NewConferenceSubscriber.swift in Sources */,
 				7CD7C846296603DB00B56632 /* CreateIdea.swift in Sources */,
 				7CD7C8432965FEFC00B56632 /* ConferenceList.swift in Sources */,
 			);

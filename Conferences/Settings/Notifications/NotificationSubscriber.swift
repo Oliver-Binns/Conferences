@@ -18,9 +18,9 @@ final class NotificationSubscriber: ObservableObject {
                 try await requestAuthorizationIfNeeded()
                 
                 if newConferences {
-                    try await subscribeToNewConferences()
+                    try await newConferenceSubscriber.subscribe()
                 } else {
-                    try await removeConferenceSubscription()
+                    try await newConferenceSubscriber.unsubscribe()
                 }
             }
         }
@@ -31,6 +31,7 @@ final class NotificationSubscriber: ObservableObject {
         didSet {
             Task {
                 try await requestAuthorizationIfNeeded()
+                try await toggleSubscriptions()
             }
         }
     }
@@ -40,6 +41,7 @@ final class NotificationSubscriber: ObservableObject {
         didSet {
             Task {
                 try await requestAuthorizationIfNeeded()
+                try await toggleSubscriptions()
             }
         }
     }
@@ -49,16 +51,20 @@ final class NotificationSubscriber: ObservableObject {
         didSet {
             Task {
                 try await requestAuthorizationIfNeeded()
+                try await toggleSubscriptions()
             }
         }
     }
     
     private let centre: UNUserNotificationCenter
+    private let newConferenceSubscriber = NewConferenceSubscriber()
+    private let editConferenceSubscriber = EditConferenceSubscriber()
+    private let editAttendanceSubscriber = EditAttendanceSubscriber()
     
     init(centre: UNUserNotificationCenter = .current()) async throws {
         self.centre = centre
         
-        let newConferences = try await isConferenceSubscriptionEnabled()
+        let newConferences = try await newConferenceSubscriber.isSubscribed
         await MainActor.run { self.newConferences = newConferences }
     }
     
@@ -69,52 +75,20 @@ final class NotificationSubscriber: ObservableObject {
         await checkNotificationSettings()
     }
     
-    private func subscribeToNewConferences() async throws {
-        let subscription = CKQuerySubscription(recordType: RecordType.conference.rawValue,
-                                               predicate: NSPredicate(value: true),
-                                               subscriptionID: SubscriptionType.newConferences.rawValue,
-                                               options: .firesOnRecordCreation)
-        
-        let info = CKSubscription.NotificationInfo()
-        info.titleLocalizationKey = "New Conference: %1$@"
-        info.titleLocalizationArgs = ["name"]
-        
-        info.alertLocalizationKey = "Open the app for more details including dates and location!"
-        
-        info.shouldBadge = true
-        info.soundName = "default"
-        
-        subscription.notificationInfo = info
-        try await CKContainer.default().publicCloudDatabase.save(subscription)
-    }
-    
-    private func removeConferenceSubscription() async throws {
-        try await CKContainer.default().publicCloudDatabase
-            .deleteSubscription(withID: SubscriptionType.newConferences.rawValue)
-    }
-    
-    private func isConferenceSubscriptionEnabled() async throws -> Bool {
-        do {
-            _ = try await CKContainer.default()
-                .publicCloudDatabase
-                .fetch(withSubscriptionID: SubscriptionType.newConferences.rawValue)
-            return true
-        } catch CKError.unknownItem {
-            return false
+    private func toggleSubscriptions() async throws {
+        let shouldSubscribe = await MainActor.run { cfpOpening || cfpClosing || travelReminders }
+        if shouldSubscribe {
+            try await editAttendanceSubscriber.subscribe()
+            try await editConferenceSubscriber.subscribe()
+        } else {
+            try await editAttendanceSubscriber.unsubscribe()
+            try await editConferenceSubscriber.unsubscribe()
         }
     }
     
     func checkNotificationSettings() async {
         let status = await centre.getNotificationSettings()
             .authorizationStatus
-        await MainActor.run {
-            authorizationStatus = status
-        }
+        await MainActor.run { authorizationStatus = status }
     }
-}
-
-enum SubscriptionType: String {
-    case newConferences
-    case conferenceEdit
-    case attendanceEdit
 }
