@@ -7,16 +7,16 @@ struct ConferenceList: View {
     @EnvironmentObject private var database: ConferenceDataStore
     
     @State
-    private var displayingInfo: Bool = false
+    private var isSettingsDisplayed: Bool = false
     
     @State
-    private var editingSort: Bool = false
+    private var isSortingDisplayed: Bool = false
     
     @State
-    private var errorOccurred: Bool = false
+    private var hasErrorOccurred: Bool = false
     
     @StateObject
-    private var sort = SortModel()
+    private var sortModel = SortModel()
     
     @State
     var conferences: [Conference] = []
@@ -48,7 +48,7 @@ struct ConferenceList: View {
                  .cached(let conferences):
                 ScrollView {
                     LazyVStack {
-                        ForEach(sort.process(conferences: conferences)) { conference in
+                        ForEach(sortModel.process(conferences: conferences)) { conference in
                             NavigationLink {
                                 ConferenceDetailView(conference: conference,
                                                      attendance: attendance(at: conference))
@@ -61,21 +61,21 @@ struct ConferenceList: View {
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button {
-                                displayingInfo = true
+                                isSettingsDisplayed = true
                             } label: {
-                                Label("Info", systemImage: "info.circle")
-                            }.sheet(isPresented: $displayingInfo) {
-                                InfoView()
+                                Label("Info", systemImage: "gear")
+                            }.sheet(isPresented: $isSettingsDisplayed) {
+                                SettingsView()
                             }
                         }
                         ToolbarItem {
                             Button {
-                                editingSort = true
+                                isSortingDisplayed = true
                             } label: {
                                 Label("Sort", systemImage: "arrow.up.arrow.down")
                             }
-                            .popover(isPresented: $editingSort) {
-                                SortView(viewModel: sort)
+                            .popover(isPresented: $isSortingDisplayed) {
+                                SortView(viewModel: sortModel)
                             }
                         }
                     }

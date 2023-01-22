@@ -1,14 +1,12 @@
 import SwiftUI
 
 struct InfoView: View {
-    @Environment(\.dismiss) var dismiss
-    
     @State
     private var url: URL?
     
     var body: some View {
-        NavigationView {
-            ScrollView {
+        ScrollView {
+            VStack {
                 VStack(spacing: 24) {
                     VStack(alignment: .leading, spacing: 16) {
                         Text("""
@@ -46,8 +44,8 @@ struct InfoView: View {
                         You can raise an Issue on GitHub. This is a project I'm doing in my spare time, so please be patient.
                         I can't promise I'll be able to fix every issue, but feel free to raise a pull request yourself.
                         """)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .fixedSize(horizontal: false, vertical: true)
                         Button {
                             url = .github.appending(path: "issues")
                         } label: {
@@ -82,14 +80,6 @@ struct InfoView: View {
             .navigationTitle("Info")
             .sheet(item: $url) { url in
                 SafariView(url: url)
-            }
-            .toolbar {
-                Button {
-                    dismiss()
-                } label: {
-                    Text("Done")
-                }
-
             }
         }
     }

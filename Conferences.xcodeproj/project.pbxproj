@@ -34,6 +34,13 @@
 		7CC33709297B594F007C0364 /* CloudKit+Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33708297B594F007C0364 /* CloudKit+Concurrency.swift */; };
 		7CC3370D297B6CD2007C0364 /* ConferenceDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC3370C297B6CD2007C0364 /* ConferenceDataSource.swift */; };
 		7CC33711297C21FC007C0364 /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33710297C21FC007C0364 /* FileCache.swift */; };
+		7CC33714297D5DB6007C0364 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33713297D5DB6007C0364 /* AppDelegate.swift */; };
+		7CC33717297D65B2007C0364 /* NotificationSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33716297D65B2007C0364 /* NotificationSubscriber.swift */; };
+		7CC33719297D67D1007C0364 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33718297D67D1007C0364 /* SettingsView.swift */; };
+		7CC3371C297D6C85007C0364 /* UNUserNotificationCenter+Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC3371B297D6C85007C0364 /* UNUserNotificationCenter+Concurrency.swift */; };
+		7CC3371E297D7068007C0364 /* URLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC3371D297D7068007C0364 /* URLOpener.swift */; };
+		7CC33724297D7300007C0364 /* View+AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33723297D7300007C0364 /* View+AppState.swift */; };
+		7CC33727297D73A5007C0364 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33726297D73A5007C0364 /* NotificationsView.swift */; };
 		7CCA101C296F542200E1833D /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCA101B296F542200E1833D /* SortView.swift */; };
 		7CCA101E296F611100E1833D /* Collection+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCA101D296F611100E1833D /* Collection+Sorting.swift */; };
 		7CD7C80E2965F4B100B56632 /* ConferencesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C80D2965F4B100B56632 /* ConferencesApp.swift */; };
@@ -97,6 +104,13 @@
 		7CC33708297B594F007C0364 /* CloudKit+Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit+Concurrency.swift"; sourceTree = "<group>"; };
 		7CC3370C297B6CD2007C0364 /* ConferenceDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceDataSource.swift; sourceTree = "<group>"; };
 		7CC33710297C21FC007C0364 /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
+		7CC33713297D5DB6007C0364 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7CC33716297D65B2007C0364 /* NotificationSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSubscriber.swift; sourceTree = "<group>"; };
+		7CC33718297D67D1007C0364 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7CC3371B297D6C85007C0364 /* UNUserNotificationCenter+Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+Concurrency.swift"; sourceTree = "<group>"; };
+		7CC3371D297D7068007C0364 /* URLOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLOpener.swift; sourceTree = "<group>"; };
+		7CC33723297D7300007C0364 /* View+AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+AppState.swift"; sourceTree = "<group>"; };
+		7CC33726297D73A5007C0364 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		7CCA101B296F542200E1833D /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
 		7CCA101D296F611100E1833D /* Collection+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Sorting.swift"; sourceTree = "<group>"; };
 		7CD7C80A2965F4B100B56632 /* Conferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,12 +160,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7C74914E2975D25900AC7B82 /* Info */ = {
+		7C74914E2975D25900AC7B82 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				7C74914F2975D26300AC7B82 /* InfoView.swift */,
+				7CC33718297D67D1007C0364 /* SettingsView.swift */,
+				7CC3371D297D7068007C0364 /* URLOpener.swift */,
+				7CC33726297D73A5007C0364 /* NotificationsView.swift */,
 			);
-			path = Info;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		7CB9E38029674D8900753EA3 /* View */ = {
@@ -188,14 +205,12 @@
 		7CB9E390296763BA00753EA3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7CC33722297D72DF007C0364 /* CoreLocation */,
+				7CC33721297D72D7007C0364 /* Foundation */,
+				7CC33720297D72CE007C0364 /* Swift */,
+				7CC3371F297D72C8007C0364 /* SwiftUI */,
+				7CC3371A297D6C75007C0364 /* UserNotifications */,
 				7CC33707297B5943007C0364 /* CloudKit */,
-				7CB9E391296763D000753EA3 /* Date+Extensions.swift */,
-				7CB9E393296766B600753EA3 /* OptionalCollection+Extensions.swift */,
-				7CBAAC732969B2EF00096F1E /* CLLocationCoordinate2D+Codable.swift */,
-				7CCA101D296F611100E1833D /* Collection+Sorting.swift */,
-				7C7491512975D40700AC7B82 /* URL+Identifiable.swift */,
-				7C7491532975D42A00AC7B82 /* URL+Conferences.swift */,
-				7C7491552975D73400AC7B82 /* View+Section.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -247,6 +262,68 @@
 			path = Cache;
 			sourceTree = "<group>";
 		};
+		7CC33712297D5DAB007C0364 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				7CC33715297D65A7007C0364 /* Notifications */,
+				7CD7C80D2965F4B100B56632 /* ConferencesApp.swift */,
+				7CC33713297D5DB6007C0364 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		7CC33715297D65A7007C0364 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				7CC33716297D65B2007C0364 /* NotificationSubscriber.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		7CC3371A297D6C75007C0364 /* UserNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				7CC3371B297D6C85007C0364 /* UNUserNotificationCenter+Concurrency.swift */,
+			);
+			path = UserNotifications;
+			sourceTree = "<group>";
+		};
+		7CC3371F297D72C8007C0364 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				7C7491552975D73400AC7B82 /* View+Section.swift */,
+				7CC33723297D7300007C0364 /* View+AppState.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		7CC33720297D72CE007C0364 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				7CCA101D296F611100E1833D /* Collection+Sorting.swift */,
+				7CB9E393296766B600753EA3 /* OptionalCollection+Extensions.swift */,
+			);
+			path = Swift;
+			sourceTree = "<group>";
+		};
+		7CC33721297D72D7007C0364 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				7CB9E391296763D000753EA3 /* Date+Extensions.swift */,
+				7C7491532975D42A00AC7B82 /* URL+Conferences.swift */,
+				7C7491512975D40700AC7B82 /* URL+Identifiable.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		7CC33722297D72DF007C0364 /* CoreLocation */ = {
+			isa = PBXGroup;
+			children = (
+				7CBAAC732969B2EF00096F1E /* CLLocationCoordinate2D+Codable.swift */,
+			);
+			path = CoreLocation;
+			sourceTree = "<group>";
+		};
 		7CCA101A296F541800E1833D /* Sorting */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,7 +357,8 @@
 		7CD7C80C2965F4B100B56632 /* Conferences */ = {
 			isa = PBXGroup;
 			children = (
-				7C74914E2975D25900AC7B82 /* Info */,
+				7CC33712297D5DAB007C0364 /* Application */,
+				7C74914E2975D25900AC7B82 /* Settings */,
 				7CB9E390296763BA00753EA3 /* Extensions */,
 				7CB9E38D29675F3000753EA3 /* Persistence */,
 				7CB9E38529675E1600753EA3 /* Model */,
@@ -288,7 +366,6 @@
 				7CD7C844296603CD00B56632 /* Brainstorm */,
 				7CD7C8412965FEEE00B56632 /* Conferences */,
 				7CD7C83D2965F5A900B56632 /* Info.plist */,
-				7CD7C80D2965F4B100B56632 /* ConferencesApp.swift */,
 				7CD7C8162965F4B200B56632 /* Assets.xcassets */,
 				7CD7C8182965F4B300B56632 /* Conferences.entitlements */,
 				7CD7C8112965F4B100B56632 /* Conferences.xcdatamodeld */,
@@ -489,14 +566,19 @@
 				7CB9E38A29675E3D00753EA3 /* Venue.swift in Sources */,
 				7CB9E38229674D9600753EA3 /* SafariView.swift in Sources */,
 				7CC336FE297B0F9B007C0364 /* SortModel.swift in Sources */,
+				7CC33717297D65B2007C0364 /* NotificationSubscriber.swift in Sources */,
 				7CCA101C296F542200E1833D /* SortView.swift in Sources */,
+				7CC33724297D7300007C0364 /* View+AppState.swift in Sources */,
 				7C7491542975D42A00AC7B82 /* URL+Conferences.swift in Sources */,
 				7CCA101E296F611100E1833D /* Collection+Sorting.swift in Sources */,
 				7C85C1D0296DC47200A98BC5 /* Idea+Comparable.swift in Sources */,
 				7CC33711297C21FC007C0364 /* FileCache.swift in Sources */,
+				7CC33719297D67D1007C0364 /* SettingsView.swift in Sources */,
 				7CB9E394296766B600753EA3 /* OptionalCollection+Extensions.swift in Sources */,
 				7CB9E384296751D400753EA3 /* CountdownText.swift in Sources */,
+				7CC33714297D5DB6007C0364 /* AppDelegate.swift in Sources */,
 				7CBAAC742969B2EF00096F1E /* CLLocationCoordinate2D+Codable.swift in Sources */,
+				7CC3371E297D7068007C0364 /* URLOpener.swift in Sources */,
 				7CB9E38F29675F3D00753EA3 /* Persistence+Preview.swift in Sources */,
 				7CD7C8102965F4B100B56632 /* Persistence.swift in Sources */,
 				7C85C1CA296D9C6D00A98BC5 /* SelectedTalksView.swift in Sources */,
@@ -506,6 +588,8 @@
 				7CC33706297B51A1007C0364 /* Conference+Queryable.swift in Sources */,
 				7C85C1CC296D9D4500A98BC5 /* SelectTalksView.swift in Sources */,
 				7CC33704297B5180007C0364 /* Venue+Queryable.swift in Sources */,
+				7CC3371C297D6C85007C0364 /* UNUserNotificationCenter+Concurrency.swift in Sources */,
+				7CC33727297D73A5007C0364 /* NotificationsView.swift in Sources */,
 				7CA45EAA296CC3F200A18941 /* CalendarView.swift in Sources */,
 				7C7491502975D26300AC7B82 /* InfoView.swift in Sources */,
 				7CC3370D297B6CD2007C0364 /* ConferenceDataSource.swift in Sources */,
