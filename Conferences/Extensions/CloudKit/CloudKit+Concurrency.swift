@@ -38,6 +38,42 @@ extension CKDatabase {
             
             add(operation)
         }
-        
+    }
+    
+    @discardableResult
+    func save(_ record: CKRecord) async throws -> CKRecord {
+        try await withCheckedThrowingContinuation { continuation in
+            save(record) { record, error in
+                if let record {
+                    continuation.resume(with: .success(record))
+                } else if let error {
+                    continuation.resume(with: .failure(error))
+                }
+            }
+        }
+    }
+    
+    func fetch(withSubscriptionID id: CKSubscription.ID) async throws -> CKSubscription? {
+        try await withCheckedThrowingContinuation { continuation in
+            fetch(withSubscriptionID: id) { subscription, error in
+                if let error {
+                    continuation.resume(with: .failure(error))
+                } else {
+                    continuation.resume(with: .success(subscription))
+                }
+            }
+        }
+    }
+    
+    func fetchAllSubscriptions() async throws -> [CKSubscription] {
+        try await withCheckedThrowingContinuation { continuation in
+            fetchAllSubscriptions { subscriptions, error in
+                if let subscriptions {
+                    continuation.resume(with: .success(subscriptions))
+                } else if let error {
+                    continuation.resume(with: .failure(error))
+                }
+            }
+        }
     }
 }

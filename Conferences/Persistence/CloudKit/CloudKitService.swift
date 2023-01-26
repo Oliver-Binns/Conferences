@@ -7,6 +7,7 @@ protocol Queryable {
 enum RecordType: String {
     case conference = "Conference"
     case venue = "Venue"
+    case attendance = "CD_Attendance"
 }
 
 protocol DataService {
