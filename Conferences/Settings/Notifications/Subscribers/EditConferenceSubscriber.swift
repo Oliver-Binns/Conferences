@@ -26,6 +26,9 @@ struct EditConferenceSubscriber: ObjectSubscriber {
                                                predicate: NSPredicate(value: true),
                                                subscriptionID: subscriptionID,
                                                options: .firesOnRecordUpdate)
+        let info = CKSubscription.NotificationInfo()
+        info.shouldSendContentAvailable = true
+        subscription.notificationInfo = info
         try await CKContainer.default().publicCloudDatabase.save(subscription)
     }
     

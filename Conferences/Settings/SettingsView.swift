@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @State var subscriber: NotificationSubscriber?
+    @State var subscriber: NotificationSettingsViewModel?
     
     var body: some View {
         NavigationView {

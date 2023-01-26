@@ -2,7 +2,7 @@ import CloudKit
 import UIKit
 import UserNotifications
 
-final class NotificationSubscriber: ObservableObject {
+final class NotificationSettingsViewModel: ObservableObject {
     @MainActor @Published
     private var authorizationStatus: UNAuthorizationStatus = .notDetermined
     
