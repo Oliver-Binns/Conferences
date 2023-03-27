@@ -32,17 +32,17 @@ struct ConferenceDetailView: View {
             set: {
                 attendance.type = $0.rawValue
                 if $0 == .none {
-                    attendance.travelReminders = false
+                    attendance.travelBooked = false
                 }
                 try? viewContext.save()
             }
         )
     }
     
-    private var travelReminders: Binding<Bool> {
-        .init { attendance.travelReminders }
+    private var travelBooked: Binding<Bool> {
+        .init { attendance.travelBooked }
         set: {
-            attendance.travelReminders = $0
+            attendance.travelBooked = $0
             try? viewContext.save()
         }
     }
@@ -98,7 +98,7 @@ struct ConferenceDetailView: View {
                         VStack(alignment: .leading) {
                             AddToCalendarButton(conference: conference)
                             Divider()
-                            Toggle(isOn: travelReminders) {
+                            Toggle(isOn: travelBooked) {
                                 Text("Travel Booked")
                             }
                         }

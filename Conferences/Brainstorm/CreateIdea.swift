@@ -35,10 +35,10 @@ struct EditIdea: View {
                 .compactMap({ $0 as? Attendance })
                 .compactMap({ $0.conferenceId })
                 .compactMap(UUID.init)
-                .compactMap { conferenceId in
+                .compactMap({ conferenceId in
                     allConferences
                         .first(where: { $0.id == conferenceId })
-                },
+                }),
                 conferences.count > 0 {
                 Section("Submitted to") {
                     ForEach(conferences) { conference in

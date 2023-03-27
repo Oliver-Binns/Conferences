@@ -14,6 +14,16 @@ protocol DataService {
     func retrieve<T: Queryable>(type: RecordType) async throws -> [T]
     func retrieve<T: Queryable>(id: CKRecord.ID,
                                 ofType type: RecordType) async throws -> T?
+    func retrieve<T: Queryable>(id: CKRecord.ID,
+                                database: KeyPath<CKContainer, CKDatabase>,
+                                ofType type: RecordType) async throws -> T?
+}
+
+extension DataService {
+    func retrieve<T: Queryable>(id: CKRecord.ID,
+                                ofType type: RecordType) async throws -> T? {
+        try await retrieve(id: id, database: \.publicCloudDatabase, ofType: type)
+    }
 }
 
 struct CloudKitService: DataService {
@@ -23,7 +33,8 @@ struct CloudKitService: DataService {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: RecordType.conference.rawValue, predicate: predicate)
         
-        return try await container.publicCloudDatabase
+        return try await container
+            .publicCloudDatabase
             .run(query: query)
             .compactMap { try? await T(record: $0, database: self) }
             .reduce(into: [T](), {
@@ -31,9 +42,14 @@ struct CloudKitService: DataService {
             })
     }
     
-    func retrieve<T: Queryable>(id: CKRecord.ID, ofType type: RecordType) async throws -> T? {
-        guard let record = try await container.publicCloudDatabase
-            .fetch(withRecordID: id) else { return nil }
+    
+    func retrieve<T: Queryable>(id: CKRecord.ID,
+                                database: KeyPath<CKContainer, CKDatabase>,
+                                ofType type: RecordType) async throws -> T? {
+        guard let record = try await container[keyPath: database]
+            .fetch(withRecordID: id) else {
+            return nil
+        }
         return try await T(record: record, database: self)
     }
 }

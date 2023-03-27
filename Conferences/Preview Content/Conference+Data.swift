@@ -22,8 +22,9 @@ struct PreviewDataService: DataService {
         Conference.all.compactMap { $0 as? T }
     }
     
-    func retrieve<T: Queryable>(id: CKRecord.ID,
-                                ofType type: RecordType) async throws -> T? {
+    func retrieve<T>(id: CKRecord.ID,
+                     database: KeyPath<CKContainer, CKDatabase>,
+                     ofType type: RecordType) async throws -> T? where T : Queryable {
         nil
     }
 }

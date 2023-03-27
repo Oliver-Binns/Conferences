@@ -1,10 +1,11 @@
 import CloudKit
-import UIKit
+import SwiftUI
 import UserNotifications
 
 final class NotificationSettingsViewModel: ObservableObject {
     @MainActor @Published
     private var authorizationStatus: UNAuthorizationStatus = .notDetermined
+    private var scheduler = NotificationScheduler()
     
     @MainActor
     var isRejected: Bool {
@@ -25,33 +26,42 @@ final class NotificationSettingsViewModel: ObservableObject {
             }
         }
     }
-    
-    @MainActor @Published
+
+    @AppStorage(.cfpOpenNotifications)
     var cfpOpening: Bool = false {
         didSet {
             Task {
                 try await requestAuthorizationIfNeeded()
                 try await toggleSubscriptions()
+                if !cfpOpening {
+                    await scheduler.removePendingCFPOpeningNotifications()
+                }
             }
         }
     }
-    
-    @MainActor @Published
+
+    @AppStorage(.cfpCloseNotifications)
     var cfpClosing: Bool = false {
         didSet {
             Task {
                 try await requestAuthorizationIfNeeded()
                 try await toggleSubscriptions()
+                if !cfpClosing {
+                    await scheduler.removePendingCFPOpeningNotifications()
+                }
             }
         }
     }
-    
-    @MainActor @Published
+
+    @AppStorage(.travelNotifications)
     var travelReminders: Bool = false {
         didSet {
             Task {
                 try await requestAuthorizationIfNeeded()
                 try await toggleSubscriptions()
+                if !travelReminders {
+                    await scheduler.removePendingCFPOpeningNotifications()
+                }
             }
         }
     }
@@ -76,8 +86,7 @@ final class NotificationSettingsViewModel: ObservableObject {
     }
     
     private func toggleSubscriptions() async throws {
-        let shouldSubscribe = await MainActor.run { cfpOpening || cfpClosing || travelReminders }
-        if shouldSubscribe {
+        if cfpOpening || cfpClosing || travelReminders {
             try await editAttendanceSubscriber.subscribe()
             try await editConferenceSubscriber.subscribe()
         } else {

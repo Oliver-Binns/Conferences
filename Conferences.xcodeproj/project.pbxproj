@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0733597329D1A27400B518AC /* NotificationsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733597229D1A27400B518AC /* NotificationsParser.swift */; };
+		0733597529D1B07700B518AC /* ReadOnlyAttendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733597429D1B07700B518AC /* ReadOnlyAttendance.swift */; };
+		0733597829D1BFE500B518AC /* AppStorage+Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733597729D1BFE500B518AC /* AppStorage+Enum.swift */; };
+		0733597A29D1C00000B518AC /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733597929D1C00000B518AC /* SettingsStore.swift */; };
 		7C7491502975D26300AC7B82 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74914F2975D26300AC7B82 /* InfoView.swift */; };
 		7C7491522975D40700AC7B82 /* URL+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7491512975D40700AC7B82 /* URL+Identifiable.swift */; };
 		7C7491542975D42A00AC7B82 /* URL+Conferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7491532975D42A00AC7B82 /* URL+Conferences.swift */; };
@@ -47,6 +51,7 @@
 		7CC33731297DA31D007C0364 /* EditAttendanceSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33730297DA31D007C0364 /* EditAttendanceSubscriber.swift */; };
 		7CCA101C296F542200E1833D /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCA101B296F542200E1833D /* SortView.swift */; };
 		7CCA101E296F611100E1833D /* Collection+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCA101D296F611100E1833D /* Collection+Sorting.swift */; };
+		7CD04F6A29829BED0050E1E4 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD04F6929829BED0050E1E4 /* NotificationScheduler.swift */; };
 		7CD7C80E2965F4B100B56632 /* ConferencesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C80D2965F4B100B56632 /* ConferencesApp.swift */; };
 		7CD7C8102965F4B100B56632 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C80F2965F4B100B56632 /* Persistence.swift */; };
 		7CD7C8132965F4B100B56632 /* Conferences.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C8112965F4B100B56632 /* Conferences.xcdatamodeld */; };
@@ -81,6 +86,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0733597229D1A27400B518AC /* NotificationsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsParser.swift; sourceTree = "<group>"; };
+		0733597429D1B07700B518AC /* ReadOnlyAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadOnlyAttendance.swift; sourceTree = "<group>"; };
+		0733597729D1BFE500B518AC /* AppStorage+Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppStorage+Enum.swift"; sourceTree = "<group>"; };
+		0733597929D1C00000B518AC /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		7C74914F2975D26300AC7B82 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		7C7491512975D40700AC7B82 /* URL+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Identifiable.swift"; sourceTree = "<group>"; };
 		7C7491532975D42A00AC7B82 /* URL+Conferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Conferences.swift"; sourceTree = "<group>"; };
@@ -121,6 +130,7 @@
 		7CC33730297DA31D007C0364 /* EditAttendanceSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAttendanceSubscriber.swift; sourceTree = "<group>"; };
 		7CCA101B296F542200E1833D /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
 		7CCA101D296F611100E1833D /* Collection+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Sorting.swift"; sourceTree = "<group>"; };
+		7CD04F6929829BED0050E1E4 /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		7CD7C80A2965F4B100B56632 /* Conferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD7C80D2965F4B100B56632 /* ConferencesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferencesApp.swift; sourceTree = "<group>"; };
 		7CD7C80F2965F4B100B56632 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -168,6 +178,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0733597629D1BFCD00B518AC /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				0733597729D1BFE500B518AC /* AppStorage+Enum.swift */,
+				0733597929D1C00000B518AC /* SettingsStore.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
 		7C74914E2975D25900AC7B82 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +222,7 @@
 		7CB9E38D29675F3000753EA3 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				0733597629D1BFCD00B518AC /* UserDefaults */,
 				7CC3370F297C21E0007C0364 /* Cache */,
 				7CC33700297B1D5F007C0364 /* CloudKit */,
 				7CC336FF297B1D51007C0364 /* CoreData */,
@@ -250,6 +270,7 @@
 				7CC33703297B5180007C0364 /* Venue+Queryable.swift */,
 				7CC33705297B51A1007C0364 /* Conference+Queryable.swift */,
 				7CC3370C297B6CD2007C0364 /* ConferenceDataSource.swift */,
+				0733597429D1B07700B518AC /* ReadOnlyAttendance.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -329,6 +350,8 @@
 				7CC3372B297DA192007C0364 /* Subscribers */,
 				7CC33716297D65B2007C0364 /* NotificationSettingsViewModel.swift */,
 				7CC33726297D73A5007C0364 /* NotificationsView.swift */,
+				7CD04F6929829BED0050E1E4 /* NotificationScheduler.swift */,
+				0733597229D1A27400B518AC /* NotificationsParser.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -581,6 +604,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C7491562975D73400AC7B82 /* View+Section.swift in Sources */,
+				0733597329D1A27400B518AC /* NotificationsParser.swift in Sources */,
 				7CD7C80E2965F4B100B56632 /* ConferencesApp.swift in Sources */,
 				7CBAAC7A2969B3E900096F1E /* Conference+Data.swift in Sources */,
 				7CB9E38A29675E3D00753EA3 /* Venue.swift in Sources */,
@@ -591,10 +615,13 @@
 				7CC33724297D7300007C0364 /* View+AppState.swift in Sources */,
 				7C7491542975D42A00AC7B82 /* URL+Conferences.swift in Sources */,
 				7CCA101E296F611100E1833D /* Collection+Sorting.swift in Sources */,
+				0733597829D1BFE500B518AC /* AppStorage+Enum.swift in Sources */,
 				7C85C1D0296DC47200A98BC5 /* Idea+Comparable.swift in Sources */,
 				7CC33711297C21FC007C0364 /* FileCache.swift in Sources */,
 				7CC33719297D67D1007C0364 /* SettingsView.swift in Sources */,
+				0733597A29D1C00000B518AC /* SettingsStore.swift in Sources */,
 				7CB9E394296766B600753EA3 /* OptionalCollection+Extensions.swift in Sources */,
+				0733597529D1B07700B518AC /* ReadOnlyAttendance.swift in Sources */,
 				7CB9E384296751D400753EA3 /* CountdownText.swift in Sources */,
 				7CC33714297D5DB6007C0364 /* AppDelegate.swift in Sources */,
 				7CBAAC742969B2EF00096F1E /* CLLocationCoordinate2D+Codable.swift in Sources */,
@@ -608,6 +635,7 @@
 				7CC33706297B51A1007C0364 /* Conference+Queryable.swift in Sources */,
 				7C85C1CC296D9D4500A98BC5 /* SelectTalksView.swift in Sources */,
 				7CC33704297B5180007C0364 /* Venue+Queryable.swift in Sources */,
+				7CD04F6A29829BED0050E1E4 /* NotificationScheduler.swift in Sources */,
 				7CC3372D297DA19D007C0364 /* ObjectSubscriber.swift in Sources */,
 				7CC3372F297DA2C9007C0364 /* EditConferenceSubscriber.swift in Sources */,
 				7CC3371C297D6C85007C0364 /* UNUserNotificationCenter+Concurrency.swift in Sources */,

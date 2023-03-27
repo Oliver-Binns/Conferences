@@ -12,9 +12,11 @@ Pull requests and feature requests are welcome.
 I am developing this in the open and will release it, when it's good enough!
 
 ## Some Future Ideas
-* List of conferences on a remote web server
 * Better macOS / watchOS Support
 * ChatGPT for Talk Ideas
-* Push notifications for new conferences
 * Integration with PaperCall API to automatically submit talks (may need a sponsor)
-* API / Web Hooks for conferences to provide their own info
+* API / Web Hooks for conferences to provide their own info / schedules
+
+## Implemented
+* ~~List of conferences on a remote web server~~
+* ~~Push notifications for new conferences~~
