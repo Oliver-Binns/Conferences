@@ -1,4 +1,5 @@
 import CloudKit
+import CoreData
 import SwiftUI
 import UserNotifications
 
@@ -34,7 +35,9 @@ final class NotificationSettingsViewModel: ObservableObject {
             Task {
                 try await requestAuthorizationIfNeeded()
                 try await toggleSubscriptions()
-                if !cfpOpening {
+                if cfpOpening {
+                    try await updateNotifications()
+                } else {
                     await scheduler.removePendingCFPOpeningNotifications()
                 }
             }
@@ -47,8 +50,10 @@ final class NotificationSettingsViewModel: ObservableObject {
             Task {
                 try await requestAuthorizationIfNeeded()
                 try await toggleSubscriptions()
-                if !cfpClosing {
-                    await scheduler.removePendingCFPOpeningNotifications()
+                if cfpClosing {
+                    try await updateNotifications()
+                } else {
+                    await scheduler.removePendingCFPClosingNotifications()
                 }
             }
         }
@@ -60,20 +65,41 @@ final class NotificationSettingsViewModel: ObservableObject {
             Task {
                 try await requestAuthorizationIfNeeded()
                 try await toggleSubscriptions()
-                if !travelReminders {
-                    await scheduler.removePendingCFPOpeningNotifications()
+                if travelReminders {
+                    try await updateNotifications()
+                } else {
+                    await scheduler.removePendingTravelNotifications()
                 }
             }
         }
     }
-    
+
+    private var data: [(Attendance?, Conference)] {
+        get async {
+            switch await database.state {
+            case .loaded(let conferences),
+                    .cached(let conferences):
+                return conferences.map {
+                    ($0.attendance(context: viewContext), $0)
+                }
+            default: return []
+            }
+        }
+    }
+
+    private var database: ConferenceDataStore
+    private var viewContext: NSManagedObjectContext
     private let centre: UNUserNotificationCenter
     private let newConferenceSubscriber = NewConferenceSubscriber()
     private let editConferenceSubscriber = EditConferenceSubscriber()
     private let editAttendanceSubscriber = EditAttendanceSubscriber()
     
-    init(centre: UNUserNotificationCenter = .current()) {
+    init(centre: UNUserNotificationCenter = .current(),
+         context: NSManagedObjectContext,
+         database: ConferenceDataStore) {
         self.centre = centre
+        self.database = database
+        self.viewContext = context
 
         Task {
             let newConferences = try await newConferenceSubscriber.isSubscribed
@@ -95,6 +121,15 @@ final class NotificationSettingsViewModel: ObservableObject {
         } else {
             try await editAttendanceSubscriber.unsubscribe()
             try await editConferenceSubscriber.unsubscribe()
+        }
+    }
+
+    private func updateNotifications() async throws {
+        for (attendance, conference) in await data {
+            try await scheduler.scheduleNotifications(for: attendance, at: conference)
+        }
+        await UNUserNotificationCenter.current().pendingNotificationRequests().forEach {
+            print("request", $0)
         }
     }
     

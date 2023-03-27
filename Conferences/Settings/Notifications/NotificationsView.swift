@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct NotificationsView: View {
-    @ObservedObject var notificationSubscriber: NotificationSettingsViewModel
+    @ObservedObject
+    var notificationSubscriber: NotificationSettingsViewModel
     private let urlOpener: URLOpener = UIApplication.shared
     
     var body: some View {

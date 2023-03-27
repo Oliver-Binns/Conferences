@@ -51,7 +51,7 @@ struct ConferenceList: View {
                         ForEach(sortModel.process(conferences: conferences)) { conference in
                             NavigationLink {
                                 ConferenceDetailView(conference: conference,
-                                                     attendance: attendance(at: conference))
+                                                     attendance: conference.attendance(context: viewContext))
                             } label: {
                                 SmallConferenceView(conference: conference)
                             }.buttonStyle(.plain)
@@ -65,7 +65,8 @@ struct ConferenceList: View {
                             } label: {
                                 Label("Info", systemImage: "gear")
                             }.sheet(isPresented: $isSettingsDisplayed) {
-                                SettingsView()
+                                SettingsView(dataStore: database,
+                                             viewContext: viewContext)
                             }
                         }
                         ToolbarItem {
@@ -87,19 +88,6 @@ struct ConferenceList: View {
     func fetchConferences() {
         database.fetch()
     }
-    
-    func attendance(at conference: Conference) -> Attendance {
-        let fetchRequest = Attendance.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "conferenceId = %@",
-                                             conference.id.uuidString)
-        fetchRequest.fetchLimit = 1
-        guard let attendance = try? viewContext.fetch(fetchRequest).first else {
-            let newAttendance = Attendance(context: viewContext)
-            newAttendance.conferenceId = conference.id.uuidString
-            return newAttendance
-        }
-        return attendance
-    }
 }
 
 #if DEBUG
@@ -110,3 +98,18 @@ struct ConferenceList_Previews: PreviewProvider {
     }
 }
 #endif
+
+extension Conference {
+    func attendance(context: NSManagedObjectContext) -> Attendance {
+        let fetchRequest = Attendance.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "conferenceId = %@",
+                                             id.uuidString)
+        fetchRequest.fetchLimit = 1
+        guard let attendance = try? context.fetch(fetchRequest).first else {
+            let newAttendance = Attendance(context: context)
+            newAttendance.conferenceId = id.uuidString
+            return newAttendance
+        }
+        return attendance
+    }
+}

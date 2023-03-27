@@ -23,7 +23,7 @@ struct NotificationScheduler {
         }
     }
     
-    func remindCFPOpening(conference: Conference) -> UNNotificationRequest? {
+    private func remindCFPOpening(conference: Conference) -> UNNotificationRequest? {
         guard settingsStore.bool(for: .cfpOpenNotifications),
               let openingDate = conference.cfpSubmission?.opens,
               openingDate > .now else {
@@ -41,7 +41,7 @@ struct NotificationScheduler {
         return UNNotificationRequest(identifier: "\(conference.id)-cfpopen", content: content, trigger: trigger)
     }
     
-    func remindCFPClosing(conference: Conference) -> UNNotificationRequest? {
+    private func remindCFPClosing(conference: Conference) -> UNNotificationRequest? {
         guard settingsStore.bool(for: .cfpCloseNotifications),
               let closingDate = conference.cfpSubmission?.closes,
               closingDate > .now,
@@ -60,7 +60,7 @@ struct NotificationScheduler {
         return UNNotificationRequest(identifier: "\(conference.id)-cfpclosing", content: content, trigger: trigger)
     }
     
-    func remindTravel(for attendance: Attendance?, at conference: Conference) -> UNNotificationRequest? {
+    private func remindTravel(for attendance: Attendance?, at conference: Conference) -> UNNotificationRequest? {
         let startDate = conference.dates.lowerBound
         guard settingsStore.bool(for: .travelNotifications),
               let attendance = attendance,
