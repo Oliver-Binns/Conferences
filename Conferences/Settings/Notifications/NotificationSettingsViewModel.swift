@@ -13,9 +13,10 @@ final class NotificationSettingsViewModel: ObservableObject {
     }
     
     @MainActor @Published
-    var newConferences: Bool = false {
+    var newConferences: Bool? {
         didSet {
             Task {
+                guard let newConferences else { return }
                 try await requestAuthorizationIfNeeded()
                 
                 if newConferences {
@@ -71,11 +72,13 @@ final class NotificationSettingsViewModel: ObservableObject {
     private let editConferenceSubscriber = EditConferenceSubscriber()
     private let editAttendanceSubscriber = EditAttendanceSubscriber()
     
-    init(centre: UNUserNotificationCenter = .current()) async throws {
+    init(centre: UNUserNotificationCenter = .current()) {
         self.centre = centre
-        
-        let newConferences = try await newConferenceSubscriber.isSubscribed
-        await MainActor.run { self.newConferences = newConferences }
+
+        Task {
+            let newConferences = try await newConferenceSubscriber.isSubscribed
+            await MainActor.run { self.newConferences = newConferences }
+        }
     }
     
     private func requestAuthorizationIfNeeded() async throws {

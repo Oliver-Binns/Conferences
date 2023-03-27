@@ -6,9 +6,21 @@ struct NotificationsView: View {
     
     var body: some View {
         Section("Notifications") {
-            Toggle("New Conferences",
-                   isOn: $notificationSubscriber.newConferences)
-            .disabled(notificationSubscriber.isRejected)
+            if notificationSubscriber.newConferences != nil {
+                Toggle("New Conferences",
+                       isOn: .init(get: {
+                    notificationSubscriber.newConferences ?? false
+                }, set: {
+                    notificationSubscriber.newConferences = $0
+                }))
+                .disabled(notificationSubscriber.isRejected)
+            } else {
+                HStack {
+                    Text("New Conferences")
+                    Spacer()
+                    ProgressView()
+                }
+            }
             
             Toggle("Travel Reminders",
                    isOn: $notificationSubscriber.travelReminders)
