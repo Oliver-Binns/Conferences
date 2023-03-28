@@ -1,10 +1,10 @@
 import CoreData
-import CloudKit
+import Model
 import SwiftUI
 
 struct ConferenceList: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject private var database: ConferenceDataStore
+    @EnvironmentObject private var database: CachedService<Conference>
     
     @State
     private var isSettingsDisplayed: Bool = false
@@ -94,19 +94,19 @@ struct ConferenceList: View {
 struct ConferenceList_Previews: PreviewProvider {
     static var previews: some View {
         ConferenceList()
-            .environmentObject(ConferenceDataStore(service: PreviewDataService()))
+            .environmentObject(CachedService<Conference>(service: PreviewDataService()))
     }
 }
 #endif
 
 extension Conference {
-    func attendance(context: NSManagedObjectContext) -> Attendance {
-        let fetchRequest = Attendance.fetchRequest()
+    func attendance(context: NSManagedObjectContext) -> CDAttendance {
+        let fetchRequest = CDAttendance.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "conferenceId = %@",
                                              id.uuidString)
         fetchRequest.fetchLimit = 1
         guard let attendance = try? context.fetch(fetchRequest).first else {
-            let newAttendance = Attendance(context: context)
+            let newAttendance = CDAttendance(context: context)
             newAttendance.conferenceId = id.uuidString
             return newAttendance
         }

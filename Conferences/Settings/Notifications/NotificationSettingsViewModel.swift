@@ -1,5 +1,6 @@
-import CloudKit
 import CoreData
+import Model
+import Notifications
 import SwiftUI
 import UserNotifications
 
@@ -29,7 +30,7 @@ final class NotificationSettingsViewModel: ObservableObject {
         }
     }
 
-    @AppStorage(.cfpOpenNotifications)
+    @AppStorage(SettingsKey.cfpOpenNotifications)
     var cfpOpening: Bool = false {
         didSet {
             Task {
@@ -44,7 +45,7 @@ final class NotificationSettingsViewModel: ObservableObject {
         }
     }
 
-    @AppStorage(.cfpCloseNotifications)
+    @AppStorage(SettingsKey.cfpCloseNotifications)
     var cfpClosing: Bool = false {
         didSet {
             Task {
@@ -59,7 +60,7 @@ final class NotificationSettingsViewModel: ObservableObject {
         }
     }
 
-    @AppStorage(.travelNotifications)
+    @AppStorage(SettingsKey.travelNotifications)
     var travelReminders: Bool = false {
         didSet {
             Task {
@@ -74,11 +75,11 @@ final class NotificationSettingsViewModel: ObservableObject {
         }
     }
 
-    private var data: [(Attendance?, Conference)] {
+    private var data: [(CDAttendance?, Conference)] {
         get async {
             switch await database.state {
             case .loaded(let conferences),
-                    .cached(let conferences):
+                 .cached(let conferences):
                 return conferences.map {
                     ($0.attendance(context: viewContext), $0)
                 }
@@ -87,16 +88,17 @@ final class NotificationSettingsViewModel: ObservableObject {
         }
     }
 
-    private var database: ConferenceDataStore
+    private var database: CachedService<Conference>
     private var viewContext: NSManagedObjectContext
     private let centre: UNUserNotificationCenter
-    private let newConferenceSubscriber = NewConferenceSubscriber()
-    private let editConferenceSubscriber = EditConferenceSubscriber()
-    private let editAttendanceSubscriber = EditAttendanceSubscriber()
+    
+    private let newConferenceSubscriber: ObjectSubscriber = PersistenceSubscriber.newConference()
+    private let editConferenceSubscriber: ObjectSubscriber = PersistenceSubscriber.editConference()
+    private let editAttendanceSubscriber: ObjectSubscriber = PersistenceSubscriber.editAttendance()
     
     init(centre: UNUserNotificationCenter = .current(),
          context: NSManagedObjectContext,
-         database: ConferenceDataStore) {
+         database: CachedService<Conference>) {
         self.centre = centre
         self.database = database
         self.viewContext = context

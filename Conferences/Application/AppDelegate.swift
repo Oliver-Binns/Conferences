@@ -1,3 +1,6 @@
+import Notifications
+import Persistence
+import Service
 import UIKit
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
@@ -30,7 +33,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
         do {
-            let (conference, attendance) = try await NotificationParser()
+            let (conference, attendance) = try await NotificationParser(service: CloudKitService.shared,
+                                                                        store: PersistenceController.shared)
                 .parse(userInfo: userInfo)
             try await NotificationScheduler()
                 .scheduleNotifications(for: attendance, at: conference)

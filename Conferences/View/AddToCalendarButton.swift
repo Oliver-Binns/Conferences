@@ -1,5 +1,6 @@
 import EventKit
 import EventKitUI
+import Model
 import SwiftUI
 
 final class AddToCalendarButtonViewModel: NSObject, ObservableObject, EKEventEditViewDelegate {

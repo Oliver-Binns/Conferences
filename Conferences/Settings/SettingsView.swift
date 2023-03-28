@@ -1,11 +1,12 @@
 import CoreData
+import Model
 import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @State var subscriber: NotificationSettingsViewModel
 
-    init(dataStore: ConferenceDataStore, viewContext: NSManagedObjectContext) {
+    init(dataStore: CachedService<Conference>, viewContext: NSManagedObjectContext) {
         _subscriber = .init(initialValue:
             NotificationSettingsViewModel(context: viewContext, database: dataStore)
         )

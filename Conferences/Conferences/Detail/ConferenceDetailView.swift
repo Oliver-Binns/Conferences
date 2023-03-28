@@ -1,11 +1,6 @@
 import MapKit
+import Model
 import SwiftUI
-
-enum AttendanceType: String {
-    case none
-    case attendee
-    case speaker
-}
 
 enum Link: Identifiable {
     case web
@@ -19,7 +14,7 @@ struct ConferenceDetailView: View {
     @State private var displayLink: URL?
     
     let conference: Conference
-    @ObservedObject var attendance: Attendance
+    @ObservedObject var attendance: CDAttendance
     
     private var region: MKCoordinateRegion {
         .init(center: conference.venue.location,
@@ -27,7 +22,8 @@ struct ConferenceDetailView: View {
               longitudinalMeters: 750)
     }
     
-    private var attendanceType: Binding<AttendanceType> { .init(
+    private var attendanceType: Binding<AttendanceType> {
+        .init(
             get: { attendance.type.flatMap(AttendanceType.init) ?? .none },
             set: {
                 attendance.type = $0.rawValue
@@ -156,10 +152,12 @@ struct ConferenceDetailView: View {
 
 
 #if DEBUG
+import Persistence
+
 struct ExpandedConferenceView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceController.preview.container.viewContext
-        let attendance = Attendance(context: context)
+        let context = PersistenceController.preview.context
+        let attendance = CDAttendance(context: context)
         
         return VStack {
             ConferenceDetailView(conference: .deepDish,

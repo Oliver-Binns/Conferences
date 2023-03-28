@@ -1,11 +1,13 @@
 import CoreData
+import Model
+import Persistence
 
 #if DEBUG
 extension PersistenceController {
-    static var preview: PersistenceController = {
-        let result = PersistenceController(inMemory: true)
-        let viewContext = result.container.viewContext
-        
+    static var preview: DataStore = {
+        let container = NSPersistentCloudKitContainer(name: "Conferences")
+        let result = CoreDataStore(container: container, inMemory: true)
+        let viewContext = result.context
         [
             "Something Something Some Core Data",
             "Something Something Some SwiftUI",
@@ -13,7 +15,7 @@ extension PersistenceController {
             "Something Something Some ARKit",
             "Something Something Some Accessibility"
         ].forEach {
-            let newItem = Idea(context: viewContext)
+            let newItem = CDIdea(context: viewContext)
             newItem.title = $0
         }
         

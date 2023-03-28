@@ -1,12 +1,13 @@
 import CoreData
+import Model
 import SwiftUI
 
 struct EditIdea: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject private var database: ConferenceDataStore
+    @EnvironmentObject private var database: CachedService<Conference>
     @Environment(\.dismiss) var dismiss
     
-    @ObservedObject var idea: Idea
+    @ObservedObject var idea: CDIdea
     
     private var allConferences: [Conference] {
         switch database.state {
@@ -32,7 +33,7 @@ struct EditIdea: View {
             }), axis: .vertical)
             
             if let conferences = idea.submittedTo?
-                .compactMap({ $0 as? Attendance })
+                .compactMap({ $0 as? CDAttendance })
                 .compactMap({ $0.conferenceId })
                 .compactMap(UUID.init)
                 .compactMap({ conferenceId in
@@ -60,17 +61,19 @@ struct EditIdea: View {
 }
 
 #if DEBUG
+import Persistence
+
 struct EditIdea_Previews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceController.preview.container.viewContext
-        let idea = Idea(context: context)
+        let context = PersistenceController.preview.context
+        let idea = CDIdea(context: context)
         idea.title = "Something Something Core Data"
         idea.overview = """
         For those of you who may not be familiar, core data is a framework that allows for the storage, retrieval, and management of data in iOS, macOS, and watchOS applications. It provides a number of powerful features that make it an essential tool for any developer working with data on Apple platforms. In this talk, I will be providing an overview of core data, discussing its key features and benefits, and demonstrating how to use it effectively in your own projects.
         """
         return EditIdea(idea: idea)
             .environment(\.managedObjectContext, context)
-            .environmentObject(ConferenceDataStore(service: PreviewDataService()))
+            .environmentObject(CachedService<Conference>(service: PreviewDataService()))
     }
 }
 #endif

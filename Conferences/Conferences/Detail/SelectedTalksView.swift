@@ -1,10 +1,11 @@
+import Model
 import SwiftUI
 
 struct SelectedTalksView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @State private var isEditing: Bool = false
-    @ObservedObject var attendance: Attendance
+    @ObservedObject var attendance: CDAttendance
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -18,7 +19,7 @@ struct SelectedTalksView: View {
                 }
             }.font(.title2)
             
-            if let talks = attendance.talks?.compactMap({ $0 as? Idea }).sorted(),
+            if let talks = attendance.talks?.compactMap({ $0 as? CDIdea }).sorted(),
                !talks.isEmpty {
                 VStack(alignment: .leading, spacing: 8) {
                     ForEach(talks) { talk in
