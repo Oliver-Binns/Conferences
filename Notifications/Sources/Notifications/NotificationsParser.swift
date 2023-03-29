@@ -17,8 +17,8 @@ enum NotificationParseError: Error {
 }
 
 struct NotificationParser {
-    let service: DataService
-    let store: DataStore
+    private let service: DataService
+    private let store: DataStore
 
     public init(service: DataService,
                 store: DataStore) {
