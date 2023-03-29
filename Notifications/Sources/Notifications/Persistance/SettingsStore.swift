@@ -1,16 +1,21 @@
 import Foundation
 
-public enum SettingsKey: String {
+enum SettingsKey: String {
     case cfpOpenNotifications
     case cfpCloseNotifications
     case travelNotifications
 }
 
-public protocol SettingsStore {
+protocol SettingsStore {
     func bool(for key: SettingsKey) -> Bool
+    func set(value: Bool, for key: SettingsKey)
 }
 extension UserDefaults: SettingsStore {
-    public func bool(for key: SettingsKey) -> Bool {
+    func bool(for key: SettingsKey) -> Bool {
         bool(forKey: key.rawValue)
+    }
+
+    func set(value: Bool, for key: SettingsKey) {
+        setValue(value, forKey: key.rawValue)
     }
 }

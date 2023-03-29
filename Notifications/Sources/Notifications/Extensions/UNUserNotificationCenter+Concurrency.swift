@@ -1,7 +1,7 @@
 import UserNotifications
 
 extension UNUserNotificationCenter {
-    public func getNotificationSettings() async -> UNNotificationSettings {
+    func getNotificationSettings() async -> UNNotificationSettings {
         await withCheckedContinuation { continuation in
             getNotificationSettings { settings in
                 continuation.resume(with: .success(settings))

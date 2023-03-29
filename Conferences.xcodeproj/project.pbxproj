@@ -34,7 +34,6 @@
 		7CC3370D297B6CD2007C0364 /* ConferenceDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC3370C297B6CD2007C0364 /* ConferenceDataSource.swift */; };
 		7CC33711297C21FC007C0364 /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33710297C21FC007C0364 /* FileCache.swift */; };
 		7CC33714297D5DB6007C0364 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33713297D5DB6007C0364 /* AppDelegate.swift */; };
-		7CC33717297D65B2007C0364 /* NotificationSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33716297D65B2007C0364 /* NotificationSettingsViewModel.swift */; };
 		7CC33719297D67D1007C0364 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33718297D67D1007C0364 /* SettingsView.swift */; };
 		7CC3371E297D7068007C0364 /* URLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC3371D297D7068007C0364 /* URLOpener.swift */; };
 		7CC33724297D7300007C0364 /* View+AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC33723297D7300007C0364 /* View+AppState.swift */; };
@@ -96,7 +95,6 @@
 		7CC3370C297B6CD2007C0364 /* ConferenceDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceDataSource.swift; sourceTree = "<group>"; };
 		7CC33710297C21FC007C0364 /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
 		7CC33713297D5DB6007C0364 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7CC33716297D65B2007C0364 /* NotificationSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewModel.swift; sourceTree = "<group>"; };
 		7CC33718297D67D1007C0364 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7CC3371D297D7068007C0364 /* URLOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLOpener.swift; sourceTree = "<group>"; };
 		7CC33723297D7300007C0364 /* View+AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+AppState.swift"; sourceTree = "<group>"; };
@@ -295,7 +293,6 @@
 		7CC33728297DA114007C0364 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				7CC33716297D65B2007C0364 /* NotificationSettingsViewModel.swift */,
 				7CC33726297D73A5007C0364 /* NotificationsView.swift */,
 			);
 			path = Notifications;
@@ -548,7 +545,6 @@
 				7CBAAC7A2969B3E900096F1E /* Conference+Data.swift in Sources */,
 				7CB9E38229674D9600753EA3 /* SafariView.swift in Sources */,
 				7CC336FE297B0F9B007C0364 /* SortModel.swift in Sources */,
-				7CC33717297D65B2007C0364 /* NotificationSettingsViewModel.swift in Sources */,
 				7CCA101C296F542200E1833D /* SortView.swift in Sources */,
 				7CC33724297D7300007C0364 /* View+AppState.swift in Sources */,
 				7C7491542975D42A00AC7B82 /* URL+Conferences.swift in Sources */,

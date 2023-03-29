@@ -4,18 +4,11 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @State var subscriber: NotificationSettingsViewModel
-
-    init(dataStore: CachedService<Conference>, viewContext: NSManagedObjectContext) {
-        _subscriber = .init(initialValue:
-            NotificationSettingsViewModel(context: viewContext, database: dataStore)
-        )
-    }
 
     var body: some View {
         NavigationView {
             List {
-                NotificationsView(notificationSubscriber: subscriber)
+                NotificationsView()
             
                 NavigationLink("About the App") {
                     InfoView()

@@ -16,7 +16,7 @@ enum NotificationParseError: Error {
     case invalidSubscriptionType
 }
 
-public struct NotificationParser {
+struct NotificationParser {
     let service: DataService
     let store: DataStore
 
@@ -26,7 +26,7 @@ public struct NotificationParser {
         self.store = store
     }
 
-    public func parse(userInfo: [AnyHashable: Any]) async throws -> (Conference, CDAttendance?) {
+    func parse(userInfo: [AnyHashable: Any]) async throws -> (Conference, CDAttendance?) {
         guard let ck = userInfo["ck"] as? [String: Any],
               let query = ck["qry"] as? [String: Any],
               let objectID = query["rid"] as? String,
@@ -51,7 +51,7 @@ public struct NotificationParser {
             guard let conference = try await fetchConference(id: record) else {
                 throw NotificationParseError.noConferenceFound
             }
-            return try await (conference, fetchAttendance(conferenceID: conference.id))
+            return try await (conference, conference.fetchAttendance(context: store.context))
         default:
             throw NotificationParseError.invalidSubscriptionType
         }
@@ -61,21 +61,28 @@ public struct NotificationParser {
         try await service.retrieve(id: id)
     }
 
-    private func fetchAttendance(conferenceID: UUID) async throws -> CDAttendance? {
-        let request = CDAttendance.fetchRequest()
-        request.fetchLimit = 1
-        request.predicate = .init(format: "conferenceId = %@", conferenceID as CVarArg)
-        return try await store.context.perform({
-            try request.execute().first
-        })
-    }
 
     private func fetchAttendance(id: CKRecord.ID) async throws -> CDAttendance? {
-        guard let roAttendance: Attendance = try await service
-            .retrieve(id: id),
-              let attendance = try await fetchAttendance(conferenceID: roAttendance.conferenceID) else {
+        guard let roAttendance: Attendance = try await service.retrieve(id: id),
+              let attendance = try await Conference.fetchAttendance(id: roAttendance.conferenceID,
+                                                                    context: store.context) else {
             return nil
         }
         return attendance
+    }
+}
+
+extension Conference {
+    func fetchAttendance(context: NSManagedObjectContext) async throws -> CDAttendance? {
+        try await Self.fetchAttendance(id: id, context: context)
+    }
+
+    static func fetchAttendance(id: UUID, context: NSManagedObjectContext) async throws -> CDAttendance? {
+        let request = CDAttendance.fetchRequest()
+        request.fetchLimit = 1
+        request.predicate = .init(format: "conferenceId = %@", id as CVarArg)
+        return try await context.perform({
+            try request.execute().first
+        })
     }
 }

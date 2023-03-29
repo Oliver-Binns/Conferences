@@ -33,11 +33,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
         do {
-            let (conference, attendance) = try await NotificationParser(service: CloudKitService.shared,
-                                                                        store: PersistenceController.shared)
-                .parse(userInfo: userInfo)
-            try await NotificationScheduler()
-                .scheduleNotifications(for: attendance, at: conference)
+            try await NotificationScheduler(service: CloudKitService.shared, store: PersistenceController.shared)
+                .receivedSilentNotification(userInfo: userInfo)
         } catch {
             print("error thrown", error)
         }

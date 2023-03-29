@@ -1,40 +1,34 @@
+import Notifications
+import Service
 import SwiftUI
 
 struct NotificationsView: View {
     @ObservedObject
-    var notificationSubscriber: NotificationSettingsViewModel
+    var state = NotificationManager(scheduler:
+        NotificationScheduler(service: CloudKitService.shared, store: PersistenceController.shared)
+    )
+
     private let urlOpener: URLOpener = UIApplication.shared
     
     var body: some View {
         Section("Notifications") {
-            if notificationSubscriber.newConferences != nil {
-                Toggle("New Conferences",
-                       isOn: .init(get: {
-                    notificationSubscriber.newConferences ?? false
-                }, set: {
-                    notificationSubscriber.newConferences = $0
-                }))
-                .disabled(notificationSubscriber.isRejected)
-            } else {
-                HStack {
-                    Text("New Conferences")
-                    Spacer()
-                    ProgressView()
-                }
-            }
-            
+            Toggle("New Conferences",
+                   isOn: $state.newConference)
+            .disabled(state.isDenied)
+
             Toggle("Travel Reminders",
-                   isOn: $notificationSubscriber.travelReminders)
-            .disabled(notificationSubscriber.isRejected)
+                   isOn: $state.travel)
+            .disabled(state.isDenied)
             
             Toggle("CFP Opening",
-                   isOn: $notificationSubscriber.cfpOpening)
-            .disabled(notificationSubscriber.isRejected)
+                   isOn: $state.cfpOpening)
+            .disabled(state.isDenied)
+
             Toggle("CFP Closing",
-                   isOn: $notificationSubscriber.cfpClosing)
-            .disabled(notificationSubscriber.isRejected)
+                   isOn: $state.cfpClosing)
+            .disabled(state.isDenied)
             
-            if notificationSubscriber.isRejected {
+            if state.isDenied {
                 VStack(alignment: .leading, spacing: 16) {
                     Button {
                         urlOpener.openNotificationSettings()
@@ -45,13 +39,6 @@ struct NotificationsView: View {
                     .font(.subheadline)
                     .foregroundColor(.orange)
                 }
-            }
-        }
-        .onForeground {
-            // TODO: move this inside subscriber class
-            Task {
-                await notificationSubscriber
-                    .checkNotificationSettings()
             }
         }
     }

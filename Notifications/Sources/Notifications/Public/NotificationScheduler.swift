@@ -1,19 +1,45 @@
 import Model
+import Persistence
+import Service
 import UserNotifications
 
 public struct NotificationScheduler {
-    let center: UNUserNotificationCenter
-    let settingsStore: SettingsStore
-    
-    public init(center: UNUserNotificationCenter = .current(),
-                settingsStore: SettingsStore = UserDefaults.standard) {
-        self.center = center
-        self.settingsStore = settingsStore
+    private let center: UNUserNotificationCenter
+    private let settingsStore: SettingsStore
+
+    private let parser: NotificationParser
+
+    private let service: DataService
+    private let store: DataStore
+
+    public init(service: DataService, store: DataStore) {
+        let parser = NotificationParser(service: service, store: store)
+        self.init(center: .current(), settingsStore: UserDefaults.standard,
+                  service: service, store: store,
+                  parser: parser)
     }
     
-    // MARK: - Add Notifications
-    
-    public func scheduleNotifications(for attendance: CDAttendance?, at conference: Conference) async throws {
+    init(center: UNUserNotificationCenter,
+         settingsStore: SettingsStore,
+         service: DataService,
+         store: DataStore,
+         parser: NotificationParser) {
+        self.center = center
+        self.settingsStore = settingsStore
+        self.service = service
+        self.store = store
+        self.parser = parser
+    }
+}
+
+// MARK: - Received Notification
+extension NotificationScheduler {
+    public func receivedSilentNotification(userInfo: [AnyHashable: Any]) async throws {
+        let (conference, attendance) = try await parser.parse(userInfo: userInfo)
+        try await scheduleNotifications(for: attendance, at: conference)
+    }
+
+    func scheduleNotifications(for attendance: CDAttendance?, at conference: Conference) async throws {
         for notification in [
             remindCFPOpening(conference: conference),
             remindCFPClosing(conference: conference),
@@ -22,8 +48,53 @@ public struct NotificationScheduler {
             try await center.add(notification)
         }
     }
+}
     
-    func remindCFPOpening(conference: Conference) -> UNNotificationRequest? {
+// MARK: - Add Notifications
+extension NotificationScheduler {
+    private var conferences: [Conference] {
+        get async throws {
+            try await service.retrieve()
+        }
+    }
+
+    private var attendance: [(CDAttendance?, Conference)] {
+        get async throws {
+            try await withThrowingTaskGroup(of: (CDAttendance?, Conference).self) { group -> [(CDAttendance?, Conference)] in
+                try await conferences.forEach { conference in
+                    group.addTask {
+                        let attendance = try await conference.fetchAttendance(context: store.context)
+                        return (attendance, conference)
+                    }
+                }
+
+                return try await group.reduce([]) { $0 + [$1] }
+            }
+        }
+    }
+
+    func scheduleCFPOpeningNotifications() async throws {
+        try await conferences
+            .compactMap(remindCFPOpening)
+            .forEach {
+                center.add($0)
+            }
+    }
+
+    func scheduleCFPClosingNotifications() async throws {
+        try await conferences
+            .compactMap(remindCFPClosing)
+            .forEach {
+                center.add($0)
+            }
+    }
+
+    func scheduleTravelNotifications() async throws {
+
+    }
+
+
+    private func remindCFPOpening(conference: Conference) -> UNNotificationRequest? {
         guard settingsStore.bool(for: .cfpOpenNotifications),
               let openingDate = conference.cfpSubmission?.opens,
               openingDate > .now else {
@@ -41,7 +112,7 @@ public struct NotificationScheduler {
         return UNNotificationRequest(identifier: "\(conference.id)-cfpopen", content: content, trigger: trigger)
     }
     
-    func remindCFPClosing(conference: Conference) -> UNNotificationRequest? {
+    private func remindCFPClosing(conference: Conference) -> UNNotificationRequest? {
         guard settingsStore.bool(for: .cfpCloseNotifications),
               let closingDate = conference.cfpSubmission?.closes,
               closingDate > .now,
@@ -60,7 +131,7 @@ public struct NotificationScheduler {
         return UNNotificationRequest(identifier: "\(conference.id)-cfpclosing", content: content, trigger: trigger)
     }
     
-    func remindTravel(for attendance: CDAttendance?, at conference: Conference) -> UNNotificationRequest? {
+    private func remindTravel(for attendance: CDAttendance?, at conference: Conference) -> UNNotificationRequest? {
         let startDate = conference.dates.lowerBound
         guard settingsStore.bool(for: .travelNotifications),
               let attendance = attendance,
@@ -82,18 +153,19 @@ public struct NotificationScheduler {
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         return UNNotificationRequest(identifier: "\(conference.id)-travel", content: content, trigger: trigger)
     }
+}
     
-    // MARK: - Remove Notifications
-    
-    public func removePendingCFPOpeningNotifications() async {
+// MARK: - Remove Notifications
+extension NotificationScheduler {
+    func removePendingCFPOpeningNotifications() async {
         await removePendingRequests(withSuffix: "-cfpopen")
     }
     
-    public func removePendingCFPClosingNotifications() async {
+    func removePendingCFPClosingNotifications() async {
         await removePendingRequests(withSuffix: "-cfpclosing")
     }
     
-    public func removePendingTravelNotifications() async {
+    func removePendingTravelNotifications() async {
         await removePendingRequests(withSuffix: "-travel")
     }
     

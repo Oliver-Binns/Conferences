@@ -65,8 +65,7 @@ struct ConferenceList: View {
                             } label: {
                                 Label("Info", systemImage: "gear")
                             }.sheet(isPresented: $isSettingsDisplayed) {
-                                SettingsView(dataStore: database,
-                                             viewContext: viewContext)
+                                SettingsView()
                             }
                         }
                         ToolbarItem {
