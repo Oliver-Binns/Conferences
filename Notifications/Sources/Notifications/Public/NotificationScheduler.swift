@@ -40,13 +40,9 @@ extension NotificationScheduler {
     }
 
     func scheduleNotifications(for attendance: CDAttendance?, at conference: Conference) async throws {
-        for notification in [
-            remindCFPOpening(conference: conference),
-            remindCFPClosing(conference: conference),
-            remindTravel(for: attendance, at: conference)
-        ].compactMap({ $0 }) {
-            try await center.add(notification)
-        }
+        try await remindCFPOpening(conference: conference)
+        try await remindCFPClosing(conference: conference)
+        try await remindTravel(for: attendance, at: conference)
     }
 }
     
@@ -58,7 +54,7 @@ extension NotificationScheduler {
         }
     }
 
-    private var attendance: [(CDAttendance?, Conference)] {
+    private var attendances: [(CDAttendance?, Conference)] {
         get async throws {
             try await withThrowingTaskGroup(of: (CDAttendance?, Conference).self) { group -> [(CDAttendance?, Conference)] in
                 try await conferences.forEach { conference in
@@ -74,31 +70,31 @@ extension NotificationScheduler {
     }
 
     func scheduleCFPOpeningNotifications() async throws {
-        try await conferences
-            .compactMap(remindCFPOpening)
-            .forEach {
-                center.add($0)
-            }
+        for conference in try await conferences {
+            try await remindCFPOpening(conference: conference)
+        }
     }
 
     func scheduleCFPClosingNotifications() async throws {
-        try await conferences
-            .compactMap(remindCFPClosing)
-            .forEach {
-                center.add($0)
-            }
+        for conference in try await conferences {
+            try await remindCFPClosing(conference: conference)
+        }
     }
 
     func scheduleTravelNotifications() async throws {
-
+        for (attendance, conference) in try await attendances {
+            try await remindTravel(for: attendance, at: conference)
+        }
     }
 
 
-    private func remindCFPOpening(conference: Conference) -> UNNotificationRequest? {
+    private func remindCFPOpening(conference: Conference) async throws {
+        let identifier = "\(conference.id)-cfpopen"
+
         guard settingsStore.bool(for: .cfpOpenNotifications),
               let openingDate = conference.cfpSubmission?.opens,
               openingDate > .now else {
-            return nil
+            return center.removePendingNotificationRequests(withIdentifiers: [identifier])
         }
         
         let content = UNMutableNotificationContent()
@@ -109,15 +105,18 @@ extension NotificationScheduler {
         let fireDate = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute, .second],
                                                        from: openingDate)
         let trigger = UNCalendarNotificationTrigger(dateMatching: fireDate, repeats: false)
-        return UNNotificationRequest(identifier: "\(conference.id)-cfpopen", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        try await center.add(request)
     }
     
-    private func remindCFPClosing(conference: Conference) -> UNNotificationRequest? {
+    private func remindCFPClosing(conference: Conference) async throws {
+        let identifier = "\(conference.id)-cfpclosing"
+
         guard settingsStore.bool(for: .cfpCloseNotifications),
               let closingDate = conference.cfpSubmission?.closes,
               closingDate > .now,
               let fireDate = Calendar.current.date(byAdding: .day, value: -3, to: closingDate) else {
-            return nil
+            return center.removePendingNotificationRequests(withIdentifiers: [identifier])
         }
         
         let content = UNMutableNotificationContent()
@@ -128,10 +127,13 @@ extension NotificationScheduler {
         let dateComponents = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute, .second],
                                                              from: fireDate)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-        return UNNotificationRequest(identifier: "\(conference.id)-cfpclosing", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        try await center.add(request)
     }
     
-    private func remindTravel(for attendance: CDAttendance?, at conference: Conference) -> UNNotificationRequest? {
+    private func remindTravel(for attendance: CDAttendance?, at conference: Conference) async throws {
+        let identifier = "\(conference.id)-travel"
+
         let startDate = conference.dates.lowerBound
         guard settingsStore.bool(for: .travelNotifications),
               let attendance = attendance,
@@ -140,7 +142,7 @@ extension NotificationScheduler {
               !attendance.travelBooked,
               let fireDate = Calendar.current.date(byAdding: .month, value: -1, to: startDate),
               fireDate > .now else {
-            return nil
+            return center.removePendingNotificationRequests(withIdentifiers: [identifier])
         }
         
         let content = UNMutableNotificationContent()
@@ -151,7 +153,8 @@ extension NotificationScheduler {
         let dateComponents = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute, .second],
                                                              from: fireDate)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-        return UNNotificationRequest(identifier: "\(conference.id)-travel", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        try await center.add(request)
     }
 }
     
