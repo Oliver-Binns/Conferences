@@ -24,14 +24,23 @@ final class NotificationParserTests: XCTestCase {
         super.tearDown()
     }
 
+    func testParseEditAttendance() async throws {
+        let conferenceID = UUID()
+        let conference = Conference.mock
+        service.data = [Attendance(conferenceID: conferenceID), conference]
+
+        let attendance = CDAttendance(context: store.context)
+        attendance.conferenceId = conferenceID.uuidString
+        try store.insert(object: attendance)
+
+        let userInfo = validPayload(id: "abc", subscriptionID: "editAttendance")
+        let (returnedConference, returnedAttendance) = try await sut.parse(userInfo: userInfo)
+        XCTAssertEqual(returnedConference.id, conference.id)
+        XCTAssertEqual(returnedAttendance, attendance)
+    }
+
     func testParseEditConferenceAllowsNilAttendance() async throws {
-        let location = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-        let conference = Conference(name: "Mock Conference",
-                                    website: nil, twitter: nil,
-                                    venue: Venue(name: "Mock Venue",
-                                                 city: "London", country: "United Kingdom",
-                                                 location: location),
-                                    cfpSubmission: nil, dates: Date.distantPast...Date.distantFuture)
+        let conference = Conference.mock
         service.data = [conference]
 
         let userInfo = validPayload(id: "abc", subscriptionID: "editConference")
@@ -85,6 +94,17 @@ final class NotificationParserTests: XCTestCase {
         } catch NotificationParseError.noConferenceFound {
 
         }
+    }
+}
+
+extension Conference {
+    static var mock: Conference {
+        Conference(name: "Mock Conference",
+                   website: nil, twitter: nil,
+                   venue: Venue(name: "Mock Venue",
+                                city: "London", country: "United Kingdom",
+                                location: CLLocationCoordinate2D(latitude: 0, longitude: 0)),
+                   cfpSubmission: nil, dates: Date.distantPast...Date.distantFuture)
     }
 }
 

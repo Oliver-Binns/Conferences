@@ -9,7 +9,7 @@ final class MockDataService: DataService {
     }
 
     func retrieve<T>(id: CKRecord.ID) async throws -> T? {
-        guard let item = data.first as? T else {
+        guard let item = data.compactMap { $0 as? T }.first else {
             return nil
         }
         return item
