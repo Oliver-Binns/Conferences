@@ -5,7 +5,7 @@ final class MockDataService: DataService {
     var data: [Any] = []
 
     func retrieve<T: Queryable>() async throws -> [T] {
-        []
+        data.compactMap { $0 as? T }
     }
 
     func retrieve<T>(id: CKRecord.ID) async throws -> T? {

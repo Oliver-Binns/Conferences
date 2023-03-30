@@ -26,7 +26,7 @@ final class NotificationParserTests: XCTestCase {
 
     func testParseEditAttendance() async throws {
         let conferenceID = UUID()
-        let conference = Conference.mock
+        let conference = Conference.mock()
         service.data = [Attendance(conferenceID: conferenceID), conference]
 
         let attendance = CDAttendance(context: store.context)
@@ -40,7 +40,7 @@ final class NotificationParserTests: XCTestCase {
     }
 
     func testParseEditConferenceAllowsNilAttendance() async throws {
-        let conference = Conference.mock
+        let conference = Conference.mock()
         service.data = [conference]
 
         let userInfo = validPayload(id: "abc", subscriptionID: "editConference")
@@ -98,13 +98,14 @@ final class NotificationParserTests: XCTestCase {
 }
 
 extension Conference {
-    static var mock: Conference {
+    static func mock(cfpDates: [Date] = []) -> Conference {
         Conference(name: "Mock Conference",
                    website: nil, twitter: nil,
                    venue: Venue(name: "Mock Venue",
                                 city: "London", country: "United Kingdom",
                                 location: CLLocationCoordinate2D(latitude: 0, longitude: 0)),
-                   cfpSubmission: nil, dates: Date.distantPast...Date.distantFuture)
+                   cfpSubmission: .init(dates: cfpDates),
+                   dates: Date.distantPast...Date.distantFuture)
     }
 }
 

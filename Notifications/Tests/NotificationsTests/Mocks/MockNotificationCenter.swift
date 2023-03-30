@@ -11,7 +11,7 @@ final class MockNotificationCenter: Notifications.NotificationCenter {
     }
 
     func add(_ request: UNNotificationRequest) async throws {
-
+        pendingRequests.append(request)
     }
 
     func removePendingNotificationRequests(withIdentifiers identifiers: [String]) {
