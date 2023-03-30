@@ -2,6 +2,7 @@ import Combine
 import Foundation
 import UserNotifications
 
+@MainActor
 public final class NotificationManager: NotificationState {
     @Published public private(set) var isDenied: Bool = false
 

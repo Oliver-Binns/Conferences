@@ -1,5 +1,6 @@
 import Combine
 
+@MainActor
 public protocol NotificationState: ObservableObject {
     var isDenied: Bool { get }
 
