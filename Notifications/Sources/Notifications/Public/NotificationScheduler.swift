@@ -4,7 +4,7 @@ import Service
 import UserNotifications
 
 public struct NotificationScheduler {
-    private let center: UNUserNotificationCenter
+    private let center: NotificationCenter
     private let settingsStore: SettingsStore
 
     private let parser: NotificationParser
@@ -14,12 +14,12 @@ public struct NotificationScheduler {
 
     public init(service: DataService, store: DataStore) {
         let parser = NotificationParser(service: service, store: store)
-        self.init(center: .current(), settingsStore: UserDefaults.standard,
+        self.init(settingsStore: UserDefaults.standard,
                   service: service, store: store,
                   parser: parser)
     }
     
-    init(center: UNUserNotificationCenter,
+    init(center: NotificationCenter = UNUserNotificationCenter.current(),
          settingsStore: SettingsStore,
          service: DataService,
          store: DataStore,
@@ -89,7 +89,7 @@ extension NotificationScheduler {
 
 
     private func remindCFPOpening(conference: Conference) async throws {
-        let identifier = "\(conference.id)-cfpopen"
+        let identifier = "\(conference.id)-cfpopening"
 
         guard settingsStore.bool(for: .cfpOpenNotifications),
               let openingDate = conference.cfpSubmission?.opens,
@@ -161,7 +161,7 @@ extension NotificationScheduler {
 // MARK: - Remove Notifications
 extension NotificationScheduler {
     func removePendingCFPOpeningNotifications() async {
-        await removePendingRequests(withSuffix: "-cfpopen")
+        await removePendingRequests(withSuffix: "-cfpopening")
     }
     
     func removePendingCFPClosingNotifications() async {
