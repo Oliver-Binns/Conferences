@@ -9,7 +9,8 @@ let package = Package(
         .library(name: "Persistence", targets: ["Persistence"]),
     ],
     targets: [
-        .target(name: "Persistence"),
+        .target(name: "Persistence",
+                swiftSettings: [.define("DEBUG", .when(configuration: .debug))]),
         .testTarget(name: "PersistenceTests", dependencies: ["Persistence"]),
     ]
 )

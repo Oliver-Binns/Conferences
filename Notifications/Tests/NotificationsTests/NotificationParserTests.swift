@@ -1,22 +1,44 @@
-
+import CoreLocation
+import Model
 import XCTest
 @testable import Notifications
 
 final class NotificationParserTests: XCTestCase {
     var sut: NotificationParser!
+    var service: MockDataService!
+    var store: MockDataStore!
 
     override func setUp() {
         super.setUp()
 
-        let service = MockDataService()
-        let store = MockDataStore()
+        service = MockDataService()
+        store = MockDataStore()
 
         sut = .init(service: service, store: store)
     }
 
     override func tearDown() {
         sut = nil
+        service = nil
+        store = nil
         super.tearDown()
+    }
+
+    func testParseEditConferenceAllowsNilAttendance() async throws {
+        let location = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        let conference = Conference(name: "Mock Conference",
+                                    website: nil, twitter: nil,
+                                    venue: Venue(name: "Mock Venue",
+                                                 city: "London", country: "United Kingdom",
+                                                 location: location),
+                                    cfpSubmission: nil, dates: Date.distantPast...Date.distantFuture)
+        service.data = [conference]
+
+        let userInfo = validPayload(id: "abc", subscriptionID: "editConference")
+        let (returnedConference, attendance) = try await sut.parse(userInfo: userInfo)
+        XCTAssertEqual(returnedConference.id, conference.id)
+        XCTAssertNil(attendance)
+        
     }
 
     func testParsingInvalidNotification() async throws {

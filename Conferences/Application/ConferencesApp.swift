@@ -1,15 +1,5 @@
-import CoreData
 import Model
-import Persistence
 import SwiftUI
-
-struct PersistenceController {
-    static var shared: DataStore = {
-        let container = NSPersistentCloudKitContainer(name: "Conferences",
-                                                      managedObjectModel: .conferences)
-        return CoreDataStore(container: container)
-    }()
-}
 
 @main
 struct ConferencesApp: App {

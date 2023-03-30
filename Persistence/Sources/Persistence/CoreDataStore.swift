@@ -1,17 +1,14 @@
 import CoreData
 
-public struct CoreDataStore: DataStore {
+public final class CoreDataStore: DataStore {
     private let container: NSPersistentContainer
 
     public var context: NSManagedObjectContext {
         container.viewContext
     }
 
-    public init(container: NSPersistentContainer, inMemory: Bool = false) {
+    public init(container: NSPersistentContainer) {
         self.container = container
-        if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        }
         container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.

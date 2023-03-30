@@ -1,5 +1,4 @@
 import CoreData
-import Model
 
 extension NSManagedObjectModel {
     static var conferences: NSManagedObjectModel {
@@ -7,10 +6,16 @@ extension NSManagedObjectModel {
     }
 
     private static var url: URL {
-        guard let modelURL = Model.bundle
+        guard let modelURL = Bundle.module
             .url(forResource: "Conferences", withExtension: "momd") else {
             preconditionFailure("Unable to find CoreData model in bundle")
         }
         return modelURL
+    }
+}
+
+extension NSPersistentContainer {
+    public static var conferences: NSPersistentContainer {
+        NSPersistentCloudKitContainer(name: "Conferences", managedObjectModel: .conferences)
     }
 }

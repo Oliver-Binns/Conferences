@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0733597829D1BFE500B518AC /* AppStorage+Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0733597729D1BFE500B518AC /* AppStorage+Enum.swift */; };
-		0747377329D3107900E486A3 /* NSManagedObjectModel+Conferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747377229D3107900E486A3 /* NSManagedObjectModel+Conferences.swift */; };
 		07C8870229D313E2003F8824 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = 07C8870129D313E2003F8824 /* Model */; };
 		07C8870429D313E2003F8824 /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 07C8870329D313E2003F8824 /* Notifications */; };
 		07C8870629D313E2003F8824 /* Persistence in Frameworks */ = {isa = PBXBuildFile; productRef = 07C8870529D313E2003F8824 /* Persistence */; };
 		07C8870829D313E2003F8824 /* Service in Frameworks */ = {isa = PBXBuildFile; productRef = 07C8870729D313E2003F8824 /* Service */; };
+		07E4304129D6263000DE9929 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E4304029D6263000DE9929 /* PersistenceController.swift */; };
+		07E4304529D628A600DE9929 /* ConferencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E4304429D628A600DE9929 /* ConferencesTests.swift */; };
 		7C7491502975D26300AC7B82 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74914F2975D26300AC7B82 /* InfoView.swift */; };
 		7C7491522975D40700AC7B82 /* URL+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7491512975D40700AC7B82 /* URL+Identifiable.swift */; };
 		7C7491542975D42A00AC7B82 /* URL+Conferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7491532975D42A00AC7B82 /* URL+Conferences.swift */; };
@@ -25,7 +25,6 @@
 		7CA45EAC296CC56B00A18941 /* AddToCalendarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA45EAB296CC56B00A18941 /* AddToCalendarButton.swift */; };
 		7CB9E38229674D9600753EA3 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9E38129674D9600753EA3 /* SafariView.swift */; };
 		7CB9E384296751D400753EA3 /* CountdownText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9E383296751D400753EA3 /* CountdownText.swift */; };
-		7CB9E38F29675F3D00753EA3 /* Persistence+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9E38E29675F3D00753EA3 /* Persistence+Preview.swift */; };
 		7CB9E392296763D000753EA3 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9E391296763D000753EA3 /* Date+Extensions.swift */; };
 		7CB9E394296766B600753EA3 /* OptionalCollection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9E393296766B600753EA3 /* OptionalCollection+Extensions.swift */; };
 		7CBAAC762969B39400096F1E /* conferences.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CBAAC752969B39400096F1E /* conferences.json */; };
@@ -44,7 +43,6 @@
 		7CD7C8152965F4B100B56632 /* IdeasList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C8142965F4B100B56632 /* IdeasList.swift */; };
 		7CD7C8172965F4B200B56632 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CD7C8162965F4B200B56632 /* Assets.xcassets */; };
 		7CD7C81B2965F4B300B56632 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CD7C81A2965F4B300B56632 /* Preview Assets.xcassets */; };
-		7CD7C8252965F4B300B56632 /* ConferencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C8242965F4B300B56632 /* ConferencesTests.swift */; };
 		7CD7C82F2965F4B300B56632 /* ConferencesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C82E2965F4B300B56632 /* ConferencesUITests.swift */; };
 		7CD7C8312965F4B300B56632 /* ConferencesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD7C8302965F4B300B56632 /* ConferencesUITestsLaunchTests.swift */; };
 		7CD7C8402965F85B00B56632 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD7C83F2965F85B00B56632 /* CloudKit.framework */; };
@@ -72,8 +70,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0733597729D1BFE500B518AC /* AppStorage+Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppStorage+Enum.swift"; sourceTree = "<group>"; };
-		0747377229D3107900E486A3 /* NSManagedObjectModel+Conferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Conferences.swift"; sourceTree = "<group>"; };
+		07E4304029D6263000DE9929 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		07E4304429D628A600DE9929 /* ConferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferencesTests.swift; sourceTree = "<group>"; };
 		7C74914F2975D26300AC7B82 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		7C7491512975D40700AC7B82 /* URL+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Identifiable.swift"; sourceTree = "<group>"; };
 		7C7491532975D42A00AC7B82 /* URL+Conferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Conferences.swift"; sourceTree = "<group>"; };
@@ -86,7 +84,6 @@
 		7CA45EAB296CC56B00A18941 /* AddToCalendarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCalendarButton.swift; sourceTree = "<group>"; };
 		7CB9E38129674D9600753EA3 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		7CB9E383296751D400753EA3 /* CountdownText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownText.swift; sourceTree = "<group>"; };
-		7CB9E38E29675F3D00753EA3 /* Persistence+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Persistence+Preview.swift"; sourceTree = "<group>"; };
 		7CB9E391296763D000753EA3 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		7CB9E393296766B600753EA3 /* OptionalCollection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionalCollection+Extensions.swift"; sourceTree = "<group>"; };
 		7CBAAC752969B39400096F1E /* conferences.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = conferences.json; sourceTree = "<group>"; };
@@ -108,7 +105,6 @@
 		7CD7C8182965F4B300B56632 /* Conferences.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Conferences.entitlements; sourceTree = "<group>"; };
 		7CD7C81A2965F4B300B56632 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7CD7C8202965F4B300B56632 /* ConferencesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConferencesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7CD7C8242965F4B300B56632 /* ConferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferencesTests.swift; sourceTree = "<group>"; };
 		7CD7C82A2965F4B300B56632 /* ConferencesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConferencesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD7C82E2965F4B300B56632 /* ConferencesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferencesUITests.swift; sourceTree = "<group>"; };
 		7CD7C8302965F4B300B56632 /* ConferencesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferencesUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -150,18 +146,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0733597629D1BFCD00B518AC /* UserDefaults */ = {
-			isa = PBXGroup;
-			children = (
-				0733597729D1BFE500B518AC /* AppStorage+Enum.swift */,
-			);
-			path = UserDefaults;
-			sourceTree = "<group>";
-		};
 		0747377129D3106800E486A3 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				0747377229D3107900E486A3 /* NSManagedObjectModel+Conferences.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -199,9 +186,7 @@
 		7CB9E38D29675F3000753EA3 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				0733597629D1BFCD00B518AC /* UserDefaults */,
 				7CC3370F297C21E0007C0364 /* Cache */,
-				7CC33700297B1D5F007C0364 /* CloudKit */,
 				7CC336FF297B1D51007C0364 /* CoreData */,
 			);
 			path = Persistence;
@@ -231,23 +216,16 @@
 		7CC336FF297B1D51007C0364 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				7CB9E38E29675F3D00753EA3 /* Persistence+Preview.swift */,
+				07E4304029D6263000DE9929 /* PersistenceController.swift */,
 				7C85C1CD296DAEE500A98BC5 /* ManagedObjectContext.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		7CC33700297B1D5F007C0364 /* CloudKit */ = {
-			isa = PBXGroup;
-			children = (
-				7CC3370C297B6CD2007C0364 /* ConferenceDataSource.swift */,
-			);
-			path = CloudKit;
-			sourceTree = "<group>";
-		};
 		7CC3370F297C21E0007C0364 /* Cache */ = {
 			isa = PBXGroup;
 			children = (
+				7CC3370C297B6CD2007C0364 /* ConferenceDataSource.swift */,
 				7CC33710297C21FC007C0364 /* FileCache.swift */,
 			);
 			path = Cache;
@@ -360,7 +338,7 @@
 		7CD7C8232965F4B300B56632 /* ConferencesTests */ = {
 			isa = PBXGroup;
 			children = (
-				7CD7C8242965F4B300B56632 /* ConferencesTests.swift */,
+				07E4304429D628A600DE9929 /* ConferencesTests.swift */,
 			);
 			path = ConferencesTests;
 			sourceTree = "<group>";
@@ -479,6 +457,7 @@
 					};
 					7CD7C81F2965F4B300B56632 = {
 						CreatedOnToolsVersion = 14.1;
+						LastSwiftMigration = 1430;
 						TestTargetID = 7CD7C8092965F4B100B56632;
 					};
 					7CD7C8292965F4B300B56632 = {
@@ -540,7 +519,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C7491562975D73400AC7B82 /* View+Section.swift in Sources */,
-				0747377329D3107900E486A3 /* NSManagedObjectModel+Conferences.swift in Sources */,
 				7CD7C80E2965F4B100B56632 /* ConferencesApp.swift in Sources */,
 				7CBAAC7A2969B3E900096F1E /* Conference+Data.swift in Sources */,
 				7CB9E38229674D9600753EA3 /* SafariView.swift in Sources */,
@@ -549,7 +527,6 @@
 				7CC33724297D7300007C0364 /* View+AppState.swift in Sources */,
 				7C7491542975D42A00AC7B82 /* URL+Conferences.swift in Sources */,
 				7CCA101E296F611100E1833D /* Collection+Sorting.swift in Sources */,
-				0733597829D1BFE500B518AC /* AppStorage+Enum.swift in Sources */,
 				7C85C1D0296DC47200A98BC5 /* Idea+Comparable.swift in Sources */,
 				7CC33711297C21FC007C0364 /* FileCache.swift in Sources */,
 				7CC33719297D67D1007C0364 /* SettingsView.swift in Sources */,
@@ -557,7 +534,6 @@
 				7CB9E384296751D400753EA3 /* CountdownText.swift in Sources */,
 				7CC33714297D5DB6007C0364 /* AppDelegate.swift in Sources */,
 				7CC3371E297D7068007C0364 /* URLOpener.swift in Sources */,
-				7CB9E38F29675F3D00753EA3 /* Persistence+Preview.swift in Sources */,
 				7C85C1CA296D9C6D00A98BC5 /* SelectedTalksView.swift in Sources */,
 				7CA45EAC296CC56B00A18941 /* AddToCalendarButton.swift in Sources */,
 				7CD7C8152965F4B100B56632 /* IdeasList.swift in Sources */,
@@ -573,6 +549,7 @@
 				7C85C1CE296DAEE500A98BC5 /* ManagedObjectContext.swift in Sources */,
 				7CD7C846296603DB00B56632 /* CreateIdea.swift in Sources */,
 				7CD7C8432965FEFC00B56632 /* ConferenceList.swift in Sources */,
+				07E4304129D6263000DE9929 /* PersistenceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,7 +557,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CD7C8252965F4B300B56632 /* ConferencesTests.swift in Sources */,
+				07E4304529D628A600DE9929 /* ConferencesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,6 +780,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z86DH46P79;
@@ -815,6 +793,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Conferences.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Conferences";
@@ -826,6 +805,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z86DH46P79;

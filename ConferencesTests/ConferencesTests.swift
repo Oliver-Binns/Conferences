@@ -1,9 +1,8 @@
-@testable import Conferences
-import CoreData
 import XCTest
+@testable import Conferences
 
-final class NSManagedObjerctModelTests: XCTestCase {
-    func testModelExists() {
-        XCTAssertNotNil(NSManagedObjectModel.conferences)
+final class ConferencesTests: XCTestCase {
+    func testExample() throws {
+        XCTAssertNotNil("Hello, World!")
     }
 }
