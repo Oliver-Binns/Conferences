@@ -98,14 +98,17 @@ final class NotificationParserTests: XCTestCase {
 }
 
 extension Conference {
-    static func mock(cfpDates: [Date] = []) -> Conference {
-        Conference(name: "Mock Conference",
-                   website: nil, twitter: nil,
-                   venue: Venue(name: "Mock Venue",
-                                city: "London", country: "United Kingdom",
-                                location: CLLocationCoordinate2D(latitude: 0, longitude: 0)),
-                   cfpSubmission: .init(dates: cfpDates),
-                   dates: Date.distantPast...Date.distantFuture)
+    static func mock(id: UUID = UUID(), cfpDates: [Date] = []) -> Conference {
+        let startDate = Calendar.current.date(byAdding: .month, value: 2, to: .now)!
+
+        return Conference(id: id,
+                          name: "Mock Conference",
+                          website: nil, twitter: nil,
+                          venue: Venue(name: "Mock Venue",
+                                       city: "London", country: "United Kingdom",
+                                       location: CLLocationCoordinate2D(latitude: 0, longitude: 0)),
+                          cfpSubmission: .init(dates: cfpDates),
+                          dates: startDate...Date.distantFuture)
     }
 }
 

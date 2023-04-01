@@ -140,7 +140,7 @@ extension NotificationScheduler {
               let type = attendance.type.flatMap(AttendanceType.init),
               type != .none,
               !attendance.travelBooked,
-              let fireDate = Calendar.current.date(byAdding: .month, value: -1, to: startDate),
+              let fireDate = Calendar.current.date(byAdding: .day, value: -45, to: startDate),
               fireDate > .now else {
             return center.removePendingNotificationRequests(withIdentifiers: [identifier])
         }
