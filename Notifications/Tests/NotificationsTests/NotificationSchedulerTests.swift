@@ -191,7 +191,7 @@ extension NotificationSchedulerTests {
 
 // MARK: - Remove Notifications
 extension NotificationSchedulerTests {
-    func testRemoveCFPOpeningNotifications() async throws {
+    func testRemovePendingCFPOpeningNotifications() async throws {
         let identifiers = (0..<5).map { _ in "\(UUID())-cfpopening" }
         try await addNotifications(identifiers: identifiers)
 

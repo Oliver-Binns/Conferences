@@ -2,6 +2,10 @@ import UserNotifications
 @testable import Notifications
 
 final class MockNotificationCenter: Notifications.NotificationCenter {
+    var authorizationStatus: UNAuthorizationStatus {
+        .notDetermined
+    }
+
     var pendingRequests: [UNNotificationRequest] = []
 
     var didCallRemoveNotifications: [String] = []

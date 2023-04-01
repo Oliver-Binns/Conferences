@@ -1,5 +1,6 @@
 import Combine
 import Foundation
+import Service
 import UserNotifications
 
 @MainActor
@@ -70,34 +71,41 @@ public final class NotificationManager: NotificationState {
 
     private let store: SettingsStore
 
-    private let newConferenceSubscriber: ObjectSubscriber = PersistenceSubscriber.newConference()
-    private let editConferenceSubscriber: ObjectSubscriber = PersistenceSubscriber.editConference()
-    private let editAttendanceSubscriber: ObjectSubscriber = PersistenceSubscriber.editAttendance()
+    private let newConferenceSubscriber: ObjectSubscriber
+    private let editConferenceSubscriber: ObjectSubscriber
+    private let editAttendanceSubscriber: ObjectSubscriber
 
     private let scheduler: NotificationScheduler
-    private let center: UNUserNotificationCenter
+    private let center: NotificationCenter
 
     init(scheduler: NotificationScheduler,
+         service: SubscriptionService,
          store: SettingsStore,
-         center: UNUserNotificationCenter) {
+         center: NotificationCenter) {
         self.scheduler = scheduler
         self.store = store
         self.center = center
+
+        newConferenceSubscriber = PersistenceSubscriber.newConference(service: service)
+        editConferenceSubscriber = PersistenceSubscriber.editConference(service: service)
+        editAttendanceSubscriber = PersistenceSubscriber.editAttendance(service: service)
+
 
         cfpOpening = store.bool(for: .cfpOpenNotifications)
         cfpClosing = store.bool(for: .cfpCloseNotifications)
         travel = store.bool(for: .travelNotifications)
 
         Task(priority: .userInitiated) {
-            isDenied = await center.notificationSettings().authorizationStatus == .denied
+            isDenied = await center.authorizationStatus == .denied
             newConference = try await newConferenceSubscriber.isSubscribed
         }
     }
 
     public convenience init(scheduler: NotificationScheduler) {
         self.init(scheduler: scheduler,
+                  service: CloudKitService.shared,
                   store: UserDefaults.standard,
-                  center: .current())
+                  center: UNUserNotificationCenter.current())
     }
 
     private func toggleSubscribers() async throws {
@@ -113,11 +121,10 @@ public final class NotificationManager: NotificationState {
 
     private func requestAuthorizationIfNeeded() async throws {
         guard await center
-            .getNotificationSettings()
             .authorizationStatus == .notDetermined else {
             return
         }
         try await center.requestAuthorization(options: [.alert, .badge, .sound])
-        isDenied = await center.notificationSettings().authorizationStatus == .denied
+        isDenied = await center.authorizationStatus == .denied
     }
 }
