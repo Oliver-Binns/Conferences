@@ -11,9 +11,10 @@ public final class NotificationManager: NotificationState {
     public var newConference: Bool = false {
         didSet {
             Task {
-                if newConference,
-                    try await requestAuthorizationIfNeeded() {
-                    try await newConferenceSubscriber.subscribe()
+                if newConference {
+                    if try await requestAuthorizationIfNeeded() {
+                        try await newConferenceSubscriber.subscribe()
+                    }
                 } else {
                     try await newConferenceSubscriber.unsubscribe()
                 }

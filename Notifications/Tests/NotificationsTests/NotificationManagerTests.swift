@@ -1,5 +1,7 @@
 import XCTest
+import Model
 @testable import Notifications
+@testable import Service
 
 @MainActor
 final class NotificationManangerTests: XCTestCase {
@@ -59,5 +61,14 @@ extension NotificationManangerTests {
     func testDidEnableTravelRequestsAuthorization() {
         sut.travel = true
         wait(for: self.center.didCallRequestAuthorization, timeout: 3)
+    }
+}
+
+extension NotificationManangerTests {
+    func testDidDisableNewConferenceUnsubscribesFromNotifications() {
+        sut.newConference = false
+        wait(for: !self.service.didUnsubscribe.isEmpty, timeout: 3)
+        XCTAssertTrue(service.didUnsubscribe[0].type == .new)
+        XCTAssertTrue(service.didUnsubscribe[0].object == Conference.self)
     }
 }
