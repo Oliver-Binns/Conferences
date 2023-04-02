@@ -1,7 +1,9 @@
 import UserNotifications
 @testable import Notifications
 
-final class MockNotificationCenter: Notifications.NotificationCenter {
+final class MockNotificationCenter: NSObject, Notifications.NotificationCenter {
+    var didCallRequestAuthorization = false
+
     var authorizationStatus: UNAuthorizationStatus {
         .notDetermined
     }
@@ -23,8 +25,7 @@ final class MockNotificationCenter: Notifications.NotificationCenter {
     }
 
     func requestAuthorization(options: UNAuthorizationOptions) async throws -> Bool {
-        false
+        didCallRequestAuthorization = true
+        return false
     }
-
-
 }

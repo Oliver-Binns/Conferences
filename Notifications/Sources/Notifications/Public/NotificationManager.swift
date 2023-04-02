@@ -11,8 +11,8 @@ public final class NotificationManager: NotificationState {
     public var newConference: Bool = false {
         didSet {
             Task {
-                if newConference {
-                    try await requestAuthorizationIfNeeded()
+                if newConference,
+                    try await requestAuthorizationIfNeeded() {
                     try await newConferenceSubscriber.subscribe()
                 } else {
                     try await newConferenceSubscriber.unsubscribe()
@@ -109,22 +109,25 @@ public final class NotificationManager: NotificationState {
     }
 
     private func toggleSubscribers() async throws {
-        if cfpOpening || cfpClosing || travel {
-            try await requestAuthorizationIfNeeded()
-            try await editAttendanceSubscriber.subscribe()
-            try await editConferenceSubscriber.subscribe()
+        if (cfpOpening || cfpClosing || travel) {
+            if try await requestAuthorizationIfNeeded() {
+                try await editAttendanceSubscriber.subscribe()
+                try await editConferenceSubscriber.subscribe()
+            }
         } else {
             try await editAttendanceSubscriber.unsubscribe()
             try await editConferenceSubscriber.unsubscribe()
         }
     }
 
-    private func requestAuthorizationIfNeeded() async throws {
-        guard await center
-            .authorizationStatus == .notDetermined else {
-            return
+    private func requestAuthorizationIfNeeded() async throws -> Bool {
+        let authorizationStatus = await center.authorizationStatus
+        guard authorizationStatus == .notDetermined else {
+            return authorizationStatus != .denied
         }
-        try await center.requestAuthorization(options: [.alert, .badge, .sound])
-        isDenied = await center.authorizationStatus == .denied
+        let granted = try await center
+            .requestAuthorization(options: [.alert, .badge, .sound])
+        isDenied = !granted
+        return granted
     }
 }

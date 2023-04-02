@@ -63,7 +63,6 @@ extension NotificationScheduler {
                         return (attendance, conference)
                     }
                 }
-
                 return try await group.reduce([]) { $0 + [$1] }
             }
         }
