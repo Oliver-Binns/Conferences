@@ -1,13 +1,14 @@
-import SwiftUI
 import CoreData
+import Model
+import SwiftUI
 
 struct IdeasList: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Idea.title, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \CDIdea.title, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Idea>
+    private var items: FetchedResults<CDIdea>
     
     @State
     private var editingIdea: Bool = false
@@ -58,12 +59,12 @@ struct IdeasList: View {
     private func ideaEditor(ideaID: NSManagedObjectID? = nil) -> some View {
         let editingContext = viewContext.editingContext
         
-        let childItem: Idea
+        let childItem: CDIdea
         if let ideaID,
-           let idea = editingContext.object(with: ideaID) as? Idea {
+           let idea = editingContext.object(with: ideaID) as? CDIdea {
             childItem = idea
         } else {
-            childItem = Idea(context: editingContext)
+            childItem = CDIdea(context: editingContext)
         }
         
         return EditIdea(idea: childItem)
@@ -87,10 +88,12 @@ struct IdeasList: View {
 }
 
 #if DEBUG
+import Persistence
+
 struct IdeasList_Previews: PreviewProvider {
     static var previews: some View {
         IdeasList()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environment(\.managedObjectContext, PersistenceController.preview.context)
     }
 }
 #endif

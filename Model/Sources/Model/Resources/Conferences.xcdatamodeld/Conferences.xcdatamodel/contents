@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22D49" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Attendance" representedClassName="CDAttendance" syncable="YES" codeGenerationType="class">
+        <attribute name="conferenceId" optional="YES" attributeType="String"/>
+        <attribute name="travelBooked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="talks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Idea" inverseName="submittedTo" inverseEntity="Idea"/>
+    </entity>
+    <entity name="Idea" representedClassName="CDIdea" syncable="YES" codeGenerationType="class">
+        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="submittedTo" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Attendance" inverseName="talks" inverseEntity="Attendance"/>
+    </entity>
+</model>

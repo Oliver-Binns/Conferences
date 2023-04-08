@@ -1,15 +1,16 @@
+import Model
 import SwiftUI
 
 struct SelectTalksView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) var dismiss
     
-    @ObservedObject var attendance: Attendance
+    @ObservedObject var attendance: CDAttendance
     
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Idea.title, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \CDIdea.title, ascending: true)],
         animation: .default)
-    private var ideas: FetchedResults<Idea>
+    private var ideas: FetchedResults<CDIdea>
     
     var body: some View {
         NavigationView {
@@ -48,7 +49,7 @@ struct SelectTalksView: View {
         }
     }
     
-    func isSubmitted(idea: Idea) -> Bool {
+    func isSubmitted(idea: CDIdea) -> Bool {
         attendance.talks?.contains(idea) ?? false
     }
 }

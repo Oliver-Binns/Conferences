@@ -1,5 +1,7 @@
 #if DEBUG
 import CloudKit
+import Model
+import Service
 
 extension Conference {
     fileprivate static var all: [Conference] {
@@ -18,12 +20,11 @@ extension Conference {
 }
 
 struct PreviewDataService: DataService {
-    func retrieve<T: Queryable>(type: RecordType) async throws -> [T] {
+    func retrieve<T: Queryable>() async throws -> [T] {
         Conference.all.compactMap { $0 as? T }
     }
     
-    func retrieve<T: Queryable>(id: CKRecord.ID,
-                                ofType type: RecordType) async throws -> T? {
+    func retrieve<T>(id: CKRecord.ID) async throws -> T? where T : Queryable {
         nil
     }
 }

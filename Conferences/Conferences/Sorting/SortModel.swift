@@ -1,4 +1,5 @@
 import Foundation
+import Model
 
 final class SortModel: ObservableObject {
     @Published

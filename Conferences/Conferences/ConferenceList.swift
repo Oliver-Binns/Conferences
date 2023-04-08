@@ -1,22 +1,22 @@
 import CoreData
-import CloudKit
+import Model
 import SwiftUI
 
 struct ConferenceList: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject private var database: ConferenceDataStore
+    @EnvironmentObject private var database: CachedService<Conference>
     
     @State
-    private var displayingInfo: Bool = false
+    private var isSettingsDisplayed: Bool = false
     
     @State
-    private var editingSort: Bool = false
+    private var isSortingDisplayed: Bool = false
     
     @State
-    private var errorOccurred: Bool = false
+    private var hasErrorOccurred: Bool = false
     
     @StateObject
-    private var sort = SortModel()
+    private var sortModel = SortModel()
     
     @State
     var conferences: [Conference] = []
@@ -48,10 +48,10 @@ struct ConferenceList: View {
                  .cached(let conferences):
                 ScrollView {
                     LazyVStack {
-                        ForEach(sort.process(conferences: conferences)) { conference in
+                        ForEach(sortModel.process(conferences: conferences)) { conference in
                             NavigationLink {
                                 ConferenceDetailView(conference: conference,
-                                                     attendance: attendance(at: conference))
+                                                     attendance: conference.attendance(context: viewContext))
                             } label: {
                                 SmallConferenceView(conference: conference)
                             }.buttonStyle(.plain)
@@ -61,21 +61,21 @@ struct ConferenceList: View {
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button {
-                                displayingInfo = true
+                                isSettingsDisplayed = true
                             } label: {
-                                Label("Info", systemImage: "info.circle")
-                            }.sheet(isPresented: $displayingInfo) {
-                                InfoView()
+                                Label("Info", systemImage: "gear")
+                            }.sheet(isPresented: $isSettingsDisplayed) {
+                                SettingsView()
                             }
                         }
                         ToolbarItem {
                             Button {
-                                editingSort = true
+                                isSortingDisplayed = true
                             } label: {
                                 Label("Sort", systemImage: "arrow.up.arrow.down")
                             }
-                            .popover(isPresented: $editingSort) {
-                                SortView(viewModel: sort)
+                            .popover(isPresented: $isSortingDisplayed) {
+                                SortView(viewModel: sortModel)
                             }
                         }
                     }
@@ -87,26 +87,28 @@ struct ConferenceList: View {
     func fetchConferences() {
         database.fetch()
     }
-    
-    func attendance(at conference: Conference) -> Attendance {
-        let fetchRequest = Attendance.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "conferenceId = %@",
-                                             conference.id.uuidString)
-        fetchRequest.fetchLimit = 1
-        guard let attendance = try? viewContext.fetch(fetchRequest).first else {
-            let newAttendance = Attendance(context: viewContext)
-            newAttendance.conferenceId = conference.id.uuidString
-            return newAttendance
-        }
-        return attendance
-    }
 }
 
 #if DEBUG
 struct ConferenceList_Previews: PreviewProvider {
     static var previews: some View {
         ConferenceList()
-            .environmentObject(ConferenceDataStore(service: PreviewDataService()))
+            .environmentObject(CachedService<Conference>(service: PreviewDataService()))
     }
 }
 #endif
+
+extension Conference {
+    func attendance(context: NSManagedObjectContext) -> CDAttendance {
+        let fetchRequest = CDAttendance.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "conferenceId = %@",
+                                             id.uuidString)
+        fetchRequest.fetchLimit = 1
+        guard let attendance = try? context.fetch(fetchRequest).first else {
+            let newAttendance = CDAttendance(context: context)
+            newAttendance.conferenceId = id.uuidString
+            return newAttendance
+        }
+        return attendance
+    }
+}

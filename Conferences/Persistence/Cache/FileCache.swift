@@ -1,4 +1,5 @@
 import Foundation
+import Service
 
 protocol Cache {
     func store<T: Encodable>(items: [T], type: RecordType) throws
@@ -13,7 +14,7 @@ struct FileCache: Cache {
         FileManager.default
             .urls(for: .cachesDirectory, in: .userDomainMask)
             .first?
-            .appendingPathComponent("\(type.rawValue).json")
+            .appendingPathComponent("\(type.name).json")
     }
     
     func store<T: Encodable>(items: [T], type: RecordType) throws {
