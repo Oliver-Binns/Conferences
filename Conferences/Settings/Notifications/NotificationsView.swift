@@ -3,7 +3,7 @@ import Service
 import SwiftUI
 
 struct NotificationsView: View {
-    @ObservedObject
+    @StateObject
     var state = NotificationManager(scheduler:
         NotificationScheduler(service: CloudKitService.shared, store: PersistenceController.shared)
     )
@@ -12,9 +12,20 @@ struct NotificationsView: View {
     
     var body: some View {
         Section("Notifications") {
-            Toggle("New Conferences",
-                   isOn: $state.newConference)
-            .disabled(state.isDenied)
+            if state.newConference != nil {
+                Toggle("New Conferences",
+                       isOn: .init(get: { state.newConference ?? false },
+                                   set: { state.newConference = $0 }))
+                .disabled(state.isDenied)
+            } else {
+                HStack {
+                    Text("New Conferences")
+                    Spacer()
+                    ProgressView()
+                }
+            }
+
+
 
             Toggle("Travel Reminders",
                    isOn: $state.travel)

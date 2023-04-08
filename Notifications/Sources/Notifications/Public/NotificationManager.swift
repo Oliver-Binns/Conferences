@@ -8,9 +8,10 @@ public final class NotificationManager: NotificationState {
     @Published public private(set) var isDenied: Bool = false
 
     @Published
-    public var newConference: Bool = false {
+    public var newConference: Bool? {
         didSet {
             Task {
+                guard let newConference else { return }
                 if newConference {
                     if try await requestAuthorizationIfNeeded() {
                         try await newConferenceSubscriber.subscribe()

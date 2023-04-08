@@ -11,7 +11,8 @@ public struct Subscription {
     }
 
     var id: String {
-        "\(type.rawValue)\(object.recordType.name.capitalized)"
+        "\(type.rawValue)\(object.recordType.name)"
+            .filter { $0.isLetter }
     }
 }
 
