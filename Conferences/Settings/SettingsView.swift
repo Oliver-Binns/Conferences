@@ -14,12 +14,14 @@ struct SettingsView: View {
                     InfoView()
                 }
             }
-        }.toolbar {
-            Button {
-                dismiss()
-            } label: {
-                Text("Done")
+            .toolbar {
+                Button {
+                    dismiss()
+                } label: {
+                    Text("Done")
+                }
             }
+            .navigationTitle("Settings")
         }
     }
 }
