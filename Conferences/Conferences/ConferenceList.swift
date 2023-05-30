@@ -32,7 +32,7 @@ struct ConferenceList: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 150, maxHeight: 150)
-                    Text("An error occured while fetching information.")
+                    Text("An error occurred while fetching information.")
                 }
                 
                 Spacer()
