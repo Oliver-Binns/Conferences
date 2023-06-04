@@ -11,11 +11,15 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Model"),
-        .package(path: "../Persistence"),
-        .package(path: "../Service")
+        .package(path: "../Service"),
+        .package(url: "https://github.com/Oliver-Binns/Utilities.git", branch: "main")
     ],
     targets: [
-        .target(name: "Notifications", dependencies: ["Model", "Persistence", "Service"]),
+        .target(name: "Notifications", dependencies: [
+            "Model",
+            .product(name: "Persistence", package: "Utilities"),
+            "Service"
+        ]),
         .testTarget(name: "NotificationsTests", dependencies: ["Notifications"])
     ]
 )

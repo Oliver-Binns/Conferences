@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		07C8870229D313E2003F8824 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = 07C8870129D313E2003F8824 /* Model */; };
 		07C8870429D313E2003F8824 /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 07C8870329D313E2003F8824 /* Notifications */; };
-		07C8870629D313E2003F8824 /* Persistence in Frameworks */ = {isa = PBXBuildFile; productRef = 07C8870529D313E2003F8824 /* Persistence */; };
 		07C8870829D313E2003F8824 /* Service in Frameworks */ = {isa = PBXBuildFile; productRef = 07C8870729D313E2003F8824 /* Service */; };
 		07E4304129D6263000DE9929 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E4304029D6263000DE9929 /* PersistenceController.swift */; };
 		07E4304529D628A600DE9929 /* ConferencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E4304429D628A600DE9929 /* ConferencesTests.swift */; };
@@ -122,7 +121,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CD7C8402965F85B00B56632 /* CloudKit.framework in Frameworks */,
-				07C8870629D313E2003F8824 /* Persistence in Frameworks */,
 				07C8870229D313E2003F8824 /* Model in Frameworks */,
 				07C8870429D313E2003F8824 /* Notifications in Frameworks */,
 				07C8870829D313E2003F8824 /* Service in Frameworks */,
@@ -399,7 +397,6 @@
 			packageProductDependencies = (
 				07C8870129D313E2003F8824 /* Model */,
 				07C8870329D313E2003F8824 /* Notifications */,
-				07C8870529D313E2003F8824 /* Persistence */,
 				07C8870729D313E2003F8824 /* Service */,
 			);
 			productName = Conferences;
@@ -475,6 +472,9 @@
 				Base,
 			);
 			mainGroup = 7CD7C8012965F4B100B56632;
+			packageReferences = (
+				078E6EE62A2CE26400C7DF98 /* XCRemoteSwiftPackageReference "Utilities" */,
+			);
 			productRefGroup = 7CD7C80B2965F4B100B56632 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -909,6 +909,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		078E6EE62A2CE26400C7DF98 /* XCRemoteSwiftPackageReference "Utilities" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Oliver-Binns/Utilities.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		07C8870129D313E2003F8824 /* Model */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -917,10 +928,6 @@
 		07C8870329D313E2003F8824 /* Notifications */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Notifications;
-		};
-		07C8870529D313E2003F8824 /* Persistence */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Persistence;
 		};
 		07C8870729D313E2003F8824 /* Service */ = {
 			isa = XCSwiftPackageProductDependency;
