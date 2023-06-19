@@ -8,9 +8,6 @@
       location = "group:Model">
    </FileRef>
    <FileRef
-      location = "group:Persistence">
-   </FileRef>
-   <FileRef
       location = "group:Service">
    </FileRef>
    <FileRef

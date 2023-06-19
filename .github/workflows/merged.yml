@@ -1,0 +1,27 @@
+name: Deployment Workflow
+
+on:
+  push:
+    branches: [ "main", "feature/build-versioning" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build and Test default scheme using any available iPhone simulator
+    runs-on: macos-13
+
+    env:
+        DEVELOPER_DIR: /Applications/Xcode_14.3.1.app/Contents/Developer
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          lfs: 'true'
+          fetch-depth: 0
+
+      - name: Deploy to TestFlight
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: |
+          fastlane on_merge api_key:"$API_KEY"

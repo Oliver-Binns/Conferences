@@ -16,11 +16,25 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Enforce Conventional Commits and Bump Version"
-  lane :pre_commit do
-    analyze_commits(match: '*.*.*')
+  desc "Bump Build Number & Deploy to TestFlight"
+  lane :on_merge do |options|
+    # Increment Build Number	
+    analyze_commits(match: 'beta/*.*.*')
+    next_version = lane_context[SharedValues::RELEASE_NEXT_VERSION]
+    increment_build_number(build_number: next_version)
 
+    # Increment Version Number
+    analyze_commits(match: '*.*.*')
     next_version = lane_context[SharedValues::RELEASE_NEXT_VERSION]
     increment_version_number(version_number: next_version)
+
+
+    # Upload Build
+    notes = conventional_changelog(format: 'plain')
+
+    upload_to_testflight(
+      changelog: notes,
+      api_key: options[:api_key]
+    )
   end
 end
