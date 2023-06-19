@@ -29,8 +29,10 @@ platform :ios do
     increment_version_number(version_number: next_version)
 
     build_ios_app(
+      scheme: options[:scheme],
       export_method: "app-store"
     )
+
 
     # Upload Build
     notes = conventional_changelog(format: 'plain')

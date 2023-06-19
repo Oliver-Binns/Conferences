@@ -20,8 +20,16 @@ jobs:
           lfs: 'true'
           fetch-depth: 0
 
+      - name: Set Default Scheme
+        run: |
+          scheme_list=$(xcodebuild -list -json | tr -d "\n")
+          default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
+          echo $default | cat >default
+          echo Using default scheme: $default
+          echo "SCHEME=$(echo $default)" >> $GITHUB_ENV
+
       - name: Deploy to TestFlight
         env:
           API_KEY: ${{ secrets.API_KEY }}
         run: |
-          fastlane on_merge api_key:"$API_KEY"
+          fastlane on_merge scheme:"$SCHEME" api_key:"$API_KEY"
