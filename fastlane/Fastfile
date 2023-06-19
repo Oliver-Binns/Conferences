@@ -28,6 +28,9 @@ platform :ios do
     next_version = lane_context[SharedValues::RELEASE_NEXT_VERSION]
     increment_version_number(version_number: next_version)
 
+    build_ios_app(
+      export_method: "app-store"
+    )
 
     # Upload Build
     notes = conventional_changelog(format: 'plain')
