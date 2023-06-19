@@ -8,8 +8,13 @@ https://user-images.githubusercontent.com/5354593/210864796-05f0a5b4-efd4-4c2b-8
 
 ## Contributing
 
-Pull requests and feature requests are welcome.
-I am developing this in the open and will release it, when it's good enough!
+Pull requests and feature requests are welcome - this app is being developed fully in the open.
+
+[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) are required for each pull request to ensure that release versioning can be managed automatically.
+Please ensure that you have enabled the Git hooks, so that you don't get caught out!:
+```
+git config core.hooksPath hooks
+```
 
 ## Some Future Ideas
 * Better macOS / watchOS Support
