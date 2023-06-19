@@ -18,6 +18,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           lfs: 'true'
+
+      - name: Enforce Conventional Commits
+        run: |
+          ./verify-commit-messages.sh
         
       - name: Set Default Scheme
         run: |
