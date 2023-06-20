@@ -28,19 +28,19 @@ platform :ios do
     next_version = lane_context[SharedValues::RELEASE_NEXT_VERSION]
     increment_version_number(version_number: next_version)
 
-    password = SecureRandom.hex
+    #password = SecureRandom.hex
 
-    create_keychain(
-      name: "signing_temp",
-      password: password,
-      unlock: true
-    )
+    #create_keychain(
+    #  name: "signing_temp",
+    #  password: password,
+    #  unlock: true
+    #)
 
     import_certificate(
       certificate_path: options[:certificate_path],
       certificate_password: options[:certificate_password],
-      keychain_name: 'signing_temp',
-      keychain_password: password
+      keychain_name: 'login',
+      #keychain_password: password
     )
 
     get_provisioning_profile(
