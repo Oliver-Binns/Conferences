@@ -3,10 +3,10 @@
 FROM="origin/$GITHUB_BASE_REF"
 TO="origin/$GITHUB_HEAD_REF"
 
-git log --pretty=format:"%s" $FROM..$TO
-
 git log --pretty=format:"%s" $FROM..$TO |
 while read -r line; do
+  echo "read line: $line"
+
   check=$(echo $line | egrep '^(docs|fix|feat|chore|style|refactor|perf|test)(?:\((.*)\))?(!?)\: (.*)$')
 
   if [ "" = "$check" ]; then
