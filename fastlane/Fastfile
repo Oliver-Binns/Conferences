@@ -54,7 +54,8 @@ platform :ios do
       scheme: options[:scheme],
       export_method: "app-store",
       sdk: "iphoneos",
-      destination: "generic/platform=iOS"
+      destination: "generic/platform=iOS",
+      configuration: "Release"
     )
 
     
