@@ -1,7 +1,7 @@
 #!/bin/bash
 
 FROM="origin/$GITHUB_BASE_REF"
-TO="origin/$GITHUB_REF_NAME"
+TO="origin/$GITHUB_HEAD_REF"
 
 commits=$(git log --pretty=format:'%s' --date=relative $FROM..$TO)
 
