@@ -70,6 +70,8 @@ platform :ios do
       archive: true
     )
 
+    sh("ls", options[:scheme] + ".xcarchive")
+
     # Upload Build
     notes = conventional_changelog(format: 'plain')
 
