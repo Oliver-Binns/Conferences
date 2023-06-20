@@ -28,20 +28,34 @@ platform :ios do
     next_version = lane_context[SharedValues::RELEASE_NEXT_VERSION]
     increment_version_number(version_number: next_version)
 
+    password = SecureRandom.hex
+
+    create_keychain(
+      name: "signing_temp",
+      password: password,
+      unlock: true
+    )
+
     import_certificate(
       certificate_path: options[:certificate_path],
-      certificate_password: options[:certificate_password]
+      certificate_password: options[:certificate_password],
+      keychain_name: 'signing_temp',
+      keychain_password: password
     )
 
     get_provisioning_profile(
       provisioning_name: options[:scheme],
-      readonly: true
+      readonly: true,
+      api_key: options[:api_key]
     )
 
     build_ios_app(
       scheme: options[:scheme],
       export_method: "app-store"
     )
+
+    
+    delete_keychain(name: "signing_temp")
 
 
     # Upload Build
