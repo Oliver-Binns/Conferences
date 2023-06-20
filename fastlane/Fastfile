@@ -62,22 +62,22 @@ platform :ios do
     )
 
     xcarchive(
-      scheme: options[:scheme],
-      sdk: "iphoneos",
-      destination: "generic/platform=iOS",
-      configuration: "Release",
+       scheme: options[:scheme],
+       sdk: "iphoneos",
+       destination: "generic/platform=iOS",
+       configuration: "Release",
+       archive_path: options[:scheme] + ".xcarchive"
     )
 
-    build_app(
-      configuration: "Release",
-      scheme: options[:scheme],
-      export_method: "app-store",
-      export_options: {iCloudContainerEnvironment: "Production"},
-      skip_codesigning: true,
-      skip_package_ipa: false,
-      export_team_id: "Z86DH46P79",
-      destination: "generic/platform=iOS",
-    )
+    Dir.chdir("..") do
+      sh(
+        "xcodebuild",
+        "-exportArchive",
+        "-archivePath", options[:scheme] + ".xcarchive",
+        "-exportOptionsPlist", "exportOptions.plist",
+        "-exportPath", "./build"
+      )
+    end
 
     # Upload Build
     notes = conventional_changelog(format: 'plain')
