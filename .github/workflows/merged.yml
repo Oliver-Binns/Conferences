@@ -45,4 +45,5 @@ jobs:
 
       - name: Cleanup
         run: |
+          CERTIFICATE_PATH="$RUNNER_TEMP/distribution.p12"
           rm -f "$CERTIFICATE_PATH"
