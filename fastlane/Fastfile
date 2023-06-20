@@ -19,7 +19,12 @@ platform :ios do
   desc "Bump Build Number & Deploy to TestFlight"
   lane :on_merge do |options|
     # Increment Build Number	
-    analyze_commits(match: 'beta/*.*.*')
+    is_new_beta = analyze_commits(match: 'beta/*.*.*')
+
+    if !is_new_beta
+      next
+    end
+
     next_version = lane_context[SharedValues::RELEASE_NEXT_VERSION]
     increment_build_number(build_number: next_version)
 
