@@ -61,14 +61,22 @@ platform :ios do
       code_sign_identity: "Apple Distribution"
     )
 
-    xcodebuild(
+    xcarchive(
       scheme: options[:scheme],
       sdk: "iphoneos",
       destination: "generic/platform=iOS",
       configuration: "Release",
-      archive: true,
-      export_options_plist: "exportOptions.plist",
-      export_archive: true
+    )
+
+    build_app(
+      configuration: "Release",
+      scheme: options[:scheme],
+      export_method: "app-store",
+      export_options: {iCloudContainerEnvironment: "Production"},
+      skip_codesigning: true,
+      skip_package_ipa: false,
+      export_team_id: "Z86DH46P79",
+      destination: "generic/platform=iOS",
     )
 
     # Upload Build
