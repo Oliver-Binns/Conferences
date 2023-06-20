@@ -3,10 +3,9 @@
 FROM="origin/$GITHUB_BASE_REF"
 TO="origin/$GITHUB_HEAD_REF"
 
-commits=$(git log --pretty=format:'%s' --date=relative $FROM..$TO)
+commits=$(git log --date=relative $FROM..$TO --pretty=format:"%s
+")
 
-echo "Origin: $TO"
-echo "Target: $FROM"
 echo $commits
 
 echo $commits |
