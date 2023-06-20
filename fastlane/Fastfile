@@ -89,7 +89,7 @@ platform :ios do
       api_key: options[:api_key],
       reject_build_waiting_for_review: false,
       submit_beta_review: true,
-      ipa: ""
+      ipa: "build/" + options[:scheme] + ".ipa"
     )
     
     delete_keychain(name: "signing_temp")
