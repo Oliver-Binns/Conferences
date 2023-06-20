@@ -62,6 +62,7 @@ platform :ios do
     build_ios_app(
       scheme: options[:scheme],
       export_method: "app-store",
+      sdk: "iphoneos",
       destination: "generic/platform=iOS"
     )
 
