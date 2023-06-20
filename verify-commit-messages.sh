@@ -1,21 +1,23 @@
 #!/bin/bash
 
-FROM="origin/main"
-TO="$(git branch --show-current)"
+FROM="origin/$GITHUB_BASE_REF"
+TO="origin/$GITHUB_REF_NAME"
 
 commits=$(git log --pretty=format:'%s' --date=relative $FROM..$TO)
 
+echo "Origin: $TO"
+echo "Target: $FROM"
 echo $commits
 
 echo $commits |
 while read -r line; do
   check=$(echo $line | egrep '^(docs|fix|feat|chore|style|refactor|perf|test)(?:\((.*)\))?(!?)\: (.*)$')
 
-  echo "commit ok: $line"
-
   if [ "" = "$check" ]; then
     echo "Commit Message did not conform to Conventional Commits:"
     echo "\"$line\""
     exit 1
+  else
+    echo "commit ok: $line"
   fi
 done
