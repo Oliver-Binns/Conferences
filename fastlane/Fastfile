@@ -22,6 +22,7 @@ platform :ios do
     is_new_beta = analyze_commits(match: 'beta/*.*.*')
 
     if !is_new_beta
+      puts "No changes since last deployment. Exiting build."
       next
     end
 

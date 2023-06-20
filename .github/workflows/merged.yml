@@ -45,4 +45,4 @@ jobs:
 
       - name: Cleanup
         run: |
-          rm $CERTIFICATE_PATH
+          [ -e $CERTIFICATE_PATH ] && rm $CERTIFICATE_PATH
