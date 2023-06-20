@@ -33,8 +33,7 @@ jobs:
           CERTIFICATE: ${{ secrets.CERTIFICATE }}
         run: |
           CERTIFICATE_PATH=$RUNNER_TEMP/distribution.p12
-          echo $CERTIFICATE_PATH
-          echo -n "$CERTIFICATE" | base64 --decode --output "$CERTIFICATE_PATH"
+          echo -n "$CERTIFICATE" | base64 --decode -o "$CERTIFICATE_PATH"
           echo "CERTIFICATE_PATH=$(CERTIFICATE_PATH)" >> $GITHUB_ENV
 
       - name: Deploy to TestFlight
