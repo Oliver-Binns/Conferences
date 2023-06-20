@@ -5,8 +5,6 @@ TO="origin/$GITHUB_HEAD_REF"
 
 git log --pretty=format:"%s" $FROM..$TO |
 while read -r line || [ -n "$line" ]; do
-  echo "read line: $line"
-
   check=$(echo $line | egrep '^(docs|fix|feat|chore|style|refactor|perf|test)(?:\((.*)\))?(!?)\: (.*)$')
 
   if [ "" = "$check" ]; then
