@@ -15,13 +15,21 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
-### ios pre_commit
+### ios on_merge
 
 ```sh
-[bundle exec] fastlane ios pre_commit
+[bundle exec] fastlane ios on_merge
 ```
 
-Enforce Conventional Commits and Bump Version
+Bump Build Number & Deploy to TestFlight
+
+### ios xcb
+
+```sh
+[bundle exec] fastlane ios xcb
+```
+
+
 
 ----
 
