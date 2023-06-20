@@ -14,5 +14,10 @@
 	<true/>
 	<key>teamID</key>
 	<string>Z86DH46P79</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>uk.co.oliverbinns.conferences</key>
+		<string>Conferences</string>
+	</dict>
 </dict>
 </plist>
