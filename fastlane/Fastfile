@@ -9,7 +9,7 @@
 #
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
-
+require 'securerandom'
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
@@ -28,10 +28,21 @@ platform :ios do
     next_version = lane_context[SharedValues::RELEASE_NEXT_VERSION]
     increment_version_number(version_number: next_version)
 
+    # Import Signing Certificate
+    password = SecureRandom.hex
+
+    create_keychain(
+      name: "signing_temp",
+      password: password,
+      unlock: true
+    )
+
     import_certificate(
       certificate_path: options[:certificate_path],
       certificate_password: options[:certificate_password],
-      keychain_name: 'login'
+      keychain_name: 'signing_temp',
+      keychain_password: password,
+      log_output: true
     )
 
     get_provisioning_profile(
