@@ -61,21 +61,25 @@ platform :ios do
       code_sign_identity: "Apple Distribution"
     )
 
-    build_app(
+    build_ios_app(
       scheme: options[:scheme],
+      output_name: options[:scheme],
       export_method: "app-store",
       sdk: "iphoneos",
       destination: "generic/platform=iOS",
-      configuration: "Release",
-      skip_package_pkg: true
+      configuration: "Release"
     )
 
     # Upload Build
     notes = conventional_changelog(format: 'plain')
 
     upload_to_testflight(
+      distribute_external: true,
+      groups: ["Public"],
       changelog: notes,
-      api_key: options[:api_key]
+      api_key: options[:api_key],
+      reject_build_waiting_for_review: false,
+      submit_beta_review: true
     )
     
     delete_keychain(name: "signing_temp")
