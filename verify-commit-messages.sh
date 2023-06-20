@@ -3,7 +3,9 @@
 FROM="main"
 TO="$(git branch --show-current)"
 
-git log --pretty=format:'%h %s' --abbrev-commit --date=relative $FROM..$TO |
+commits=$(git log --pretty=format:'%h %s' --abbrev-commit --date=relative $FROM..$TO)
+
+echo $commits |
 while read -r line; do
   MSG=${line:8}
 
