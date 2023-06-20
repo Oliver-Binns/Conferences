@@ -3,14 +3,9 @@
 FROM="origin/$GITHUB_BASE_REF"
 TO="origin/$GITHUB_HEAD_REF"
 
-git log --pretty=format:"%h %s" $FROM..$TO
+git log --pretty=format:"%s" $FROM..$TO
 
-commits=$(git log --date=relative $FROM..$TO --pretty=format:"%s
-")
-
-echo $commits
-
-echo $commits |
+git log --pretty=format:"%s" $FROM..$TO |
 while read -r line; do
   check=$(echo $line | egrep '^(docs|fix|feat|chore|style|refactor|perf|test)(?:\((.*)\))?(!?)\: (.*)$')
 
