@@ -28,10 +28,19 @@ platform :ios do
     next_version = lane_context[SharedValues::RELEASE_NEXT_VERSION]
     increment_version_number(version_number: next_version)
 
+    import_certificate(
+      certificate_path: options[:certificate_path],
+      certificate_password: options[:certificate_password]
+    )
+
+    get_provisioning_profile(
+      provisioning_name: options[:scheme],
+      readonly: true
+    )
+
     build_ios_app(
       scheme: options[:scheme],
-      export_method: "app-store",
-      xcargs: "-allowProvisioningUpdates"
+      export_method: "app-store"
     )
 
 
