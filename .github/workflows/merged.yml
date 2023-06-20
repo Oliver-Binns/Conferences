@@ -2,7 +2,7 @@ name: Deployment Workflow
 
 on:
   push:
-    branches: [ "main", "feature/build-versioning" ]
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
