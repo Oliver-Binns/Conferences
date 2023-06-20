@@ -61,13 +61,13 @@ platform :ios do
       code_sign_identity: "Apple Distribution"
     )
 
-    build_app(
+    xcodebuild(
       scheme: options[:scheme],
-      output_name: options[:scheme],
       export_method: "app-store",
       sdk: "iphoneos",
       destination: "generic/platform=iOS",
-      configuration: "Release"
+      configuration: "Release",
+      archive: true
     )
 
     # Upload Build
