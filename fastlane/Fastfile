@@ -50,6 +50,15 @@ platform :ios do
       app_identifier: "uk.co.oliverbinns.conferences"
     )
 
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      profile_name: options[:scheme],
+      targets: options[:scheme],
+      team_id: "Z86DH46P79",
+      build_configurations: "Release",
+      code_sign_identity: "Apple Distribution"
+    )
+
     build_ios_app(
       scheme: options[:scheme],
       export_method: "app-store"
