@@ -63,14 +63,13 @@ platform :ios do
 
     xcodebuild(
       scheme: options[:scheme],
-      export_method: "app-store",
       sdk: "iphoneos",
       destination: "generic/platform=iOS",
       configuration: "Release",
-      archive: true
+      archive: true,
+      export_options_plist: "exportOptions.plist",
+      export_archive: true
     )
-
-    sh("ls", options[:scheme] + ".xcarchive")
 
     # Upload Build
     notes = conventional_changelog(format: 'plain')
@@ -81,7 +80,8 @@ platform :ios do
       changelog: notes,
       api_key: options[:api_key],
       reject_build_waiting_for_review: false,
-      submit_beta_review: true
+      submit_beta_review: true,
+      ipa: ""
     )
     
     delete_keychain(name: "signing_temp")
