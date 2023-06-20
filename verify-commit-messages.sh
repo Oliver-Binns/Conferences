@@ -1,17 +1,10 @@
 #!/bin/bash
 
-FROM="main"
+FROM="origin/main"
 TO="$(git branch --show-current)"
-
-echo "test"
-git log
-
-echo "----"
 
 commits=$(git log --pretty=format:'%h %s' --abbrev-commit --date=relative $FROM..$TO)
 
-echo "----"
-echo "commits"
 echo $commits
 
 echo $commits |
