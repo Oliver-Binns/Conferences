@@ -3,6 +3,8 @@
 FROM="origin/$GITHUB_BASE_REF"
 TO="origin/$GITHUB_HEAD_REF"
 
+git log --pretty=format:"%h %s" $FROM..$TO
+
 commits=$(git log --date=relative $FROM..$TO --pretty=format:"%s
 ")
 
