@@ -41,7 +41,7 @@ jobs:
           CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
         run: |
           CERTIFICATE_PATH="$RUNNER_TEMP/distribution.p12"
-          fastlane on_merge scheme:"$SCHEME" api_key:"$API_KEY" certificate_path:"$CERTIFICATE_PATH" certificate_password:"$CERTIFICATE_PASSWORD" --verbose
+          fastlane on_merge scheme:"$SCHEME" api_key:"$API_KEY" certificate_path:"$CERTIFICATE_PATH" certificate_password:"$CERTIFICATE_PASSWORD"
 
       - name: Cleanup
         run: |
