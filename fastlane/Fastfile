@@ -85,6 +85,11 @@ platform :ios do
       )
     end
 
+    add_git_tag(
+      grouping: "beta"
+    )
+    push_git_tags
+
     # Upload Build
     notes = conventional_changelog(format: 'plain')
 
