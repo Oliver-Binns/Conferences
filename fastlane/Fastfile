@@ -19,14 +19,22 @@ platform :ios do
   desc "Bump Build Number & Deploy to TestFlight"
   lane :on_merge do |options|
     # Increment Build Number	
-    analyze_commits(match: 'beta/*.*.*')
-    next_version = lane_context[SharedValues::RELEASE_NEXT_VERSION]
-    increment_build_number(build_number: next_version)
+    is_new_beta = analyze_commits(match: 'beta/*.*.*')
+
+    if !is_new_beta
+      puts "No changes since last deployment. Exiting build."
+      next
+    end
+
+    build_number = lane_context[SharedValues::RELEASE_NEXT_VERSION]
+    increment_build_number_in_plist(build_number: build_number)
+    increment_build_number_in_xcodeproj(build_number: build_number)
 
     # Increment Version Number
     analyze_commits(match: '*.*.*')
-    next_version = lane_context[SharedValues::RELEASE_NEXT_VERSION]
-    increment_version_number(version_number: next_version)
+    version_number = lane_context[SharedValues::RELEASE_NEXT_VERSION]
+    increment_version_number_in_plist(version_number: version_number)
+    increment_version_number_in_xcodeproj(version_number: version_number)
 
     # Import Signing Certificate
     password = SecureRandom.hex
@@ -78,6 +86,11 @@ platform :ios do
         "-exportPath", "./build"
       )
     end
+
+    add_git_tag(
+      tag: "beta/" + build_number
+    )
+    push_git_tags
 
     # Upload Build
     notes = conventional_changelog(format: 'plain')
