@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Notifications",
-    platforms: [.iOS(.v15)],
+    platforms: [.iOS(.v15), .macOS(.v12)],
     products: [
         .library(name: "Notifications", targets: ["Notifications"]),
     ],
