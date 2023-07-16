@@ -76,6 +76,7 @@ struct ConferenceList: View {
                             }
                             .popover(isPresented: $isSortingDisplayed) {
                                 SortView(viewModel: sortModel)
+                                    .frame(minWidth: 300, minHeight: 300)
                             }
                         }
                     }
