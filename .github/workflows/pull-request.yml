@@ -24,8 +24,9 @@ jobs:
           fetch-depth: 0
 
       - name: Enforce Conventional Commits
-        run: |
-          ./verify-commit-messages.sh
+        uses: Oliver-Binns/Versioning@feature/github-actions
+        with:
+          ACTION_TYPE: 'Validate'
         
       - name: Set Default Scheme
         run: |
