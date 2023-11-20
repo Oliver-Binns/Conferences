@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
 
       - name: Enforce Conventional Commits
-        uses: Oliver-Binns/Versioning@feature/github-actions
+        uses: Oliver-Binns/Versioning@feature/output-version
         with:
           ACTION_TYPE: 'Validate'
         

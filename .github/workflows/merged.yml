@@ -23,7 +23,7 @@ jobs:
           fetch-depth: 0
           
       - name: Create GitHub release
-        uses: Oliver-Binns/Versioning@feature/github-actions
+        uses: Oliver-Binns/Versioning@feature/output-version
         with:
           ACTION_TYPE: 'Release'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
