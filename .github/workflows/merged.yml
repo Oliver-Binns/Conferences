@@ -9,6 +9,8 @@ jobs:
   build:
     name: Build and Test default scheme using any available iPhone simulator
     runs-on: macos-13
+    permissions:
+      contents: write
 
     env:
         DEVELOPER_DIR: /Applications/Xcode_14.3.1.app/Contents/Developer
@@ -19,6 +21,12 @@ jobs:
         with:
           lfs: 'true'
           fetch-depth: 0
+          
+      - name: Create GitHub release
+        uses: Oliver-Binns/Versioning@feature/github-actions
+        with:
+          ACTION_TYPE: 'Release'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set Default Scheme
         run: |
