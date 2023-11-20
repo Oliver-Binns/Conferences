@@ -23,6 +23,7 @@ jobs:
           fetch-depth: 0
           
       - name: Create GitHub release
+        id: github-release
         uses: Oliver-Binns/Versioning@feature/output-version
         with:
           ACTION_TYPE: 'Release'
@@ -35,6 +36,8 @@ jobs:
           echo $default | cat >default
           echo Using default scheme: $default
           echo "SCHEME=$(echo $default)" >> $GITHUB_ENV
+          
+          echo ${{ steps.github-release.outputs.release_version }}
 
       - name: Save Certificate
         env:
